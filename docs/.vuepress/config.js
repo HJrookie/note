@@ -1,10 +1,31 @@
 import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "vuepress";
+import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
+import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
+import { nprogressPlugin } from '@vuepress/plugin-nprogress'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 
 export default defineUserConfig({
     lang: "zh-CN",
     title: "VuePress",
     description: "Linux FrondEnd 前端",
+    head: [
+        ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `./favicon.ico` }]
+    ],
+    // bundler: viteBundler({
+    //     viteOptions: {},
+    //     vuePluginOptions: {},
+    // }),
+    plugins: [
+        backToTopPlugin(),
+        mediumZoomPlugin({
+            // 配置项
+        }),
+        nprogressPlugin(),
+        docsearchPlugin({
+            // 配置项
+        }),
+    ],
     theme: defaultTheme({
         // 侧边栏数组
         // 所有页面会使用相同的侧边栏
@@ -24,7 +45,7 @@ export default defineUserConfig({
                     ],
                 },
                 {
-                    text: "自己的项目",
+                    text: "自己写的玩具",
                     // collapsible: true,
                     children: [
                         {
@@ -37,17 +58,35 @@ export default defineUserConfig({
                         },
                         {
                             text: "docker-compose",
-                            link: "/my/docker-comopose-template/overview.md",
-                            // children: [
-                            //     {
-                            //         text: "概览",
-                            //         link: "/my/docker-comopose-template/overview.md",
-                            //     },
-                            // ],
+                            // link: "/my/docker-comopose-template/overview.md",
+                            children: [
+                                {
+                                    text: "概览",
+                                    link: "/my/docker-comopose-template/overview.md",
+                                },
+                                {
+                                    text: "前端代码",
+                                    link: "/my/docker-comopose-template/code/index.md",
+                                },
+                            ],
                         },
                         {
                             text: "琐碎记录",
                             link: "/my/others.md",
+                        },
+                    ],
+                },
+                {
+                    text: "前端八股文",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "拷贝",
+                            link: "/front/copy.md",
+                        },
+                        {
+                            text: "手写各种函数",
+                            link: "/front/write.md",
                         },
                     ],
                 },
@@ -85,4 +124,5 @@ export default defineUserConfig({
             ],
         },
     }),
+
 });
