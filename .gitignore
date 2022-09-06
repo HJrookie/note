@@ -7,7 +7,7 @@ node_modules
 *.patch
 *.diff
 *.err
-
+dist/
 # temp file for git conflict merging
 *.orig
 *.log

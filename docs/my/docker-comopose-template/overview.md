@@ -17,3 +17,5 @@ docker-compose 的模板项目,大概写了如何进行前端项目的配置,以
 
 ####  docker-compose.yml
 @[code yaml](./docker/docker-compose.yml)
+
+#### 前端项目配置

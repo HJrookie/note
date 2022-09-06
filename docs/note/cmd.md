@@ -10,7 +10,6 @@ yum clean all
 yum makecache
 
 ```
-### docker
 #### centos 安装 docker
 
 ```shell
@@ -446,4 +445,11 @@ rpm -i fff.rpm
 # 卸载 rpm ,先查看所有的  ,再卸载
 rpm -aq|grep gitlab    
 rpm -e --nodeps gitlab-runner-15.1.0-1.i686    
+```
+
+#### git  修改.gitignore 后立即生效
+```shell
+git rm -r --cached .  
+git add .
+git status
 ```
