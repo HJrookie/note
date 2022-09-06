@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<script src="./jquery-3.5.0.min.js"></script>
+<script src="./jquery.cookie.js"></script>
+<script type="text/javascript">
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  var url = "https://192.168.1.153:8006"//pve访问地址
+  var pveUser = "root"//用户
+  var pvePass = "r5m-RY7-P6x-L8q"//用户密码
+  var pveNodeName = "god"//节点名称
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 获取要被删除的虚拟机id
+  // var studentIdList = request.getParameter("studentIdList");
+  function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+  }
+  var studentIdListStr = GetQueryString("studentIdList")//虚拟机id
+  var studentIdList= new Array(); //定义一数组 
+  studentIdList=studentIdListStr.split(","); //字符分割
+  
+  var res1 = null;
+  function login() {
+    // 登陆获取Cookie、ticket、Token
+    $.ajax({
+      //几个参数需要注意一下
+      type: "POST",//方法类型
+      dataType: "json",//预期服务器返回的数据类型
+      url: url + "/api2/json/access/ticket",//url
+      async: false,
+      data: { "username": pveUser, "password": pvePass, "realm": "pam" },
+      xhrFields: {
+        withCredentials: true
+      },
+      beforeSend: function (xmlReq) {
+        xmlReq.withCredentials = true;
+      },
+      success: function (res) {
+        ticket = res.data.ticket;
+        var date = new Date();
+        document.cookie = "PVEAuthCookie=" + ticket + ";path=/;";
+        res1 = res;
+      }
+    });
+  };
+
+  function stopall(csr,studentIdListStr) {
+    // 停止虚拟机
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: url + "/api2/json/nodes/" + pveNodeName + "/stopall",
+      async: false,
+      data: { "vms": studentIdListStr },
+      xhrFields: {
+        withCredentials: true
+      },
+      beforeSend: function (xmlReq) {
+        xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+      },
+    });
+  };
+
+  function deleteVM(csr, studentId) {
+    // 删除虚拟机
+    $.ajax({
+      type: "DELETE",
+      dataType: "json",
+      url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "",
+      xhrFields: {
+        withCredentials: true
+      },
+      beforeSend: function (xmlReq) {
+        xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+      },
+    });
+  }
+
+  // 删除虚拟机
+  login();
+  stopall(res1.data.CSRFPreventionToken,studentIdListStr);
+  setTimeout(function () {
+    for (var i = 0; i < studentIdList.length; i++) {
+      deleteVM(res1.data.CSRFPreventionToken, studentIdList[i]);
+    }
+  }, 5 * 1000);//延迟5000毫米
+
+
+
+</script>
+
+</html>
