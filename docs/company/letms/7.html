@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>超融合虚拟化平台</title>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      #box2 {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #zbox1 {
+        width: 100%;
+        height: 90%;
+        margin-top: 0%;
+        float: left;
+      }
+
+      #zbox2 {
+        background-color: #4c9394;
+        width: 100%;
+        height: 40px;
+        overflow: hidden;
+      }
+
+      .buttom {
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        float: right;
+        background: #1d322f;
+        text-align: center;
+        margin: 5px 50px 0 0;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #fff;
+        box-shadow: 2px 2px 5px #666;
+        cursor: pointer;
+      }
+
+      input[disabled] {
+        background-color: #666;
+      }
+      #loading {
+        width: 100%;
+        height: calc(100% - 40px);
+        text-align: center;
+        margin-top: 25%;
+      }
+
+      #iframe1 {
+        width: 100%;
+        height: calc(100% - 40px);
+        border: 0;
+      }
+      @keyframes loading-rotate {
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+      @keyframes loading-dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -40px;
+        }
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -120px;
+        }
+      }
+      .circular {
+        height: 42px;
+        width: 42px;
+        animation: loading-rotate 2s linear infinite;
+      }
+
+      .path {
+        animation: loading-dash 1.5s ease-in-out infinite;
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: 0;
+        stroke-width: 2;
+        stroke: #409eff;
+        stroke-linecap: round;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box2">
+      <div id="zbox2">
+        <input type="button" id="btn2" value="删除实例" class="buttom" />
+        <!--        <input type="button" id="btn" value="删除实例" class="buttom" />-->
+      </div>
+      <iframe id="iframe1" src=""> </iframe>
+      <div id="loading">
+        <div>正在创建,请稍候...</div>
+        <svg viewBox="25 25 50 50" class="circular" style="height: 42px; width: 42px; /* animation: loading-rotate 2s linear infinite; */">
+          <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+        </svg>
+      </div>
+    </div>
+  </body>
+  <script src="./jquery-3.5.0.min.js"></script>
+  <script src="./jquery.cookie.js"></script>
+  <script type="text/javascript">
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var url = "https://10.103.237.54:8006"; //pve访问地址
+    var pveUser = "root"; //用户
+    var pvePass = "lenovo@123"; //用户密码
+    var pveNodeName = "pve"; //节点名称
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+  对应 pve 版本 : 7.1
+* 使用方法: 把这个文件 , jquery-3.5.0.min.js, jquery.cookie.js 上传到 pve 机器的 /usr/share/pve-docs/api-viewer 下
+* 打开 https://192.168.31.108:8006/pve-docs/api-viewer/7.html?studentId=129&QuestId=100
+* 地址栏上需要传两个参数  studentId 会作为 虚拟机的名称, QuestId 是创建虚拟机时的模板id
+*  https://192.168.31.108:8006/pve-docs/api-viewer/letms-pve-admin.html?QuestId=113
+*
+* */
+    function GetQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    }
+    var studentId = GetQueryString("studentId"); //虚拟机id
+    var QuestId = GetQueryString("QuestId"); //模版id
+    // var studentId = 135;//测试用
+    // var QuestId = 128;
+
+    var res1 = null;
+    function login() {
+      // 登陆获取Cookie、ticket、Token
+      $.ajax({
+        //几个参数需要注意一下
+        type: "POST", //方法类型
+        dataType: "json", //预期服务器返回的数据类型
+        url: url + "/api2/json/access/ticket", //url
+        async: false,
+        data: { username: pveUser, password: pvePass, realm: "pam" },
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.withCredentials = true;
+        },
+        success: function (res) {
+          ticket = res.data.ticket;
+          var date = new Date();
+          // 加上 SameSite=None; Secure 之后, iframe 中发送的请求就可以正确地带上 cookie了,如果没设置,则请求头中没有 cookie,返回 401
+          document.cookie = "PVEAuthCookie=" + ticket + ";path=/;SameSite=None; Secure";
+          res1 = res;
+        },
+      });
+    }
+
+    function shutdownVM(ticket, csr) {
+      // 关闭虚拟机
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "/status/stop",
+        async: false,
+        data: {},
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+        },
+      });
+    }
+
+    function deleteVM(ticket, csr) {
+      // 删除虚拟机
+      $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "",
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+        },
+      });
+    }
+
+    function startVM(ticket, csr) {
+      // 开启虚拟机
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: url + "/api2/extjs/nodes/" + pveNodeName + "/qemu/" + studentId + "/status/start",
+        async: false,
+        data: {},
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+        },
+      });
+    }
+
+    function vncVM(ticket, csr) {
+      // 建立vnc连接
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "/vncproxy",
+        async: false,
+        data: { websocket: 1 },
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+        },
+        success: function (res) {
+          console.log(res, "res");
+          OpenVnc(res.data.port, res.data.ticket);
+        },
+        error: function (xhr, err, exceptionObject) {
+          console.log(xhr, err, exceptionObject);
+        },
+      });
+    }
+    function OpenVnc(port, ticket) {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "/vncwebsocket",
+        data: { port: port, vncticket: ticket },
+        xhrFields: {
+          withCredentials: true,
+        },
+        success: function (res) {
+          document.getElementById("iframe1").contentWindow.location.reload(true);
+        },
+      });
+    }
+
+    function cloneVM(csr) {
+      // 从模版克隆虚拟机
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + QuestId + "/clone",
+        data: { newid: studentId, target: pveNodeName },
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", csr);
+        },
+      });
+    }
+
+    login();
+    checkVmExistOrNot();
+    // 检查虚拟机是否存在
+    function checkVmExistOrNot() {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        // https://192.168.31.108:8006/pve-docs/api-viewer/index.html  接口详情
+        url: url + "/api2/json/cluster/nextid?vmid=" + studentId,
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+        },
+        success: function (res) {
+          // 代表这个 id 是可用的,意思是 这个虚拟机还没有被创建出来,
+          // 因此去创建这个虚拟机, 即调用 handleOpenVM , 然后再 加载 vnc
+          if (res.data !== null) {
+            $("#iframe1").hide();
+            cloneVM(res1.data.CSRFPreventionToken);
+            handleOpenVM();
+            setTimeout(() => {
+              $("#loading").hide();
+              $("#iframe1").show();
+              initVnc();
+            }, 6000);
+          } else {
+            // 代表已经存在这个虚拟机了,加载 vnc 即可
+            $("#loading").hide();
+            handleOpenVM();
+            $("#iframe1").show();
+            initVnc();
+          }
+        },
+        error: function (err) {
+          handleOpenVM();
+          initVnc();
+        },
+      });
+    }
+    function initVnc() {
+      document.getElementById("iframe1").src =
+        url + "/?console=kvm&novnc=1&vmid=" + studentId +
+         "&vmname=Copy-of-VM-NoOS&node=" 
+        + pveNodeName + "&resize=scale&cmd=";
+    }
+
+    // 关机
+    var oBtn2 = document.getElementById("btn2");
+    oBtn2.onclick = function () {
+      // oBtn.disabled = false;
+      oBtn2.disabled = true;
+      oBtn2.style.cursor = "default";
+      // oBtn.style.cursor = "pointer";
+
+      login();
+      shutdownVM(res1.data.ticket, res1.data.CSRFPreventionToken);
+      setTimeout(function () {
+        deleteVM(res1.data.ticket, res1.data.CSRFPreventionToken);
+      }, 5 * 1000); //延迟5000毫秒
+    };
+
+    // 开机
+    // var oBtn = document.getElementById("btn");
+    function handleOpenVM() {
+      // oBtn.disabled = true;
+      oBtn2.disabled = false;
+      // oBtn.style.cursor = "default";
+      oBtn2.style.cursor = "pointer";
+
+      login();
+      // cloneVM(res1.data.CSRFPreventionToken);
+      setTimeout(function () {
+        startVM(res1.data.ticket, res1.data.CSRFPreventionToken);
+        vncVM(res1.data.ticket, res1.data.CSRFPreventionToken);
+      }, 5 * 1000); //延迟5000毫米
+    }
+    // oBtn.onclick = handleOpenVM;
+  </script>
+</html>

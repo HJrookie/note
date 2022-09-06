@@ -64,14 +64,16 @@ const downloadImage = (src, dest, callback) => {
                     errorData.push(src);
                 });
 
-                req.pipe(
-                    fs.createWriteStream(dest, {
-                        flags: "w",
-                        autoClose: true,
-                    })
-                ).on("close", () => {
-                    callback && callback(null, dest);
-                });
+                req
+                    .pipe(
+                        fs.createWriteStream(dest, {
+                            flags: "w",
+                            autoClose: true,
+                        })
+                    )
+                    .on("close", () => {
+                        callback && callback(null, dest);
+                    });
             } catch (err) { }
         }
     });
@@ -168,72 +170,47 @@ if (errorSrcs) {
         .catch(() => { });
 }
 
-// request({
-//     url: address,
-//     jar: j,
-//     tempHeader
-// }, (error, response, body) => {
-//     if (!error && response.statusCode == 200) {
-//         // console.log(body) // Show the HTML for the baidu homepage.
-//         let resultData = parseHtmlAndGetData(body)
-//         resultData = formatImgSrc(resultData)
-//         // 开始下载
-//         // resultData.forEach((single,index) => {
-//         //     async.mapSeries(single.srcs, function (item, callback) {
-//         //         fs.mkdirSync(`dist/${single.title}-${single.count}P`,{
-//         //             recursive: true
-//         //         })
-//         //         setTimeout(function () {
-//         //             var destImage = `${getSuffix(item)}`;
-//         //             destImage = `./dist/${single.title}-${single.count}P/${destImage}`;
-//         //             downloadImage(item, destImage, (err, data) => {
-//         //                 err ? console.log(err) : console.log(path.resolve(data));
-//         //             });
-//         //             callback && callback(null, item);
-//         //         }, single * 30 * 1000 + Math.round(Math.random()* 5000));
-//         //     });
-//         // })
+request({
+    url: address,
+    jar: j,
+    tempHeader,
+},
+    (error, response, body) => {
+        if (error || response.statusCode !== 200) {
+            console.log("err", error);
+        }
+        let resultData = parseHtmlAndGetData(body);
+        resultData = formatImgSrc(resultData);
+        const promise = resultData.reduce(
+            (prev, single, index) =>
+                prev.then(() => new Promise((res, rej) => {
+                    setTimeout(() => {
+                        async.mapSeries(single.srcs, function (item, callback) {
+                            fs.mkdirSync(`dist/${single.title}-${single.count}P`, {
+                                recursive: true,
+                            });
+                            setTimeout(function () {
+                                var destImage = `${getSuffix(item)}`;
+                                destImage = `./dist/${single.title}-${single.count}P/${destImage}`;
+                                downloadImage(item, destImage, (err, data) => {
+                                    err ? console.log(err) : console.log(path.resolve(data));
+                                });
+                                callback && callback(null, item);
+                            }, 300);
+                        });
+                        res();
+                    }, 30 * 1000);
+                }))
+                    .catch((err) => { }),
+            // if (index <= 10) {
+            //     return Promise.resolve();
+            // }
+            Promise.resolve()
+        );
 
-//         const promise = resultData.reduce((prev, single, index) => {
-//             if (index <= 10) {
-//                 return Promise.resolve()
-//             }
-//             return prev.then(() => {
-//                 return new Promise((res, rej) => {
-//                     try {
-
-//                         setTimeout(() => {
-
-//                             async.mapSeries(single.srcs, function (item, callback) {
-//                                 fs.mkdirSync(`dist/${single.title}-${single.count}P`, {
-//                                     recursive: true
-//                                 })
-//                                 setTimeout(function () {
-//                                     var destImage = `${getSuffix(item)}`;
-//                                     destImage = `./dist/${single.title}-${single.count}P/${destImage}`;
-//                                     downloadImage(item, destImage, (err, data) => {
-//                                         err ? console.log(err) : console.log(path.resolve(data));
-//                                     });
-//                                     callback && callback(null, item);
-//                                 }, 300);
-//                             });
-//                             res()
-//                         }, 30 * 1000);
-
-//                     } catch (err) {
-//                     }
-//                 })
-//             }).catch(err => {
-
-//             })
-//         }, Promise.resolve())
-
-//         promise.then(() => {
-// fs.writeFileSync(errorFilePath,JSON.stringify(errorData));
-//             console.log('allError --------------------------------', errorData)
-
-//         })
-//     } else {
-//         console.log('err', error)
-//     }
-// })
+        promise.then(() => {
+            fs.writeFileSync(errorFilePath, JSON.stringify(errorData));
+            console.log("allError --------------------------------", errorData);
+        });
+    }
+);

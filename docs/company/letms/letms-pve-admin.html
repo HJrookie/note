@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LETMS PVE 管理界面</title>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      #loading {
+        text-align: center;
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+      }
+      #loading .loading-wrapper {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        color: white;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes loading-rotate {
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+
+      @keyframes loading-dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -40px;
+        }
+
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -120px;
+        }
+      }
+
+      .circular {
+        height: 42px;
+        width: 42px;
+        animation: loading-rotate 2s linear infinite;
+      }
+
+      .path {
+        animation: loading-dash 1.5s ease-in-out infinite;
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: 0;
+        stroke-width: 2;
+        stroke: #409eff;
+        stroke-linecap: round;
+      }
+
+      .info {
+        margin-bottom: 15px;
+        color: gray;
+        font-size: 14px;
+
+        width: 520px;
+      }
+
+      .input-wrapper {
+        height: 40px;
+        margin-top: 30px;
+      }
+
+      .input-wrapper input {
+        height: 30px;
+        width: 250px;
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      .input-wrapper .row {
+        margin-bottom: 20px;
+      }
+
+      .input-wrapper .row.op {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .input-wrapper .row select {
+        height: 32px;
+        width: 250px;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 3px 4px;
+      }
+
+      .input-wrapper .row.op button {
+        height: 32px;
+        padding: 3px 6px;
+        background-color: #1890ff;
+        color: white;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+      }
+
+      .input-wrapper .row.op button:hover {
+        background-color: #0075e1;
+      }
+
+      #mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #0000009e;
+        display: none;
+        z-index: 10;
+      }
+
+      #operation-info {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+        margin: 0 auto 50px 0px;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px #0000004d;
+        display: none;
+        height: 500px;
+        width: 80vh;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 11;
+        border-radius: 5px;
+      }
+
+      #operation-info .header {
+        padding: 10px 15px;
+        font-weight: bold;
+        border-bottom: 1px solid #80808057;
+      }
+
+      #operation-info .body {
+        padding: 10px 15px;
+        overflow: auto;
+      }
+
+      #operation-info .body .op-name {
+        margin-bottom: 10px;
+      }
+
+      #operation-info .body .op-vms {
+        height: 350px;
+        width: 100%;
+        word-break: break-all;
+        overflow: auto;
+      }
+
+      #operation-info .footer {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        justify-content: center;
+      }
+
+      .btn-cancel,
+      .btn-confirm {
+        height: 32px;
+        padding: 3px 14px;
+        transition: all 0.5s ease-in-out;
+        background: gainsboro;
+        border-radius: 4px;
+        width: auto;
+        margin: 0 4px;
+        color: black;
+        font-size: 14px;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+
+      .btn-cancel:hover,
+      .btn-confirm:hover {
+        background: #b9b9b9;
+        opacity: 0.8;
+      }
+
+      button + button {
+        margin-left: 20px;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        background: #ededed;
+      }
+
+      input,
+      button {
+        border: none;
+        outline: none;
+        background: none;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      }
+
+      .tip {
+        font-size: 20px;
+        margin: 40px auto 50px;
+        text-align: center;
+      }
+
+      .content {
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 900px;
+        height: 550px;
+        margin: -300px 0 0 -450px;
+        background: #fff;
+      }
+
+      .form {
+        position: relative;
+        width: 640px;
+        height: 100%;
+        transition: -webkit-transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+        padding: 50px 30px 0;
+      }
+
+      .sub-cont {
+        overflow: hidden;
+        position: absolute;
+        left: 640px;
+        top: 0;
+        width: 900px;
+        height: 100%;
+        padding-left: 260px;
+        background: #fff;
+        transition: -webkit-transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+      }
+
+      .content.s--signup .sub-cont {
+        -webkit-transform: translate3d(-640px, 0, 0);
+        transform: translate3d(-640px, 0, 0);
+      }
+
+      button {
+        display: block;
+        margin: 0 auto;
+        width: 260px;
+        height: 36px;
+        border-radius: 30px;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .img {
+        overflow: hidden;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 260px;
+        height: 100%;
+        padding-top: 360px;
+      }
+
+      .img:before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 900px;
+        height: 100%;
+        /*background-image: url(../images/bg.jpg);*/
+        background-size: cover;
+        transition: -webkit-transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+      }
+
+      .img:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000b8;
+      }
+
+      .content.s--signup .img:before {
+        -webkit-transform: translate3d(640px, 0, 0);
+        transform: translate3d(640px, 0, 0);
+      }
+
+      .img__text {
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 50px;
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+        color: #fff;
+        transition: -webkit-transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out;
+        transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+      }
+
+      .img__text h2 {
+        margin-bottom: 10px;
+        font-weight: normal;
+      }
+
+      .img__text p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .content.s--signup .img__text.m--up {
+        -webkit-transform: translateX(520px);
+        transform: translateX(520px);
+      }
+      .img__text.m--in {
+        -webkit-transform: translateX(-520px);
+        transform: translateX(-520px);
+      }
+
+      .content.s--signup .img__text.m--in {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+
+      .img__btn {
+        overflow: hidden;
+        z-index: 2;
+        position: relative;
+        width: 100px;
+        height: 36px;
+        margin: 0 auto;
+        background: transparent;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      .img__btn:after {
+        content: "";
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #fff;
+        border-radius: 30px;
+      }
+
+      .img__btn span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        transition: -webkit-transform 0.6s;
+        transition: transform 0.6s;
+        transition: transform 0.6s, -webkit-transform 0.6s;
+      }
+
+      .img__btn span.m--in {
+        -webkit-transform: translateY(-72px);
+        transform: translateY(-72px);
+      }
+
+      .content.s--signup .img__btn span.m--in {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+
+      .content.s--signup .img__btn span.m--up {
+        -webkit-transform: translateY(72px);
+        transform: translateY(72px);
+      }
+
+      h2 {
+        width: 100%;
+        font-size: 26px;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        width: 260px;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+        float: left;
+        color: #606266;
+        line-height: 30px;
+        padding: 0 12px 0 0;
+      }
+
+      label span {
+        font-size: 12px;
+        color: #909399;
+        text-transform: uppercase;
+      }
+
+      input {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+        padding-bottom: 5px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        text-align: center;
+      }
+
+      .sign-in {
+        transition-timing-function: ease-out;
+      }
+      .content.s--signup .sign-in {
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.6s;
+        -webkit-transform: translate3d(640px, 0, 0);
+        transform: translate3d(640px, 0, 0);
+      }
+
+      .sign-up {
+        -webkit-transform: translate3d(-900px, 0, 0);
+        transform: translate3d(-900px, 0, 0);
+      }
+      .content.s--signup .sign-up {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="form sign-in">
+        <h2 style="margin-bottom: 40px">LETMS PVE 管理界面</h2>
+
+        <div class="input-wrapper">
+          <div class="row">
+            <label>开始学号: </label>
+            <input type="text" id="beginId" name="beginId" required placeholder="开始学号" />
+          </div>
+
+          <div class="row">
+            <label>结束学号: </label>
+            <input type="text" id="endId" name="endId" required placeholder="结束学号" />
+          </div>
+
+          <div class="row">
+            <label>虚拟机模板: </label>
+            <input type="text" id="templateId" name="templateId" required placeholder="虚拟机模板 id" />
+          </div>
+
+          <div class="row">
+            <label>虚拟机操作: </label>
+            <select name="operations" id="operations">
+              <option value="operation">请选择要进行的操作</option>
+              <option value="create">创建</option>
+              <option value="start">开机</option>
+              <option value="close">关机</option>
+              <option value="delete">删除</option>
+            </select>
+          </div>
+          <div class="row op">
+            <button onclick="confirmOperation()">确认操作</button>
+          </div>
+        </div>
+      </div>
+      <div class="sub-cont">
+        <div class="img">
+          <div class="img__text m--up">
+            <h2>如何使用？</h2>
+            <p>立即查看，使用教程！</p>
+          </div>
+          <div class="img__text m--in">
+            <h2>已经明白？</h2>
+            <p>立即使用 LETMS PVE 管理虚拟机</p>
+          </div>
+          <div class="img__btn">
+            <span class="m--up">查看教程</span>
+            <span class="m--in">立即使用</span>
+          </div>
+        </div>
+        <div class="form sign-up">
+          <div class="info">
+            1. 可在本页面进行 虚拟机的 批量创建 , 批量开机, 批量删除, 批量关机操作(输入开始学号 以及 结束学号);
+          </div>
+          <div class="info">2. 如需操作单个虚拟机, 输入相同的开始学号 以及结束学号即可;</div>
+          <div class="info">3. 虚拟机创建后未自动开机;</div>
+          <div class="info">4. 虚拟机需要关机后,才可以删除;</div>
+        </div>
+      </div>
+      <!-- 操作确认窗口 -->
+      <div id="operation-info">
+        <div class="header">操作确认</div>
+        <div class="body">
+          <div class="row"></div>
+          <div class="op-name">本次操作为:</div>
+          <div class="op-vms">将要操作的机器为:</div>
+        </div>
+        <div class="footer">
+          <button class="btn-cancel" onclick="closeOperationModal()">取消</button>
+          <button class="btn-confirm" onclick="doOperation()">确定</button>
+        </div>
+      </div>
+      <!--      loading-->
+      <div id="loading">
+        <div class="loading-wrapper">
+          <div>正在操作,请稍候...</div>
+          <svg
+            viewBox="25 25 50 50"
+            class="circular"
+            style="height: 42px; width: 42px; /* animation: loading-rotate 2s linear infinite; */"
+          >
+            <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+          </svg>
+        </div>
+      </div>
+      <!-- 遮罩层 -->
+      <div id="mask"></div>
+    </div>
+  </body>
+  <script src="./jquery-3.5.0.min.js"></script>
+  <script src="./jquery.cookie.js"></script>
+  <script type="text/javascript">
+    /*
+    / @author: sunpeng
+    / 这里的代码写得很直观,操作虚拟机的接口用的是 pve 的接口,这些文件需要放到 pve 的机器上运行,不然会有跨域问题
+    / 没有引入 ui 框架,引入了 jq,
+    */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var url = "https://10.103.237.54:8006"; //pve访问地址
+    var pveUser = "root"; //用户
+    var pvePass = "lenovo@123"; //用户密码
+    var pveNodeName = "pve"; //节点名称
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+     * 使用方法: 把这个文件 , jquery-3.5.0.min.js, jquery.cookie.js 上传到 pve 机器的 /usr/share/pve-docs/api-viewer 下
+     * 打开 https://192.168.31.108:8006/pve-docs/api-viewer/letms-pve-admin.html
+     * pve 自身管理界面:   https://192.168.31.108:8006/#v1:0:=node%2Fpve:4::::::
+     * */
+    var vmTemplateId = ""; //模版id
+    let batchVms = []; // 存放要操作的虚拟机的名称
+
+    // 这里放的是 token
+    var res1 = null;
+    function login() {
+      // 登陆获取Cookie、ticket、Token
+      $.ajax({
+        //几个参数需要注意一下
+        type: "POST", //方法类型
+        dataType: "json", //预期服务器返回的数据类型
+        url: url + "/api2/json/access/ticket", //url
+        async: false,
+        data: { username: pveUser, password: pvePass, realm: "pam" },
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.withCredentials = true;
+        },
+        success: function (res) {
+          ticket = res.data.ticket;
+          var date = new Date();
+          document.cookie = "PVEAuthCookie=" + ticket + ";path=/;";
+          res1 = res;
+        },
+      });
+    }
+
+    function confirmOperation() {
+      // 检查学号
+      let beginId = $("#beginId").val();
+      let endId = $("#endId").val();
+      let _vmTemplateId = $("#templateId").val();
+      if (!beginId.trim().length || !endId.trim().length) {
+        alert("学号范围不能为空");
+        return;
+      }
+      // 检查 操作选项
+      let operation = $("#operations").val();
+      if (operation === "operation") {
+        alert("请选择要进行的操作");
+        return;
+      }
+      // 当创建时 需要填模板 id
+      if (operation === "create" && !_vmTemplateId.trim().length) {
+        alert("创建虚拟机时必须输入虚拟机模板");
+        return;
+      }
+      vmTemplateId = _vmTemplateId;
+
+      const operationMap = {
+        create: "创建",
+        start: "开机",
+        close: "关机",
+        delete: "删除",
+      };
+      // 如果这两个 值 相同,代表操作的是同一台机器, 否则就是 批量操作
+      const isSingle = beginId === endId;
+      $("#mask").show();
+      $("#operation-info").show();
+      $("#operation-info .op-name").text(
+        `本次操作为:     ${isSingle ? "单个操作  " : "批量操作  "} - ${operationMap[operation]}`
+      );
+      batchVms = getAllVmNames(beginId, endId); // 修改 batchVms, 会在 doOperation 中用到
+      $("#operation-info .op-vms").text(`将要操作的机器为:     ${batchVms.join()}`);
+    }
+
+    function getAllVmNames(beginId, endId) {
+      if (beginId === endId) {
+        return [beginId];
+      }
+
+      // 只取 后三位,即最多支持同时操作 999 个学生
+      let begin = +beginId.slice(-3);
+      let prefix = beginId - begin;
+
+      let end = +endId.slice(-3);
+      let result = [];
+      for (let i = begin; i <= end; i++) {
+        result.push((prefix + i).toString());
+      }
+      return [...result];
+    }
+
+    function doOperation() {
+      let operation = $("#operations").val();
+      switch (operation) {
+        case "create": {
+          batchCreateVms();
+          break;
+        }
+        case "start": {
+          batchStartVms();
+          break;
+        }
+        case "close": {
+          batchStopVms();
+
+          break;
+        }
+        case "delete": {
+          batchDeleteVms();
+          break;
+        }
+      }
+      closeOperationModal();
+      $("#loading").show();
+      $("#mask").show();
+
+      setTimeout(() => {
+        $("#loading").hide();
+        $("#mask").hide();
+      }, 5000);
+    }
+    // 关闭 操作确认窗口
+    function closeOperationModal() {
+      $("#operation-info").hide();
+      $("#mask").hide();
+      batchVms = [];
+    }
+
+    // 批量创建
+    function batchCreateVms() {
+      [...batchVms].forEach((vmName) => {
+        cloneVM(vmName);
+      });
+      batchVms = [];
+    }
+    // 批量删除
+    function batchDeleteVms() {
+      batchVms.forEach((vmName) => {
+        deleteVM(vmName);
+      });
+    }
+    // 批量关机
+    function batchStopVms() {
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/stopall",
+        async: false,
+        data: { vms: batchVms.join() },
+        xhrFields: {
+          withCredentials: true,
+        },
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+        },
+      });
+    }
+    // 批量开机
+    function batchStartVms() {
+      // pve 支持批量开机,但是这个接口并不能让机器开机
+      // $.ajax({
+      //   type: "POST",
+      //   dataType: "json",
+      //   url: url + "/api2/json/nodes/" + pveNodeName + "/startall",
+      //   async: false,
+      //   data: { vms: batchVms.join()+ ',' },
+      //   xhrFields: {
+      //     withCredentials: true,
+      //   },
+      //   beforeSend: function (xmlReq) {
+      //     xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+      //   },
+      // });
+      batchVms.forEach((vmName) => {
+        // 开启虚拟机
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + vmName + "/status/start",
+          async: false,
+          xhrFields: {
+            withCredentials: true,
+          },
+          beforeSend: function (xmlReq) {
+            xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+          },
+        });
+      });
+    }
+
+    function cloneVM(vmName) {
+      return new Promise((resolve, reject) => {
+        // 从模版克隆虚拟机
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + vmTemplateId + "/clone",
+          data: { newid: vmName, target: pveNodeName },
+          xhrFields: {
+            withCredentials: true,
+          },
+          beforeSend: function (xmlReq) {
+            xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+          },
+          success: function (data) {
+            console.log("data", data);
+            resolve(vmName);
+          },
+          error: function (error) {
+            console.log("err", error);
+            reject(error);
+          },
+        });
+      });
+    }
+
+    function deleteVM(studentId) {
+      // 删除虚拟机
+      $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        url: url + "/api2/json/nodes/" + pveNodeName + "/qemu/" + studentId + "",
+        xhrFields: {
+          withCredentials: true,
+        },
+        contentType: "application/json;charset=utf-8",
+        beforeSend: function (xmlReq) {
+          xmlReq.setRequestHeader("CSRFPreventionToken", res1.data.CSRFPreventionToken);
+        },
+      });
+    }
+
+    // 实际执行的代码 上面都是函数声明
+    login();
+    document.querySelector(".img__btn").addEventListener("click", function () {
+      document.querySelector(".content").classList.toggle("s--signup");
+    });
+  </script>
+</html>

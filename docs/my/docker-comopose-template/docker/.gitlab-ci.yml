@@ -1,0 +1,24 @@
+# 这个 ci 会运行在   10.110.197.140  这个机器上
+stages: # 分段
+  - install
+  #  - eslint
+  - build
+#  - deploy
+
+cache:
+  paths:
+    - node_modules/
+    - dist
+
+install-job:
+  stage: install
+  script:
+    - echo "-------------------------------- begin to install -----------------------"
+    - npm config set registry "https://registry.npm.taobao.org/"
+    - npm install
+
+build-job:
+  stage: build
+  script:
+    - echo "-------------------------------- begin to build -----------------------"
+    - bash docker/run.sh
