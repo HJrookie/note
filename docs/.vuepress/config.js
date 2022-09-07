@@ -25,7 +25,7 @@ export default defineUserConfig({
         }),
         nprogressPlugin(),
         docsearchPlugin({
-            apiKey: 'B67KYONSRZ',
+            apiKey: 'e545798dfec8a6328fd5f84996a8de96',
             indexName: 'dev',
             // 配置项
         }),
