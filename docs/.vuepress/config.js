@@ -92,6 +92,57 @@ export default defineUserConfig({
                             text: "手写各种函数",
                             link: "/front/write.md",
                         },
+                        {
+                            text: "隐式类型转换",
+                            link: "/front/implicit-type-conversion.md",
+                        },
+                        {
+                            text: '正则',
+                            link: '/front/regexp.md'
+                        },
+                        {
+                            text: '对象数组格式化',
+                            link: '/front/object-format-reverse.md'
+                        },
+                        {
+                            text: '移动端',
+                            link: '/front/mob.md'
+                        },
+
+                    ],
+                },
+                {
+                    text: "浏览器相关",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "跨域",
+                            link: "/browser/cross-origin.md",
+                        },
+                        {
+                            text: "事件机制",
+                            link: "/browser/event.md",
+                        },
+                    ],
+                },
+                {
+                    text: "工具",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "nginx",
+                            link: "/tools/nginx.md",
+                        },
+                    ],
+                },
+                {
+                    text: "思想",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "概览",
+                            link: "/thought/overview.md",
+                        },
                     ],
                 },
                 {

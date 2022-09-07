@@ -305,3 +305,5 @@ Function.prototype.clone = function() {
 };
 let ff = f.clone()
 ```
+
+
