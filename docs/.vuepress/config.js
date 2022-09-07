@@ -9,9 +9,11 @@ export default defineUserConfig({
     lang: "zh-CN",
     title: "VuePress",
     description: "Linux FrondEnd 前端",
-    head: [
-        ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `./favicon.ico` }]
-    ],
+    markdown: {
+        toc: {
+            includeLevel: [1, 2, 3, 4]
+        }
+    },
     // bundler: viteBundler({
     //     viteOptions: {},
     //     vuePluginOptions: {},
@@ -23,6 +25,8 @@ export default defineUserConfig({
         }),
         nprogressPlugin(),
         docsearchPlugin({
+            apiKey: 'B67KYONSRZ',
+            indexName: 'dev',
             // 配置项
         }),
     ],
