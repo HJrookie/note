@@ -27,19 +27,19 @@ HTTP/1.0里的,用来向后兼容只支持HTTP/1.0 协议的缓 存服务器(那
 #### 2.Cache-Control
 Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对时间;  
 `Cache-Control: max-age=315360000`  
-1.可缓存性  
-public,可以被任何对象缓存,包括客户端,代理服务器,即使是 通常不可缓存的内容.(post方法,响应中没有expires,或max-age)  
-private,只能被单个用户缓存,不能作为共享缓存.
-no-cache,会发送http请求到server进行验证,(协商缓存验证)  
-no-store,不缓存的意思  
+1.可缓存性    
+`public`,可以被任何对象缓存,包括客户端,代理服务器,即使是 通常不可缓存的内容.(post方法,响应中没有expires,或max-age)    
+`private`,只能被单个用户缓存,不能作为共享缓存.  
+`no-cache`,会发送http请求到server进行验证,(协商缓存验证)    
+`no-store`,不缓存的意思    
 2. 到期时间  
-max-age,相对时间,单位是秒  
-s-maxage,会覆盖max-age,或者expires头,但是只对public有用  
-min-fresh,在制定秒数内保持最新的响应;  
-max-stale,愿意接受一个过期的资源,可设置秒数,表示不能过时超过给定的事件.  
-3. 重新验证和重新加载  
-must-revalidate,在过期之后,在成功向server验证之前,这个资源不能拿来响应后续的请求;  
-proxy-revalidate,和上面作用一样,只作用于共享缓存.public的那种.
+`max-age`,相对时间,单位是秒    
+`s-maxage`,会覆盖max-age,或者expires头,但是只对public有用    
+`min-fresh`,在制定秒数内保持最新的响应;    
+`max-stale`,愿意接受一个过期的资源,可设置秒数,表示不能过时超过给定的事件.    
+3. 重新验证和重新加载    
+`must-revalidate`,在过期之后,在成功向server验证之前,这个资源不能拿来响应后续的请求;    
+`proxy-revalidate`,和上面作用一样,只作用于共享缓存.public的那种.  
 
 ### 协商缓存  
 当浏览器对某个资源的请求没有命中强缓存，就会发一个请求到服务器，验证协商缓存是否命中，  
@@ -48,7 +48,7 @@ proxy-revalidate,和上面作用一样,只作用于共享缓存.public的那种.
 协商缓存是利用的是【If-Modified-Since,Last-Modified，】和【If-None-Match,ETag、】这两对Header来管理的
 ,后者的优先级较高,
 #### etag的作用
-一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变的修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；  
+一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变了修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；  
 某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，  If-Modified-Since能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)；  
 某些服务器不能精确的得到文件的最后修改时间  
 
