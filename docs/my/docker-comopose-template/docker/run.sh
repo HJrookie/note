@@ -23,18 +23,18 @@ docker tag $image_name  10.110.197.137/$image_name
 docker push 10.110.197.137/$image_name
 
 echo "-------------- push docker image  success -------------------------"
-echo "-------------- try to move files to /home/lenovo/dockerProjects ---------"
+echo "-------------- try to move files to /home/xxx/dockerProjects ---------"
 
 # 删除目录,清空其中文件 然后 建立目录
-# rm -rf /home/lenovoedu/nginx
-# mkdir -p /home/lenovoedu/nginx
+# rm -rf /home/xxx/nginx
+# mkdir -p /home/xxx/nginx
 # 复制文件
 
 pwd
 cd ..
-cp -R docker/* config.json /home/lenovoedu/nginx
-# cd /home/lenovo/dockerProjects/  && ls -la
-cd /home/lenovoedu/nginx && ls -la
+cp -R docker/* config.json /home/xxx/nginx
+# cd /home/xxx/dockerProjects/  && ls -la
+cd /home/xxx/nginx && ls -la
 mkdir -p nginxFile
 
 echo "-------------- move files success   ---------------------------------------"

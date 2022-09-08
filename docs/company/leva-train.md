@@ -53,7 +53,7 @@ python3 manage.py runsslserver 0.0.0.0:4800
 
 4. 在浏览器打开   https://机器的 ip:4800/  ,  确认接受使用不安全的证书
 
-5. 在浏览器打开   https://leva.lenovoedu.cn/    , 确认接受使用不安全的证书
+5. 在浏览器打开   https://leva.xxx.cn/    , 确认接受使用不安全的证书
 
 6. 切换到前端页面, 输入账号密码 登录
 

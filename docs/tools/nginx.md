@@ -18,7 +18,7 @@ docker run -d --restart=always --privileged=true -p 80:80 -v /root/app/nginx/sta
 docker run -d --restart=always --privileged=true -p 80:80 -v /usr/local/letmsHtml:/usr/local/letmsHtml -v /usr/local/nginx/nginx.conf:/etc/nginx/nginx.conf -v /usr/local/file:/usr/local/file --name nginx  nginx
 
 // 天津大赛 7 月在云服务上部署时的命令  
-docker run -d --restart=always --privileged=true -p 80:80 -v /etc/localtime:/etc/localtime -v /home/lenovo/dockerProjects/nginx/nginx.conf:/etc/nginx/nginx.conf -v /usr/local/file:/usr/local/file -v /home/lenovo/dockerProjects/nginx/static:/usr/share/nginx/html -v /home/lenovo/dockerProjects/nginx/logs:/var/log/nginx --name nginx  nginx:1.23
+docker run -d --restart=always --privileged=true -p 80:80 -v /etc/localtime:/etc/localtime -v /home/xxx/dockerProjects/nginx/nginx.conf:/etc/nginx/nginx.conf -v /usr/local/file:/usr/local/file -v /home/xxx/dockerProjects/nginx/static:/usr/share/nginx/html -v /home/xxx/dockerProjects/nginx/logs:/var/log/nginx --name nginx  nginx:1.23
 ```
 
 
