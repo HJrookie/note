@@ -120,8 +120,16 @@ export default defineUserConfig({
                             link: "/browser/cross-origin.md",
                         },
                         {
-                            text: "事件机制",
+                            text: "事件Event",
                             link: "/browser/event.md",
+                        },
+                        {
+                            text: "Ajax",
+                            link: "/browser/ajax.md",
+                        },
+                        {
+                            text: "cache",
+                            link: "/browser/cache.md",
                         },
                     ],
                 },
@@ -133,6 +141,10 @@ export default defineUserConfig({
                             text: "nginx",
                             link: "/tools/nginx.md",
                         },
+                        {
+                            text: "webpack",
+                            link: "/tools/webpack.md",
+                        },
                     ],
                 },
                 {
@@ -142,6 +154,24 @@ export default defineUserConfig({
                         {
                             text: "概览",
                             link: "/thought/overview.md",
+                        },
+                    ],
+                },
+                {
+                    text: "协议",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "HTTP",
+                            link: "/protocol/http.md",
+                        },
+                        {
+                            text: "TCP-UDP",
+                            link: "/protocol/tcp-udp.md",
+                        },
+                        {
+                            text: "websocket",
+                            link: "/protocol/websocket.md",
                         },
                     ],
                 },
