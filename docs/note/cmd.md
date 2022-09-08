@@ -24,7 +24,7 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # 安装完发现没启动 
 systemctl start docker            
 systemctl enable docker   
-chown lenovo:lenovo directory
+chown xxx:xxx directory
 
 
 # 修改镜像源  
@@ -421,10 +421,10 @@ npx prisma migrate dev --name init
 
 ```sh
 $ docker login --username=菜菜成功 registry.cn-hangzhou.aliyuncs.com
-$ docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/deu-lenovo-project/signup:[镜像版本号]
-$ docker push registry.cn-hangzhou.aliyuncs.com/deu-lenovo-project/signup:[镜像版本号]
+$ docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
+$ docker push registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
 
-$ docker pull registry.cn-hangzhou.aliyuncs.com/deu-lenovo-project/signup:[镜像版本号]
+$ docker pull registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
 ```
 
 
@@ -435,7 +435,7 @@ http://ip:5000/v2/_catalog
 查看镜像所有tag版本
 http://ip:5000/v2/zhjg/镜像名/tags/list
 
-https://dockerhub.lenovoedu.cn/v2/leva/ai-portal-i18n/tags/list
+https://dockerhub.xxx.cn/v2/leva/ai-portal-i18n/tags/list
 
 
 
