@@ -1,16 +1,17 @@
 ---
 home: true
-lang: zh-CN
-heroText: FrontEnd Blog
-heroImage: /logo.jpeg
-actionText: 开始 →
-actionLink: /interview/
+title: 首页
+heroImage: /logo.svg
+actions:
+  - text: 开始 →
+    link: /browser/Event-loop.html
+    type: primary
 features:
-- title: A Blog
-  details: 专注写作前端博客，记录日常所得
-- title: For Me
-  details: 关山难遇,谁悲失路之人
-- title: For Future
-  details: 记录个人博客，见证成长之路。
+- title: 远方
+  details: 昨夜西风凋碧树
+- title: 争渡
+  details: 衣带渐宽终不悔
+- title: 回眸
+  details: 那人却在灯火阑珊处
 footer: Copyright © 2019-present Sun Peng
 ---
