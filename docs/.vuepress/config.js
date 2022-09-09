@@ -8,7 +8,7 @@ import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 export default defineUserConfig({
     lang: "zh-CN",
     title: "VuePress",
-    description: "Linux FrondEnd 前端",
+    description: "不积跬步无以至千里",
     markdown: {
         toc: {
             includeLevel: [1, 2, 3, 4]
@@ -31,6 +31,11 @@ export default defineUserConfig({
         }),
     ],
     theme: defaultTheme({
+        lastUpdated: '最后更新时间',
+        repoLabel: 'Github',
+        base: '/note/',
+        repo: 'https://github.com/HJrookie/note',
+
         // 侧边栏数组
         // 所有页面会使用相同的侧边栏
         sidebar: {

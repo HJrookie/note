@@ -11,3 +11,17 @@
     }
   }
 }
+
+*{
+  transition: all ease-in-out 0.5s;
+}
+
+.hero img {
+  border-radius: 50%;
+  background: #008d2f21;
+}
+.home .hero .action-button{
+  padding: 0.5rem 1.4rem;
+  border-radius: 20px;
+  font-size: 1.1rem;
+}
