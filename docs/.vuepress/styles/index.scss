@@ -1,0 +1,13 @@
+:root {
+  scroll-behavior: smooth;
+  aside.sidebar {
+    &::-webkit-scrollbar {
+      background-color: #71cda361;
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #71cda361;
+    }
+  }
+}
