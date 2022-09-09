@@ -1,8 +1,16 @@
-# Hello VuePress
-[详细配置文档](https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#sidebar)
-
-
-
-
-# 2
-[相关指南](https://v2.vuepress.vuejs.org/zh/guide/markdown.html#%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95)
+---
+home: true
+lang: zh-CN
+heroText: FrontEnd Blog
+heroImage: /logo.jpeg
+actionText: 开始 →
+actionLink: /interview/
+features:
+- title: A Blog
+  details: 专注写作前端博客，记录日常所得
+- title: For Me
+  details: 关山难遇,谁悲失路之人
+- title: For Future
+  details: 记录个人博客，见证成长之路。
+footer: Copyright © 2019-present Sun Peng
+---
