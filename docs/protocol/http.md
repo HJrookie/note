@@ -9,9 +9,8 @@
 - 503 Service  Unavailable  
 - 504 Gateway Time-out
 
-
-
-
+#### 幂等性
+HEAD,PUT,GET,Delete,Options
 
 ### Long PUll
 也是轮询，但是是阻塞的。没有消息的时候，就不返回，一直等待。直到拿到想要的结果

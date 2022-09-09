@@ -128,8 +128,18 @@ export default defineUserConfig({
                             link: "/browser/ajax.md",
                         },
                         {
-                            text: "cache",
+                            text: 'Event Loop',
+                            link: '/browser/Event-loop.md'
+                        },
+                        {
+                            text: "Cache",
                             link: "/browser/cache.md",
+                            collapsible: true,
+                            children: [
+                                {
+                                    text: "Chrome",
+                                    link: "/browser/chrome-cache.md",
+                                },]
                         },
                     ],
                 },
@@ -174,6 +184,17 @@ export default defineUserConfig({
                             link: "/protocol/websocket.md",
                         },
                     ],
+                },
+                {
+                    text: '网络知识',
+                    link: '/network/index.md'
+                },
+                {
+                    text: 'CSS',
+                    children: [{
+                        text: '细节',
+                        link: '/css/detail.md'
+                    }]
                 },
                 {
                     text: "公司项目",
