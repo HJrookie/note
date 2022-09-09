@@ -13,8 +13,7 @@ HTTP/1.0里的,用来向后兼容只支持HTTP/1.0 协议的缓 存服务器(那
 >常用值: no-cache(强制要求缓存服务器在返回缓存的版本之前,讲请求提交到源服务器进行验证)  
 #### 1. Expires
 1.0里表示资源过期时间的header,描述的是一个绝对时间,由服务器返回,Expires受限于本地时间,  
-如果本地时间修改了之后,可能缓存就失效了  
-`Expires: Wed, 11 May 2018 07:20:00 GMT`  
+如果本地时间修改了之后,可能缓存就失效了, `Expires: Wed, 11 May 2018 07:20:00 GMT`  
 #### 2.Cache-Control
 Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对时间;  
 `Cache-Control: max-age=315360000`  
@@ -41,25 +40,12 @@ Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对
 #### etag的作用
 一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变了修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；  
 某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，  If-Modified-Since能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)；  
-某些服务器不能精确的得到文件的最后修改时间  
 
 
-
-### 几种状态码  
-`200`：强缓Expires/Cache-Control存失效时，返回新的资源文件  
-`200(from cache)`: 强缓Expires/Cache-Control两者都存在，未过期，Cache-Control优先Expires时，浏览器从本地获取资源成功  
-`304(Not Modified )`：协商缓存Last-modified/Etag没有过期时，服务端返回状态码304    
-
-
-HTTP 304响应,客户端发一个条件请求,请求头里带了If-Modified-Since: 服务器上次返回响应头中Last-Modified,  
-以及If-None-Match,值为服务器上次返回的ETag响应头的值,服务器对内容做判断是否是最新的,如果是最新的,那么服务器返回304,然后从本地缓存中读取资源  
-如果不是最新的,服务器返回200,响应体中就是当前资源最新的内容.    
-
-
-### 浏览器缓存判断顺序
+### 浏览器缓存判断顺序  ---> [流程图](/browser/cache.md/#整体流程图)
 1. 先通过时间上判断,该资源是否过期,优先级从高到低,依次为`Cache-Control中的s-maxage  -->  max-age   --> Expires`  
 2. 如果资源没有过期,那么浏览器就会从本地缓存中读取,`不会发送 http 请求`,只是有的文件从`Memory`中读取,有的从`Disk`中读取,具体规则未知,  
-    部分行为详见  `Chrome 实现`
+    部分行为详见  --->  [Chrome 实现](/browser/chrome-cache.md)
 3. 如果资源已经过期,那么此时就需要`发送 HTTP 请求` 到 server,去判断资源是否过期,并且该 http 请求会带上特殊的请求头,  
 > 1. 如果该文件上次响应的响应头中有 `Etag` 字段,那么这次请求时的请求头就会 带上`If-None-Match`字段,其值为 上次的`Etag` 的值  
 > 2. 如果该文件上次响应的响应头中有 `Last-Modified` 字段,那么这次请求时的请求头就会 带上`If-Modified-Since`字段,其值为 上次的`Last-Modified` 的值  
@@ -84,38 +70,12 @@ HTTP 304响应,客户端发一个条件请求,请求头里带了If-Modified-Sinc
 
 
 
-### Chrome 实现
-1. Chrome `Render engine` 是 `Blink`,它会将一些静态文件,js,css 存储到内存中,在 network tab 中称之为`Memory cache`    
-2. 浏览器缓存,在 network tab 中称之为`Disk cache`     
-3. `Blink `如何决定将文件放进 memory 还是 disk?  
-> 目前没有明确的文档,属于其内部实现,可以猜测的是 对于script 标签中动态加载的 js,并不会放进 memory,而是放到 disk
-```js
-var newScript = document.createElement('script');
-    newScript.src = '/scripts2.js?id=1';
-    document.body.appendChild(newScript);
-```
-> 并且对于 响应头中 Cache-Control为 `no-cache,max-age=0,no-store` 的文件,`Blink`不会缓存
-> 可以在 nginx 配置中增加 `add_header Cache-Control no-cache,max-age=0,no-store;`   
-![每次加载时,都会去服务器获取资源](https://pica.zhimg.com/80/v2-1a7cbf172a788971d262605686837b32_1440w.jpg?source=3af55fa1)
-
-#### Chrome 不同操作会影响 Request header
-1. `Ctrl + R`  或者 `F5`  
-Request header中 *没有* 任何缓存相关的 header ,例如`Pragma,Cache-Control,Expires`  
-2. `Ctrl + Shift + R`   
-`Request header`会增加`Cache-Control: no-cache;  以及    Pragma: no-cache`  
-3. 先清除浏览器缓存,然后`F5`加载  
-其实还是不会带缓存相关的 header,只是由于本地的 `Memory Cache 以及 Disk Cache` 都被清除了,因此Chrome 会向server 请求最新的文件
-4. Chrome DevTools 中勾选 `Disable Cache`  
-其实等同于 `Ctrl + Shift + R` ,`Request header`会增加`Cache-Control: no-cache;  以及    Pragma: no-cache`
-
 #### Etag 计算方式  - nginx 实现
 ```js
 // 根据 Request Header 中的 Last-Modified 与 Content-Length 计算而来
 // 例如 Content-Length: 612                     Last-Modified: Tue, 23 Apr 2019 10:18:21 GMT  结果为  "5cbee66d-264"
 `${(new Date('Tue, 23 Apr 2019 10:18:21 GMT').valueOf()/1000).toString(16)}-${(612).toString(16)}`  //时间戳除以 1000 然后转 16
 ```
-
-
 
 
 
