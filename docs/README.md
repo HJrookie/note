@@ -13,5 +13,5 @@ features:
   details: 衣带渐宽终不悔
 - title: 回眸
   details: 那人却在灯火阑珊处
-footer: Copyright © 2019-present Sun Peng
+footer: Copyright © 2022- Sun Peng
 ---
