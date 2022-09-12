@@ -35,7 +35,6 @@ export default defineUserConfig({
         repoLabel: 'Github',
         base: '/note/',
         repo: 'https://github.com/HJrookie/note',
-
         // 侧边栏数组
         // 所有页面会使用相同的侧边栏
         sidebar: {
@@ -113,6 +112,10 @@ export default defineUserConfig({
                             text: '移动端',
                             link: '/front/mob.md'
                         },
+                        {
+                            text: '模块化',
+                            link: '/front/module.md'
+                        },
 
                     ],
                 },
@@ -169,6 +172,16 @@ export default defineUserConfig({
                         {
                             text: "概览",
                             link: "/thought/overview.md",
+                        },
+                    ],
+                },
+                {
+                    text: "速记",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "Quick",
+                            link: "/quick/quick.md",
                         },
                     ],
                 },

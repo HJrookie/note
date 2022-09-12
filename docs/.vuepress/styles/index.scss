@@ -25,3 +25,9 @@
   border-radius: 20px;
   font-size: 1.1rem;
 }
+
+html.dark {
+  .hero img {
+    background: #00ff554d;
+  }
+}

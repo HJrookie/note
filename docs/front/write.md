@@ -306,4 +306,19 @@ Function.prototype.clone = function() {
 let ff = f.clone()
 ```
 
+#### 函数 repeat,多次执行
+```js
+function repeat(func, time, delay) {
+    return function _fn(...args) {
+        if (time-- > 0) {
+            func.apply(null, args);
+            setTimeout(() => {
+                _fn.apply(null, args);
+            }, delay);
+        }
+    };
+}
 
+const fun = repeat((str) => console.log(str), 3, 1000);
+fun('I am huo');
+```
