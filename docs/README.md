@@ -4,7 +4,7 @@ title: 首页
 heroImage: /logo.svg
 actions:
   - text: 开始 →
-    link: /browser/Event-loop.html
+    link: /quick/quick.html
     type: primary
 features:
 - title: 远方
