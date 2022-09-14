@@ -6,7 +6,7 @@
 - str . match search replace   
 - JSON.stringify `JSON.stringify(val,replacer, space)` 2,key 数组,space,缩进   
 - JSON.parse `reviver`,支持自定义`parser`  
-
+- `图片文件 accept="image/*" `
 
 #### Symbol 类型
 ```js

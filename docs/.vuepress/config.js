@@ -1,8 +1,5 @@
 import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "vuepress";
-import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
-import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
-import { nprogressPlugin } from '@vuepress/plugin-nprogress'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 
 export default defineUserConfig({
@@ -19,11 +16,11 @@ export default defineUserConfig({
     //     vuePluginOptions: {},
     // }),
     plugins: [
-        backToTopPlugin(),
-        mediumZoomPlugin({
-            // 配置项
-        }),
-        nprogressPlugin(),
+        // backToTopPlugin(),
+        // mediumZoomPlugin({
+        //     // 配置项
+        // }),
+        // nprogressPlugin(),
         docsearchPlugin({
             apiKey: 'e545798dfec8a6328fd5f84996a8de96',
             indexName: 'dev',
