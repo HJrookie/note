@@ -3,13 +3,24 @@
 ```shell
 # 163 教程 https://mirrors.163.com/.help/centos.html
 # 备份
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup2
 cd /etc/yum.repos.d
 wget https://mirrors.163.com/.help/CentOS7-Base-163.repo
 yum clean all
 yum makecache
-
 ```
+
+
+#### yum 更新 git
+```shell
+yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+#安装git
+yum install git
+#更新git
+yum update git
+```
+
+
 #### centos 安装 docker
 
 ```shell
