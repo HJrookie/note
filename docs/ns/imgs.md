@@ -6,3 +6,9 @@
 <!-- 配股 https://weibo.com/2188093987/M5HfyrXy3 -->
 <!-- <img width="492" alt="image" src="https://user-images.githubusercontent.com/27692261/190317620-2fb25804-c484-4bb1-a5a1-13ce732a1817.png"> -->
 <!-- https://instant.lvv2.com/html/d9c88783ca4e625219dc6c8434ff7814.html -->
+
+<!-- 化钱咒 -->
+<!-- ![image](https://user-images.githubusercontent.com/27692261/190537418-cdfd4211-8728-4b90-ad71-db1550ce6e38.png) -->
+
+<!-- 山人怒喷印花税 -->
+<!-- <img width="507" alt="image" src="https://user-images.githubusercontent.com/27692261/190561380-c7480ee3-b992-4c22-8f45-2cf32fdc890b.png"> -->
