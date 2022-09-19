@@ -35,7 +35,7 @@ Object.create(Object.getPrototypeOf(obj),Object.getOwnPropertyDescriptors(obj))
 <!-- 子组件需要这么调用,就可以更新 prop 的值了  -->
 this.$emit('update:prop', newValue)        
 ```
-![sync是个语法糖](https://s1.ax1x.com/2020/07/22/UHdWM4.png)
+<!-- ![sync是个语法糖](https://s1.ax1x.com/2020/07/22/UHdWM4.png) -->
 
 #### css 选择器 
 `A > B` 代表,A元素后仅一代元素       
