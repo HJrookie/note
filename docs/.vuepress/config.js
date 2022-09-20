@@ -207,8 +207,8 @@ export default defineUserConfig({
                 {
                     text: 'CSS',
                     children: [{
-                        text: '细节',
-                        link: '/css/detail.md'
+                        text: 'Tips',
+                        link: '/css/tips.md'
                     }]
                 },
                 {
