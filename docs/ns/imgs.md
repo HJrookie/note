@@ -12,3 +12,6 @@
 
 <!-- 山人怒喷印花税 -->
 <!-- <img width="507" alt="image" src="https://user-images.githubusercontent.com/27692261/190561380-c7480ee3-b992-4c22-8f45-2cf32fdc890b.png"> -->
+<!-- 人生成长 -->
+<!-- https://wx2.sinaimg.cn/mw2000/798c7fafgy1h68rbp5zmcj20f07df4hf.jpg -->
+<!-- ![image](https://user-images.githubusercontent.com/27692261/191159844-f43be4db-f082-49b7-bb6b-8d93c48b6e8f.png) -->
