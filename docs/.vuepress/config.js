@@ -87,33 +87,20 @@ export default defineUserConfig({
                     children: [
                         {
                             text: "拷贝",
-                            link: "/front/copy.md",
+                            link: "/front/write/copy.md",
                         },
                         {
                             text: "手写各种函数",
-                            link: "/front/write.md",
-                        },
-                        {
-                            text: "隐式类型转换",
-                            link: "/front/implicit-type-conversion.md",
+                            link: "/front/write/write.md",
                         },
                         {
                             text: '正则',
-                            link: '/front/regexp.md'
+                            link: '/front/ecma/regexp.md'
                         },
                         {
                             text: '对象数组格式化',
-                            link: '/front/object-format-reverse.md'
+                            link: '/front/write/object-format-reverse.md'
                         },
-                        {
-                            text: '移动端',
-                            link: '/front/mob.md'
-                        },
-                        {
-                            text: '模块化',
-                            link: '/front/module.md'
-                        },
-
                     ],
                 },
                 {
