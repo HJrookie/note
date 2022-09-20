@@ -21,8 +21,6 @@ HEAD,PUT,GET,Delete,Options
 
 ## Long PUll,和Ajax轮询非常消耗资源,每次都要鉴权,建立连接,很麻烦
 
-
-
 ### HTTP 1.0 1.1 1.2
 #### 1.0 => 1.1
 缓存 部分 host 长链接 状态码 
