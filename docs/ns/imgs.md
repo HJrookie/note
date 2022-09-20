@@ -15,3 +15,7 @@
 <!-- 人生成长 -->
 <!-- https://wx2.sinaimg.cn/mw2000/798c7fafgy1h68rbp5zmcj20f07df4hf.jpg -->
 <!-- ![image](https://user-images.githubusercontent.com/27692261/191159844-f43be4db-f082-49b7-bb6b-8d93c48b6e8f.png) -->
+
+<!-- 人生缺陷 需要改进 -->
+<!-- <img width="774" alt="image" src="https://user-images.githubusercontent.com/27692261/191206271-b38e1cd6-759c-4c66-86ca-739c8f0f81fd.png">
+ -->
