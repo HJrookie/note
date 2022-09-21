@@ -4,6 +4,7 @@ function test(){
     console.log(arguments)
     console.log(Array.prototype.slice.call(arguments))
     console.log([...arguments])
+    console.log(Array.from(arguments))
 }
 test(1,2,3)
 ```
