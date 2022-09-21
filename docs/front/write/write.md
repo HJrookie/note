@@ -103,7 +103,7 @@ o.__proto__ .__proto__ === Object.prototype // 由上面推算来,ok
 o.__proto__ .__proto__.__proto__ === null // 原型链的尽头
 //  {a:1, b:2} ---> f.prototype ---> Object.prototype---> null
 f.__proto__ === Function.prototype // 函数 f 是 Function的实例,
-f.__proto__.__proto__ ===Object.prototype // 
+f.__proto__.__proto__ ===Object.prototype // true
 
 
 // 函数 f 其实只是多继承了一层.
