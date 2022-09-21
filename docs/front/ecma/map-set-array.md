@@ -23,3 +23,15 @@ new Map(JSON.parse(JSON.stringify([...map])))
 let map = new Map([[1,2],[4,5],[6,7]])
 new Map(Object.entries(JSON.parse(JSON.stringify(Object.fromEntries(map.entries())))))
 ```
+
+#### 创建数组 trick
+```js
+var count = 1000000;
+console.time('1');
+Array(count).fill(1);   // 这种方法大概4ms
+console.timeEnd('1');
+
+console.time('2');
+Array.from({length:count},v=>1)  // 大概 60ms
+console.timeEnd('2');
+```
