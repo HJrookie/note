@@ -105,6 +105,10 @@ export default defineUserConfig({
                             text: 'Object',
                             link: '/front/ecma/object.md'
                         },
+                        {
+                            text: 'Generator',
+                            link: '/front/ecma/generator.md'
+                        },
                     ],
                 },
                 {
@@ -123,6 +127,7 @@ export default defineUserConfig({
                             text: '对象数组格式化',
                             link: '/front/write/object-format-reverse.md'
                         },
+
                     ],
                 },
                 {
