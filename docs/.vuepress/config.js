@@ -82,7 +82,25 @@ export default defineUserConfig({
                     ],
                 },
                 {
-                    text: "前端八股文",
+                    text: "ECMA",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: '正则',
+                            link: '/front/ecma/regexp.md'
+                        },
+                        {
+                            text: 'map-set-array',
+                            link: '/front/ecma/map-set-array.md'
+                        },
+                        {
+                            text: 'iterator',
+                            link: '/front/ecma/iterator.md'
+                        },
+                    ],
+                },
+                {
+                    text: "Utils",
                     // collapsible: true,
                     children: [
                         {
@@ -92,10 +110,6 @@ export default defineUserConfig({
                         {
                             text: "手写各种函数",
                             link: "/front/write/write.md",
-                        },
-                        {
-                            text: '正则',
-                            link: '/front/ecma/regexp.md'
                         },
                         {
                             text: '对象数组格式化',
@@ -149,16 +163,16 @@ export default defineUserConfig({
                         },
                     ],
                 },
-                {
-                    text: "思想",
-                    // collapsible: true,
-                    children: [
-                        {
-                            text: "概览",
-                            link: "/thought/overview.md",
-                        },
-                    ],
-                },
+                // {
+                //     text: "思想",
+                //     // collapsible: true,
+                //     children: [
+                //         {
+                //             text: "概览",
+                //             link: "/thought/overview.md",
+                //         },
+                //     ],
+                // },
                 {
                     text: "速记",
                     // collapsible: true,
@@ -195,7 +209,12 @@ export default defineUserConfig({
                     text: 'CSS',
                     children: [{
                         text: 'Tips',
-                        link: '/css/tips.md'
+                        link: '/css/tips.md',
+
+                    },
+                    {
+                        text: '伪类',
+                        link: '/css/3. 伪类-伪元素.md'
                     }]
                 },
                 {
