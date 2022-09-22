@@ -15,8 +15,7 @@ var f = t();
 f.next()
 ```
 #### 什么用 ? 
-因为 generator 执行的返回值就是一个 Iterator,因此可以把 generator 函数赋值给 一个对象的`Symbol.Iterator`属性,这样子它  
-就是可迭代的了  
+因为 generator 执行的返回值就是一个 Iterator,因此可以把 generator 函数赋值给 一个对象的`Symbol.Iterator`属性,这样子它就是可迭代的了  
 ```js
 var myIterable = {};
 myIterable[Symbol.iterator] = function* () {

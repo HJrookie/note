@@ -9,8 +9,18 @@ transition: all ease-in-out 0.5s 0.1s;
 }
 ```
 
-#### animation
-```js
+#### animation      [动画效果 例子](https://segmentfault.com/a/1190000010780991)
+```css
+@keyframes animationName{
+  0% {
+    bottom: -20px;
+    opacity: 0;
+  }
+  100% {
+      bottom: 0;
+      opacity: 1;
+  }
+}
   animation: 3s ease-in-out 1s 2 reverse both running slidein;
     animation-duration: 3s;                      // 完整动画的时间
     animation-timing-function: ease-in-out;      // 速度曲线
@@ -21,7 +31,6 @@ transition: all ease-in-out 0.5s 0.1s;
     animation-play-state: running;              // 定义一个动画是否运行或者暂停。可以通过查询它来确定动画是否正在运行。另外，它的值可以被设置为暂停和恢复的动画的重放
     animation-name: slidein;
 ```
-[动画效果 例子](https://segmentfault.com/a/1190000010780991)
 
 #### transform  
 ```css
@@ -41,9 +50,6 @@ box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
 
 filter: drop-shadow(2px 4px 6px black)
 filter 很有用, 可以设置亮度 ,对比度, 灰度
-
-#### border-radius
-border-radius:25px 0 25px 0;
 
 #### background-clip  背景图片显示区域
 默认是 border-box, 可以设置为 padding-box,content-box, text(看不懂,可能要废弃)
