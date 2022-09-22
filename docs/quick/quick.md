@@ -8,7 +8,7 @@
 - JSON.parse `reviver`,支持自定义`parser`
 - `图片文件 accept="image/*" `
 - `Object.hasOwn`取代`hasOwnProperty`,避免`对象重写hasOwnProperty,以及 Object.create(null)`识别错误的问题  
-- Array.of
+- `Array.of,Object.is NaN,+0`
 
 #### Symbol 类型
 
@@ -17,7 +17,7 @@
 2. Symbol("foo") //每次都是不同的,Symbol.for("foo")会复用已有的值
 3. `new Symbol,则会抛出 TypeError错误`,//不支持包装器类型,但是支持`Object(sym)`
 4. 可以作为对象的 key,不支持 `for of,Object.entries,JSON.stringify,Object.keys/valus,
-Object.getOwnPropertyNames`,支持`Object.getOwnPropertySymbols,Reflect.ownKeys`
+Object.getOwnPropertyNames`,支持`Object.getOwnPropertySymbols,Reflect.ownKeys,Object.assign`
 5. `Symbol.keyFor(Symbol.for("kkk")) // kkk`
 6. 不能转为 string 和 number,`但是支持 toString 方法`
 7. Object(sym) == sym returns true.//用===.就不相等.因为数据类型不一样

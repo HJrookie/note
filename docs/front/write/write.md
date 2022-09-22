@@ -87,6 +87,34 @@ t.apply(o, [4, 5, 6])
 t.appl(o, [4, 5, 6])
 ```
 
+#### bind
+```js
+Function.prototype.bbind = function (_this, ...arg) {
+    _this = new Object(_this ?? globalThis);
+    const func = this;
+
+    const bound = function (...args) {
+        // console.log('thi', this, this?.constructor === func);
+        return func.call(
+            this?.constructor === func ? this : _this, // 如果 new 的时候,这个表达式为 true
+            ...arg,
+            ...args
+        );
+    };
+    bound.prototype = func.prototype;
+    return bound;
+};
+let name = 1;
+let o = { name: 22 };
+function t(a, b, c) {
+    console.log(this.name, a + b + c);
+}
+let ff = t.bbind(o, 11);
+ff(1, 2, 6); // 14
+
+const oo = new ff(7, 8);
+
+```
 
 
 

@@ -1,6 +1,6 @@
 import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "vuepress";
-import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 
 export default defineUserConfig({
     lang: "zh-CN",
@@ -8,8 +8,8 @@ export default defineUserConfig({
     description: "不积跬步无以至千里",
     markdown: {
         toc: {
-            includeLevel: [1, 2, 3, 4]
-        }
+            includeLevel: [1, 2, 3, 4],
+        },
     },
     // bundler: viteBundler({
     //     viteOptions: {},
@@ -22,16 +22,16 @@ export default defineUserConfig({
         // }),
         // nprogressPlugin(),
         docsearchPlugin({
-            apiKey: 'e545798dfec8a6328fd5f84996a8de96',
-            indexName: 'dev',
+            apiKey: "e545798dfec8a6328fd5f84996a8de96",
+            indexName: "dev",
             // 配置项
         }),
     ],
     theme: defaultTheme({
-        lastUpdated: '最后更新时间',
-        repoLabel: 'Github',
-        base: '/note/',
-        repo: 'https://github.com/HJrookie/note',
+        lastUpdated: "最后更新时间",
+        repoLabel: "Github",
+        base: "/note/",
+        repo: "https://github.com/HJrookie/note",
         // 侧边栏数组
         // 所有页面会使用相同的侧边栏
         sidebar: {
@@ -86,28 +86,28 @@ export default defineUserConfig({
                     // collapsible: true,
                     children: [
                         {
-                            text: '正则',
-                            link: '/front/ecma/regexp.md'
+                            text: "正则",
+                            link: "/front/ecma/regexp.md",
                         },
                         {
-                            text: 'map-set-array',
-                            link: '/front/ecma/map-set-array.md'
+                            text: "map-set-array",
+                            link: "/front/ecma/map-set-array.md",
                         },
                         {
-                            text: 'Iterator',
-                            link: '/front/ecma/iterator.md'
+                            text: "Iterator",
+                            link: "/front/ecma/iterator.md",
                         },
                         {
-                            text: 'Closure',
-                            link: '/front/ecma/closure.md'
+                            text: "Closure",
+                            link: "/front/ecma/closure.md",
                         },
                         {
-                            text: 'Object',
-                            link: '/front/ecma/object.md'
+                            text: "Object",
+                            link: "/front/ecma/object.md",
                         },
                         {
-                            text: 'Generator',
-                            link: '/front/ecma/generator.md'
+                            text: "Generator",
+                            link: "/front/ecma/generator.md",
                         },
                     ],
                 },
@@ -124,10 +124,9 @@ export default defineUserConfig({
                             link: "/front/write/write.md",
                         },
                         {
-                            text: '对象数组格式化',
-                            link: '/front/write/object-format-reverse.md'
+                            text: "对象数组格式化",
+                            link: "/front/write/object-format-reverse.md",
                         },
-
                     ],
                 },
                 {
@@ -147,8 +146,8 @@ export default defineUserConfig({
                             link: "/browser/ajax.md",
                         },
                         {
-                            text: 'Event Loop',
-                            link: '/browser/Event-loop.md'
+                            text: "Event Loop",
+                            link: "/browser/Event-loop.md",
                         },
                         {
                             text: "Cache",
@@ -158,7 +157,8 @@ export default defineUserConfig({
                                 {
                                     text: "Chrome",
                                     link: "/browser/chrome-cache.md",
-                                },]
+                                },
+                            ],
                         },
                     ],
                 },
@@ -215,20 +215,25 @@ export default defineUserConfig({
                     ],
                 },
                 {
-                    text: '网络知识',
-                    link: '/network/index.md'
+                    text: "网络知识",
+                    link: "/network/index.md",
                 },
                 {
-                    text: 'CSS',
-                    children: [{
-                        text: 'Tips',
-                        link: '/css/tips.md',
-
-                    },
-                    {
-                        text: '伪类',
-                        link: '/css/3. 伪类-伪元素.md'
-                    }]
+                    text: "CSS",
+                    children: [
+                        {
+                            text: "Tips",
+                            link: "/css/tips.md",
+                        },
+                        {
+                            text: "css3",
+                            link: "/css/css3.md",
+                        },
+                        {
+                            text: "伪类",
+                            link: "/css/3. 伪类-伪元素.md",
+                        },
+                    ],
                 },
                 {
                     text: "公司项目",
@@ -255,8 +260,7 @@ export default defineUserConfig({
                         },
                         {
                             text: "letms",
-                            children: [
-                            ],
+                            children: [],
                             link: "/company/letms/letms.md",
                         },
                     ],
@@ -264,5 +268,4 @@ export default defineUserConfig({
             ],
         },
     }),
-
 });
