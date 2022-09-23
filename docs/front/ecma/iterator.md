@@ -28,6 +28,7 @@ f.next()  // {value: 1, done: false}
 #### 如何实现 Iterator
 `Symbol.iterator()`方法的最简单实现，还是使用` Generator 函数` 
 ```js
+// 一个简单的实现,
 let obj = {
   * [Symbol.iterator]() {
     yield 'hello';
@@ -40,6 +41,68 @@ for (let x of obj) {
 }
 // "hello"
 // "world"
+
 ```
+
+#### 较为成熟一点的 Iterator (自定义迭代器)
+```js
+const o = {
+    a: 'hello',
+    b: 'world',
+    [Symbol.iterator]() {
+        let _this = this,
+            keys = Object.keys(this),
+            i = 0;
+        return {
+            next() {
+                if (i < keys.length) {
+                    return { value: [keys[i], _this[keys[i++]]], done: false };
+                }
+                return { value: undefined, done: true };
+            },
+        };
+    },
+};
+for(let [k,v] of o){
+  console.log(k,v)
+}
+```
+
+#### 其实也可以直接把 generator 赋值给对象
+`一种是 自己写 遍历函数,另一种是 yield 跟值  都是可以的`,只要最终的结果是 `Iterator`
+
+```js
+function* gen() {
+    yield '1';
+    yield '2';
+    yield '3';
+}
+let o = {
+    a: 1,
+    b: 2,
+    c: 3,
+    [Symbol.iterator]: gen,
+};
+
+for (let v of o) {
+    console.log(v); // 1  2 3  即 yield 的值
+}
+
+let o = {
+    a: 1,
+    b: 2,
+    c: 3,
+    *[Symbol.iterator]() {
+        yield '1';
+        yield '2';
+        yield '3';
+    },
+};
+
+for (let v of o) {
+    console.log(v); // 1  2 3  即 yield 的值
+}
+```
+
 #### tips
 - `for of, ... , Array.from()`都会调用 iterator

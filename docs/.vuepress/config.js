@@ -127,6 +127,10 @@ export default defineUserConfig({
                             text: "对象数组格式化",
                             link: "/front/write/object-format-reverse.md",
                         },
+                        {
+                            text: "Promise",
+                            link: "/front/write/promise.md",
+                        }
                     ],
                 },
                 {
