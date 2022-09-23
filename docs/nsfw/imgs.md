@@ -19,3 +19,9 @@
 <!-- 人生缺陷 需要改进 -->
 <!-- <img width="774" alt="image" src="https://user-images.githubusercontent.com/27692261/191206271-b38e1cd6-759c-4c66-86ca-739c8f0f81fd.png">
  -->
+<!-- 美女腰 -->
+ <!-- ![image](https://user-images.githubusercontent.com/27692261/191929363-88ecd8e7-d0db-4798-a5fc-7041a7b0a146.png) -->
+
+<!-- 八部金刚功 评论 -->
+<!-- <img width="514" alt="image" src="https://user-images.githubusercontent.com/27692261/191932754-b58d3fa9-40dd-47a9-a91c-5750c3b97014.png">
+ -->
