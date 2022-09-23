@@ -100,3 +100,22 @@ var readFileThunk = Thunk(fileName);
 readFileThunk(callback);
 ```
 
+#### 作用
+- 实现 iterator 
+- 实现类似协程的操作,即把函数的执行权交出去,暂停函数执行    
+- 实现 无限range  
+- lazy evaluation 惰性计算  
+- 用来实现 async/await,  
+
+
+#### range 函数
+```js
+function *range(i,n){
+    for(;i<=n;i++){
+        yield i;
+    }
+}
+let f = range(1,5); // 结果为 1 2 3 4 5这 5 个数
+[...f] // 可以生成数组
+for(let v of f){console.log(v)}
+```
