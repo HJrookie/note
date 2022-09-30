@@ -21,7 +21,7 @@ pm2 save
 ```
 #### nodejs 安装
 ```shell
-wget  https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+wget --no-check-certificate https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
 tar xf node-v16.17.0-linux-x64.tar.xz  
 # 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
 cd node-v16.17.0-linux-x64.tar.xz
