@@ -351,3 +351,20 @@ function repeat(func, time, delay) {
 const fun = repeat((str) => console.log(str), 3, 1000);
 fun('I am huo');
 ```
+
+#### 数组拍平 flap
+```js
+let arr = [1,2,3,4,[5,6,[7,8,9,[10,11,1123]]]];
+const flap = arr=>{
+    let res = [];
+    arr.forEach(item=>{
+        if(Array.isArray(item)){
+            res = res.concat(flap(item))
+        }else{
+            res= res.concat(item)
+        }
+    })
+    return res;
+}
+console.log(flap(arr))
+```
