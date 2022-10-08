@@ -4,6 +4,7 @@ import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 
 export default defineUserConfig({
     lang: "zh-CN",
+    port: 8082,
     title: "VuePress",
     description: "不积跬步无以至千里",
     markdown: {
