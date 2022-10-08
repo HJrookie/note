@@ -1,18 +1,10 @@
 let fs = require("fs");
 let request = require("request");
-let path = require("path");
-const async = require("async");
 const cheerio = require("cheerio");
-const cookie_val = "Cookie: bbs_sid=5pmb8jukg4d5ne9puo2apj6iai; ";
 request = request.defaults({ jar: true });
-var j = request.jar();
-var cookie = request.cookie(cookie_val);
-const { log: l } = console;
-const { resolve } = require("path");
 const quotedPrintable = require("quoted-printable");
 const musics = ["00-09.txt", "10-19.txt", "80-89.txt", "90-99.txt"];
 const utf8 = require("utf8");
-const errorData = [];
 const headers = {
     accept: "*/*",
     "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -23,31 +15,24 @@ const headers = {
     "sec-fetch-dest": "audio",
     "sec-fetch-mode": "no-cors",
     "sec-fetch-site": "cross-site",
-    // 'Date': 'Mon, 03 Oct 2022 04:03:33 GMT',
     "Content-Type": "audio/mp4",
 };
 const errorFilePath = "./hanman-error.txt";
 const datapath = "./data.txt";
 function downloadMp3(url, pathAndName, callback) {
-    // j.setCookie(cookie, encodeURI(url));
-
     let req = request({
         url: encodeURI(url),
         method: "get",
         headers,
         timeout: 10000,
     });
-
     req.on("error", (error) => {
-        // fs.appendFileSync(errorFilePath, url + "\n");
         console.log("error---> ", error);
-
         const musicInfo = {
             filePath: pathAndName,
             musicSrc: url,
         };
         fs.appendFileSync(errorFilePath, JSON.stringify(musicInfo) + "\n");
-
         callback && callback(null, pathAndName);
     });
 
@@ -59,9 +44,6 @@ function downloadMp3(url, pathAndName, callback) {
             })
         )
         .on("close", () => {
-            callback && callback(null, pathAndName);
-        })
-        .on("complete", (resp, body) => {
             callback && callback(null, pathAndName);
         });
 }
@@ -189,7 +171,6 @@ musics.reduce((prevM, music, ii) => {
                                             filePath: `${curPath}/${line}.mp3`,
                                             musicSrc: "null",
                                         };
-
                                         console.log(3, musicSrc, new Date().toLocaleString());
                                         if (!musicSrc) {
                                             fs.appendFileSync(errorFilePath, JSON.stringify(musicInfo) + "\n");
