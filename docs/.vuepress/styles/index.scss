@@ -10,9 +10,10 @@
       background-color: #71cda361;
     }
   }
+  --content-width: 1000px;
 }
 
-*{
+* {
   transition: all ease-in-out 0.5s;
 }
 
@@ -20,7 +21,7 @@
   border-radius: 50%;
   background: #008d2f21;
 }
-.home .hero .action-button{
+.home .hero .action-button {
   padding: 0.5rem 1.4rem;
   border-radius: 20px;
   font-size: 1.1rem;
@@ -29,5 +30,16 @@
 html.dark {
   .hero img {
     background: #00ff554d;
+  }
+}
+
+@media (max-width: 419px) {
+  .theme-default-content {
+    code {
+      font-size: 0.75em;
+    }
+    pre.language-javascript {
+      line-height: 1.2;
+    }
   }
 }
