@@ -43,6 +43,8 @@ Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对
 
 
 ### 浏览器缓存判断顺序  ---> [流程图](/browser/cache.md/#整体流程图)
+0. 先查看`pragma,expires,cache-control`这三个字段中是否设置了缓存,如果是`no-store`,那么会直接请求服务端  
+   如果是`no-cache`,则至`步骤 3` 校验文件是否过期  
 1. 先通过时间上判断,该资源是否过期,优先级从高到低,依次为`Cache-Control中的s-maxage  -->  max-age   --> Expires`  
 2. 如果资源没有过期,那么浏览器就会从本地缓存中读取,`不会发送 http 请求`,只是有的文件从`Memory`中读取,有的从`Disk`中读取,具体规则未知,  
     部分行为详见  --->  [Chrome 实现](/browser/chrome-cache.md)
