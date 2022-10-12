@@ -3,9 +3,18 @@
 
 > 事件捕获阶段 --> 处于目标阶段 --> 事件冒泡阶段(目标的元素在捕获阶段不会接收到事件)
 
-
-#### addEventListener 函数
+#### DOM0
 ```js
+let dom = document.getElementById('1')
+dom.onclick = function(e){  // 如果添加多个 onclick 会重写之前的事件
+  console.log(e,1)
+}
+```
+#### DOM1 一般只有设计规范没有具体实现
+
+#### DOM2 - > addEventListener 函数
+```js
+// 多次添加的话,事件会按先后顺序执行,先添加的先执行
 addEventListener("eventName",function,useCapture) // 是否在捕获阶段执行 useCapture 其实和 options 中的 capture 是相同的
 addEventListener("eventName",function,options) // 可以传递 options
 /* options 包括
@@ -25,7 +34,7 @@ signal     AbortSignal，该 AbortSignal 的 abort() 方法被调用时，监听
 - `event.type`    事件类型//例如 click 
 - `event.target`  触发事件的 dom,例如点击了哪个 dom  
 - `currentTarget` 一直指向`注册事件处理程序的DOM`,和 this 指向相同    
-- `cancalable`    改值设置为true的事件,才能通过`preventDefault`来取消其默认行为  
+- `cancalable`    该值设置为true的事件,才能通过`preventDefault`来取消其默认行为  
 - `eventPhase`    可能的值为 1,2,3. 分别代表事件捕获阶段,处于目标对象阶段,事件冒泡阶段  
 #####  注意currentTarget ,this,target指向 
 - currentTarget 永远等于this,都指向事件处理程序所在 dom  

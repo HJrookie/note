@@ -13,47 +13,115 @@ microtasks:  `process.nextTick, Promise, **MutationObserver** `
 反之如果新建一个 task 来做数据更新，task运行完再更新ui,那么渲染就会进行两次。  
 
 
+#### 比较简单的例子  
+```js
+setTimeout(() => {
+    console.log('1');
+    Promise.resolve().then(() => {
+        console.log('2');  // 这里可以看出来 .then 里面的代码会立即加入到微任务,但是并不会立马执行
+    });
+    console.log(3);
+}, 0);
+setTimeout(() => {
+    console.log('4');
+}, 0);
+console.log('5');
+```
+
+#### 稍微复杂的例子
+> 复杂的点在于,要整理清楚 微任务和宏任务的切换
+```js
+Promise.resolve().then(() => {
+  console.log(' 1');
+  const timer2 = setTimeout(() => {
+    console.log('2')
+  }, 0)
+});
+const timer1 = setTimeout(() => {
+  console.log('3')
+  Promise.resolve().then(() => {
+    console.log('4')
+  })
+}, 0)
+console.log('5');
+```
+
 ### 终极例子
 ```js
-console.log(1)
-Promise.resolve().then(() => {
-  Promise.resolve().then(() => {
-    console.log("2")  // 这里比3要快,
-  }).then(() => {
-    sleep(3);
-    console.log(6)  //这里在Promis最后,比settim快
-  }) //这里没有sleep,还是会先打印3,在打印6,应该还是把.then里面的加到micro队列尾部了
-}).then(() => {
-  console.log("3") //这里比6快,即比上一个.then里面的promise.then先执行
-})
-console.log(4)
+console.log(1);
+Promise.resolve()
+    .then(() => {
+        console.log(7);
+        Promise.resolve()
+            .then(() => {
+                console.log('2');
+            })
+            .then(() => {
+                sleep(3);
+                console.log(6);
+            });
+        console.log(8);
+    })
+    .then(() => { 
+        console.log('3');
+    });
+console.log(4);
 
 let r = setTimeout(() => {
-  console.log(5)
-}, 100)
+    console.log(5);
+}, 100);
 
 function sleep(delay) {
-  let time = new Date();
-  while (new Date() - time < delay * 1000) {}
+    let time = new Date();
+    while (new Date() - time < delay * 1000) {}
 }
 
 // 1
 // 4
+// 7
+// 8
 // 2
 // 3
 // 等了3秒
 // 6 
-// 等了0.1秒
-// 5 
+// 5  立即打印 5,它被阻塞了,不然早就打印了
+
+// 解析
+
+console.log(1);
+Promise.resolve()
+    .then(() => {
+        console.log(7);
+        Promise.resolve()
+            .then(() => {
+                console.log('2');
+            })
+            .then(() => {
+                sleep(3);
+                console.log(6);
+            });
+        console.log(8);
+    })
+    .then(() => {  // 后面跟的这个.then 需要等前面的那个.then 里的东西都执行了,才会放到微任务队列
+        console.log('3');
+    });
+console.log(4);
+
+let r = setTimeout(() => {
+    console.log(5);
+}, 100);
+
+function sleep(delay) {
+    let time = new Date();
+    while (new Date() - time < delay * 1000) {}
+}
 ```
 
 #### 例子2
 ```js
 console.log(1)
 Promise.resolve().then(()=>{
-   
     console.log(2)
-
 }).then(()=>{
     setTimeout(()=>{
     console.log(5)
@@ -61,7 +129,7 @@ Promise.resolve().then(()=>{
 })
 console.log(3)
 setTimeout(()=>{
-    console.log(4) //这里的要比.then里的setTimeout块
+    console.log(4) 
 },0)
 
 // 1 3 2 4 5
@@ -100,7 +168,7 @@ function sleep(delay) {
 ```
 
 
-### 比较难的一个例子
+### 比较难的一个例子 需要细心
 ```js
 console.log(1)
 setTimeout(()=>{console.log(2)},0)
