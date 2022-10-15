@@ -76,10 +76,10 @@ export default defineUserConfig({
                                 },
                             ],
                         },
-                        {
-                            text: "琐碎记录",
-                            link: "/my/others.md",
-                        },
+                        // {
+                        //     text: "琐碎记录",
+                        //     link: "/my/others.md",
+                        // },
                     ],
                 },
                 {
