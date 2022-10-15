@@ -6,17 +6,17 @@ js中的对象是无序属性的组合,其属性可以包含基本值,对象,或
 >对象属性名前面加_,表示私有变量,表明只能通过对象方法来访问,但是只是建议  
 
 #### 数据属性
-Configurable 能否通过delete删除属性而重新定义属性,或者修改属性的特性,或者将数据属性修改为访问器属性,用.创建.默认true  
-Enumerable  能否通过for-in循环返回属性,用.创建.默认true  
-Writable  是否可修改,用.创建.默认true  
+Configurable 能否通过delete删除属性而重新定义属性,或者修改属性的特性,或者将数据属性修改为访问器属性,`用.创建 默认true`  
+Enumerable  能否通过for-in循环返回属性,`用.创建 默认true`  
+Writable  是否可修改,`用.创建 默认true`    
 Value  数据的值.默认undefined  
 
 可以通过 `Object.defineProperty(obj,property,{writable,configurable,enumerable,value})`来修改属性的特性,也可以新添加属性,该属性默认的`configurable, enumerable, writable默认为false`. 修改已有属性时不会这样.  
 >可以通过Object.getOwnPropertyDescriptor(obj,property)来获取属性的详情.或者Object.getOwnPropertyDescriptors(obj)获取所有属性的特性.(Symbol类型也可以)
 
 #### 访问器属性
-Configurable 能否通过delete删除属性而重新定义属性,或者修改属性的特性,或者将数据属性修改为访问器属性,用.创建.默认true  
-Enumerable  能否通过for-in循环返回属性,用.创建.默认true  
+Configurable 能否通过delete删除属性而重新定义属性,或者修改属性的特性,或者将数据属性修改为访问器属性,`用.创建 默认true`  
+Enumerable  能否通过for-in循环返回属性,`用.创建 默认true`  
 get  获取值的时候,会调用此函数  
 set  设置值的的时候,调用此函数  
  
