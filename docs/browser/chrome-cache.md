@@ -9,7 +9,7 @@ var newScript = document.createElement('script');
     document.body.appendChild(newScript);
 ```
 > 并且对于 响应头中 Cache-Control为 `no-cache,max-age=0,no-store` 的文件,`Blink`不会缓存
-> 可以在 nginx 配置中增加 `add_header Cache-Control no-cache,max-age=0,no-store;`   
+> 可以在 nginx 配置中增加 `add_header Cache-Control no-cache,max-age=600,no-store;`   
 
 <img width="755" alt="image" src="https://user-images.githubusercontent.com/27692261/189311901-0ff07921-8d6d-4b21-8067-656fc8d9f9a8.png">
 

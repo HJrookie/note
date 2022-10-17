@@ -3,11 +3,13 @@
 ```shell
 # 163 教程 https://mirrors.163.com/.help/centos.html
 # 备份
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup2
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 cd /etc/yum.repos.d
 wget https://mirrors.163.com/.help/CentOS7-Base-163.repo
 yum clean all
 yum makecache
+# 只升级所有包，不升级软件和系统内核
+yum -y upgrade 
 ```
 #### pm2
 ```shell
@@ -21,6 +23,7 @@ pm2 save
 ```
 #### nodejs 安装
 ```shell
+# https://nodejs.org/dist/v15.4.0/node-v15.4.0-linux-x64.tar.gz
 wget --no-check-certificate https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
 tar xf node-v16.17.0-linux-x64.tar.xz  
 # 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
