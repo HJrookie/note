@@ -22,6 +22,8 @@ docker run -d --restart=always --privileged=true -p 80:80 -v /etc/localtime:/etc
 ```
 
 
+docker run -d --restart=always --privileged=true -p 80:80 -v /home/lenovoedu/front-end-nginx/static:/usr/share/nginx/html  -v /home/lenovoedu/front-end-nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx  nginx
+img
 ### 2.常用命令
 ##### 2.1 linux上常用命令
 1. 重启       `sudo nginx -s stop && sudo nginx  `

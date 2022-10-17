@@ -131,7 +131,11 @@ export default defineUserConfig({
                         {
                             text: "Promise",
                             link: "/front/write/promise.md",
-                        }
+                        },
+                        {
+                            text: "todo",
+                            link: "/front/write/todo.md",
+                        },
                     ],
                 },
                 {
