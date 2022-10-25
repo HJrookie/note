@@ -88,9 +88,6 @@ chmod +x /usr/local/bin/docker-compose
 ```
 
 #### 启动容器
-
-
-
 ```shell
 # mysql
 docker run -itd --name mysql -p 3306:3306 --privileged=true -e MYSQL_ROOT_PASSWORD=root  -e TZ=Asia/Shanghai mysql:5.7 
@@ -100,6 +97,16 @@ docker exec --user root -it 18e541e99668 bash
 docker run -d -p 80:80  -v /usr/local/letmsHtml:/usr/local/letmsHtml -v /usr/local/nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx nginx
 ```
 
+
+#### docker-compose 每次都拉最新镜像
+```shell
+# 0. 停止
+docker-compose  -f docker-web-prod.yml  stop
+# 1. 拉镜像 
+docker-compose  -f docker-web-prod.yml  pull
+# 2. 启动
+docker-compose  -f docker-web-prod.yml  up -d
+```
 
 
 
