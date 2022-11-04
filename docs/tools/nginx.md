@@ -61,3 +61,11 @@ load_module /etc/nginx/modules/ngx_http_image_filter_module.so;  # 放到 nginx 
 1. apt-get 换源  `sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list`  
 2. `apt-get update            apt-get upgrade`  
 3. apt-get install vim
+
+
+#### nginx 配置
+```nginx
+ add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+```
