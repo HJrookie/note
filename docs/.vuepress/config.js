@@ -183,6 +183,10 @@ export default defineUserConfig({
                             text: "webpack",
                             link: "/tools/webpack.md",
                         },
+                        {
+                            text: "docker",
+                            link: "/tools/docker.md",
+                        },
                     ],
                 },
                 // {

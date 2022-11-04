@@ -1,3 +1,10 @@
+#### 网卡
+```shell
+sudo ifconfig en1 down
+sudo ifconfig en1 up
+
+```
+
 #### 配置yum 源
 
 ```shell
@@ -106,6 +113,8 @@ docker-compose  -f docker-web-prod.yml  stop
 docker-compose  -f docker-web-prod.yml  pull
 # 2. 启动
 docker-compose  -f docker-web-prod.yml  up -d
+
+docker-compose -f nginx-dev.yml down --rmi all
 ```
 
 
@@ -495,4 +504,34 @@ rpm -e --nodeps gitlab-runner-15.1.0-1.i686
 git rm -r --cached .  
 git add .
 git status
+```
+
+
+
+
+
+
+#### gmail
+
+
+
+```shell
+sudo su
+vi /etc/ssh/sshd_config
+# 改成 yes
+PermitRootLogin no
+PasswordAuthentication no
+service sshd restart
+passwd root
+gsnysbslzr@123qwe
+
+
+//  ss no混淆
+bash <(curl -sL https://raw.githubusercontent.com/Miuzarte/hijk.sh/main/Original/ss.sh)
+
+// with plugin
+wget -N --no-check-certificate -c -t3 -T60 -O ss-plugins.sh https://git.io/fjlbl
+chmod +x ss-plugins.sh
+./ss-plugins.sh
+
 ```
