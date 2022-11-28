@@ -535,3 +535,9 @@ chmod +x ss-plugins.sh
 ./ss-plugins.sh
 
 ```
+
+#### 
+```shell
+# 清除 dns 缓存
+sudo killall -HUP mDNSResponder
+```

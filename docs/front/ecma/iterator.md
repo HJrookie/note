@@ -54,7 +54,7 @@ const o = {
             keys = Object.keys(this),
             i = 0;
         return {
-            next() {
+            next() {  // 注意这里需要一个 next 函数
                 if (i < keys.length) {
                     return { value: [keys[i], _this[keys[i++]]], done: false };
                 }
