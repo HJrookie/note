@@ -94,12 +94,13 @@ Promise.resolve()
         console.log(7);
         Promise.resolve()
             .then(() => {
-                console.log('2');
+                console.log('2');  // 这个 函数 会先于 3 那个函数被放到 微任务队列里 
             })
-            .then(() => {
-                sleep(3);
-                console.log(6);
-            });
+            // 可以暂时把下面的这一部分注释掉 看一下代码是怎么执行的
+            // .then(() => {
+            //     sleep(3);
+            //     console.log(6);
+            // });
         console.log(8);
     })
     .then(() => {  // 后面跟的这个.then 需要等前面的那个.then 里的东西都执行了,才会放到微任务队列

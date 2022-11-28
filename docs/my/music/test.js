@@ -164,6 +164,6 @@ function downloadMp3(url, pathAndName, callback) {
             callback && callback(null, pathAndName);
         });
 }
-downloadMp3(data.musicSrc, data.filePath, () => {
-    console.log('success', data.name)
-})
+// downloadMp3(data.musicSrc, data.filePath, () => {
+//     console.log('success', data.name)
+// })

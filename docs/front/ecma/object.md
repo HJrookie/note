@@ -29,21 +29,21 @@ test.prototype.__proto__ === Object.prototype;
 ```
 ```js
 // 实现一下继承
-var sub = function(){}
+var son = function(){}
 var father = function(){}
-var obj = new sub();  //sub为实例
-var temp = sub.prototype;                     //在这里暂存一下sub原来的原型对象
-console.log(obj.__proto__ === sub.prototype) //判断obj的__proto__是否指向sub的原型对象  true
-sub.prototype = new father();
-console.log(obj.__proto__ === sub.prototype)    // false,sub的原型对象 = new father了,因此sub.__proto__不再指向sub的原型了.
-console.log(obj.__proto__ === temp)                                        //true,temp还是指向原来sub的原型对象
-//father 和 sub 都继承了 Object对象
-console.log(sub.prototype.__proto__ === Object.prototype)                  //false,sub的原型对象 = new father了
-console.log(sub.prototype.__proto__ === father.prototype)               //true,因此指向了father的原型对象
+var obj = new son();  //obj是 son 的实例
+var temp = son.prototype;                     //在这里暂存一下son原来的原型对象
+console.log(obj.__proto__ === son.prototype) //判断obj的__proto__是否指向son的原型对象  true
+son.prototype = new father();
+console.log(obj.__proto__ === son.prototype)    // false,son的原型对象 = new father了,因此son.__proto__不再指向son的原型了.
+console.log(obj.__proto__ === temp)                                        //true,temp还是指向原来son的原型对象
+//father 和 son 都继承了 Object对象
+console.log(son.prototype.__proto__ === Object.prototype)                  //false,son的原型对象 = new father了
+console.log(son.prototype.__proto__ === father.prototype)               //true,因此指向了father的原型对象
 console.log(father.prototype.__proto__===Object.prototype )            //true
-// 新创建一个sub对象
-var o2 = new sub();
-o2.__proto__===sub.prototype;   //true
+// 新创建一个son对象
+var o2 = new son();
+o2.__proto__===son.prototype;   //true
 ```
 #### 继承的另一个例子
 ```js
@@ -69,14 +69,14 @@ console.log(Baz.prototype.__proto__ === Bar.prototype); //true
 #### 继承的注意事项
 1.子类继承后,可以重写父类原型链上的方法,也可以在自己的原型上新创建方法.  
 但不管怎样,一定要先重写子类的原型,再做上面的修改  
-2. 如果子类是 function sub(){this.colors=["red","blud"]} 父类 father(){}  
-子类继承父类, var o1 = new sub(); va2 o2 = new sub() .  
+2. 如果子类是 function son(){this.colors=["red","blud"]} 父类 father(){}  
+子类继承父类, var o1 = new son(); va2 o2 = new son() .  
 **o1和o2会共享colors数组**
       
 #### 继承的实质是重写原型对象,取而代之的是新类型的实例
 对象属性的搜索: 在上述例子中,对于对象属性的搜索,将会有三步:  
 1. 在对象自身中搜索  
-2. 在sub.prototype中搜索  
+2. 在son.prototype中搜索  
 3. 在father>prototype中搜索
 
 ### Object的原型上有什么

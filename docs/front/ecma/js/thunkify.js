@@ -20,7 +20,7 @@ const autoRunner = (func) => {
     next();
 };
 
-// autoRunner(gen)
+autoRunner(gen)
 
 /* 
 err -->  undefined undefined
@@ -48,10 +48,11 @@ function* test2() {
 }
 const gen2 = test2();
 
-let a = gen2.next();
-console.log(a,) // 执行到了读取 1.txt,返回的 value是一个函数,可以接收回调
-let b = gen2.next(444); // 444 这个参数会作为r1的值,并且被打印
-console.log(b)
+// let a = gen2.next();
+// console.log(a,) // 执行到了读取 1.txt,返回的 value是一个函数,可以接收回调
+// let b = gen2.next(444); // 444 这个参数会作为r1的值,并且被打印
+// console.log(b)
+
 // { value: [Function (anonymous)], done: false }
 // 444
 // { value: undefined, done: true }
