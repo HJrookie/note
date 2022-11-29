@@ -2,8 +2,10 @@
 - 200 OK
 - 201 Created,所需要的资源已经建立,其URI已经跟随Location头信息返回 
 - 202 Accepted,但还没处理,不确定会不会被执行
+- 206 Partial Content   (cache)
 - 301 永久重定向,Moved Permanently
 - 302 Found
+- 304 Not Modified  (cache)
 - 413 Request Entity Too large
 - 502 Bad Gateway
 - 503 Service  Unavailable  

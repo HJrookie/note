@@ -278,6 +278,20 @@ export default defineUserConfig({
                         },
                     ],
                 },
+                {
+                    text: "一些问题",
+                    // collapsible: true,
+                    children: [
+                        {
+                            text: "1. commonJS 和 CMD区别 ",
+                            link: "/question/common-cmd/1.common-cmd.md",
+                        },
+                        {
+                            text: "2. 构建工具 ",
+                            link: "/question/build-tools/2.build-tools.md",
+                        },
+                    ],
+                },
             ],
         },
     }),

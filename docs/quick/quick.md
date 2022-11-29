@@ -53,10 +53,3 @@ this.$emit('update:prop', newValue)
 `A ~ B` ,选择前面有 A 元素的 B 元素,(不是后代关系,而是兄弟关系),A,B 有相同父元素,但是 B 不必紧随 A
 
 
-#### JS   CommonJs和ES6 module的区别是什么呢？ - 王玉略的回答 - 知乎 https://www.zhihu.com/question/62791509/answer/2345796861
-
-https://juejin.cn/post/6844904067651600391  
-
-CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。  
-CommonJS 模块是`运行时`加载，ES6 模块是`编译时`输出接口   
-CommonJS 模块的require()是同步加载模块，ES6 模块的import命令是异步加载，有一个独立的模块依赖的解析阶段  
