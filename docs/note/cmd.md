@@ -5,6 +5,30 @@ sudo ifconfig en1 up
 
 ```
 
+#### node version
+```shell
+#查看可用版本
+npm view node versions
+n 16.10.0
+```
+
+#### macos cli 配置代理
+```shell
+
+
+
+vi  ~/.zshrc
+#  配置 代理
+alias proxy='export all_proxy=socks5://127.0.0.1:54621'
+alias unproxy='unset all_proxy'
+# 加载上面的命令
+source ~/.zshrc
+# 执行 让代理生效
+proxy
+# 禁用代理  
+unproxy
+```
+
 #### 配置yum 源
 
 ```shell
@@ -13,6 +37,10 @@ sudo ifconfig en1 up
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 cd /etc/yum.repos.d
 wget https://mirrors.163.com/.help/CentOS7-Base-163.repo
+
+#  wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+
 yum clean all
 yum makecache
 # 只升级所有包，不升级软件和系统内核

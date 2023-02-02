@@ -276,6 +276,11 @@ export default defineUserConfig({
                             children: [],
                             link: "/company/letms/letms.md",
                         },
+                        {
+                            text: "train",
+                            children: [],
+                            link: "/company/letms/train.md",
+                        },
                     ],
                 },
                 {
@@ -289,6 +294,10 @@ export default defineUserConfig({
                         {
                             text: "2. 构建工具 ",
                             link: "/question/build-tools/2.build-tools.md",
+                        },
+                        {
+                            text: "3. tcp哪些方法保证可靠交付 ",
+                            link: "/question/3. tcp-way.md",
                         },
                     ],
                 },

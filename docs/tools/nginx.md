@@ -21,7 +21,6 @@ docker run -d --restart=always --privileged=true -p 80:80 -v /usr/local/letmsHtm
 docker run -d --restart=always --privileged=true -p 80:80 -v /etc/localtime:/etc/localtime -v /home/xxx/dockerProjects/nginx/nginx.conf:/etc/nginx/nginx.conf -v /usr/local/file:/usr/local/file -v /home/xxx/dockerProjects/nginx/static:/usr/share/nginx/html -v /home/xxx/dockerProjects/nginx/logs:/var/log/nginx --name nginx  nginx:1.23
 ```
 
-
 docker run -d --restart=always --privileged=true -p 80:80 -v /home/lenovoedu/front-end-nginx/static:/usr/share/nginx/html  -v /home/lenovoedu/front-end-nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx  nginx
 img
 ### 2.常用命令
