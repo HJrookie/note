@@ -159,10 +159,11 @@ ls -lh --time-style="+%Y-%m-%d %H:%M:%S" -t
 ### 压缩文件
 
 ```shell
-tar -zcvf dist.gz *
+tar -zcvf dist.tar.gz *
 scp dist.tar.gz root@10.103.237.165:/usr/local/letmsHtml
 tar zxvf dist.tar.gz
 ```
+
 
 
 #### scp 下载服务器上的文件到本地

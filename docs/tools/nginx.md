@@ -19,9 +19,16 @@ docker run -d --restart=always --privileged=true -p 80:80 -v /usr/local/letmsHtm
 
 // 天津大赛 7 月在云服务上部署时的命令  
 docker run -d --restart=always --privileged=true -p 80:80 -v /etc/localtime:/etc/localtime -v /home/xxx/dockerProjects/nginx/nginx.conf:/etc/nginx/nginx.conf -v /usr/local/file:/usr/local/file -v /home/xxx/dockerProjects/nginx/static:/usr/share/nginx/html -v /home/xxx/dockerProjects/nginx/logs:/var/log/nginx --name nginx  nginx:1.23
-```
 
 docker run -d --restart=always --privileged=true -p 80:80 -v /home/lenovoedu/front-end-nginx/static:/usr/share/nginx/html  -v /home/lenovoedu/front-end-nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx  nginx
+
+# 
+docker run -d --restart=always --privileged=true -p 80:80 -v /home/lenovoedu/nginx/static:/usr/share/nginx/html  -v /home/lenovoedu/nginx/nginx.conf:/etc/nginx/nginx.conf  -v /home/lenovoedu/nginx/logs:/var/log/nginx  --name nginx  nginx
+
+# lf
+ docker run -d --restart=always --privileged=true -p 80:80 -v  /root/nginx/static:/usr/share/nginx/html -v /root/nginx/nginx.conf:/etc/nginx/nginx.conf -v /root/nginx/logs:/var/log/nginx --name nginx nginx
+```
+
 img
 ### 2.常用命令
 ##### 2.1 linux上常用命令
