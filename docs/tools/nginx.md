@@ -69,9 +69,45 @@ load_module /etc/nginx/modules/ngx_http_image_filter_module.so;  # 放到 nginx 
 3. apt-get install vim
 
 
-#### nginx 配置
+#### nginx 知识
+1. `http - server - location`会有继承  
+2. nginx 怎么处理 多个 server 以及 server_name ?  
+```nginx.conf
+server {
+    listen      192.168.1.1:80;
+    server_name example.org www.example.org;
+}
+server {
+    # 不同端口可以有不同的默认 server
+    listen      192.168.1.1:80 default_server; 
+    server_name example.net www.example.net;
+}
+server {
+    # 不同端口可以有不同的默认 server
+    listen      192.168.1.2:80 default_server;
+    server_name example.com www.example.com;
+}
+```
+> 1. 先看 ip 和端口,即一个请求有目标 ip 和端口,然后和 listen 比对. 比对完之后,再根据 HOST 来比对 server_name .如果没找到 server_name,就让默认 server处理;  
+> 2. 一个来自`192.168.1.1:80`端口,并且Host 是`www.example.com`会被 `192.168.1.1:80`处理,就是第一个 server,因为80 端口上没有相对应的域名;
+
+3. 负载均衡
 ```nginx
- add_header Access-Control-Allow-Origin *;
-    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
-    add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+http {
+    upstream myapp1 {
+        # 默认是随机的
+        least_conn;  # 最少连接策略,不会让一个server 请求太多
+        ip_hash;   # 请求发送到上次接受请求的服务器;
+        # 加权.  5 = 3 1 1 
+        server srv1.example.com weight=3;
+        server srv2.example.com;
+        server srv3.example.com;
+    }
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://myapp1;
+        }
+    }
+}
 ```

@@ -2,7 +2,6 @@
 ```shell
 sudo ifconfig en1 down
 sudo ifconfig en1 up
-
 ```
 
 #### node version
@@ -14,9 +13,6 @@ n 16.10.0
 
 #### macos cli 配置代理
 ```shell
-
-
-
 vi  ~/.zshrc
 #  配置 代理
 alias proxy='export all_proxy=socks5://127.0.0.1:54621'
@@ -37,10 +33,7 @@ unproxy
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 cd /etc/yum.repos.d
 wget https://mirrors.163.com/.help/CentOS7-Base-163.repo
-
 #  wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-
-
 yum clean all
 yum makecache
 # 只升级所有包，不升级软件和系统内核
@@ -85,22 +78,17 @@ yum update git
 
 ```shell
 # 官方文档  https://docs.docker.com/engine/install/centos/
-
 sudo yum install -y yum-utils
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
 # 安装完发现没启动 
 systemctl start docker            
 systemctl enable docker   
 chown xxx:xxx directory
-
-
 # 修改镜像源  
 vi /etc/docker/daemon.json
-
 {
   "registry-mirrors": [
     "https://xx4bwyg2.mirror.aliyuncs.com",
@@ -110,13 +98,10 @@ vi /etc/docker/daemon.json
     "https://docker.mirrors.ustc.edu.cn"
   ]
 }
-
 # 使配置生效
 systemctl daemon-reload
 # 重启Docker
 systemctl restart docker
-
-
 # 安装 docker-compose
 curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
@@ -141,7 +126,6 @@ docker-compose  -f docker-web-prod.yml  stop
 docker-compose  -f docker-web-prod.yml  pull
 # 2. 启动
 docker-compose  -f docker-web-prod.yml  up -d
-
 docker-compose -f nginx-dev.yml down --rmi all
 ```
 
@@ -188,7 +172,6 @@ scp root@10.103.237.40:/usr/share/pve-docs/api-viewer/7.html .
 // @icon         https://www.google.com/s2/favicons?domain=firefoxchina.cn
 // @grant        none
 // ==/UserScript==
-
 (function() {
     'use strict';
     var style = document.createElement("style");
@@ -211,13 +194,11 @@ npm -v
 
 ```shell
 # 网页  https://www.cnblogs.com/heqiuyong/p/10460150.html
-
 firewall-cmd --zone=public --add-port=80/tcp --permanent   # 开放5672端口
 firewall-cmd --zone=public --remove-port=5672/tcp --permanent  #关闭5672端口
 firewall-cmd --reload   # 配置立即生效
 firewall-cmd --zone=public --list-ports     #查看防火墙所有开放的端口
 systemctl status firewalld.service  # 查看防火墙状态
-
 ```
 
 
@@ -228,7 +209,6 @@ systemctl status firewalld.service  # 查看防火墙状态
 # 一般采用 pm2
 npm config set registry https://registry.npm.taobao.org
 npm install -g pm2
-
 npm install axios
 npm install cors --save
 npm install express --save
@@ -254,7 +234,6 @@ git config --list
 ```shell
 # 把结果复制到这个目录失败,就修改它的 权限
 chown -R gitlab-runner:gitlab-runner nginx
-
 # 还有个办法是 修改 gitlab-runner 这个用户的权限,但是这种改动 影响范围 比较大
 https://www.cnblogs.com/qiyebao/p/12105737.html
 ```
@@ -269,7 +248,6 @@ https://www.cnblogs.com/qiyebao/p/12105737.html
 
 ```sh
 git config --global credential.helper store
-
 # git 清除缓存
 git rm -r --cached .
 # 删除远程分支
@@ -284,24 +262,19 @@ git push origin --delete [branchname]
 
 ```js
 // 前端 baseUrl 配置为  /secure
-
 location /secure/ {
   proxy_pass "http://10.103.237.156:4800/";
   # proxy_pass "http://localhost.localdomain:4800/";
 }
-
-
 #user  nobody;
 worker_processes  2;
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
 #pid        logs/nginx.pid;
-
 events {
     worker_connections  1024;
 }
-
 http {
     include       mime.types;
     default_type  application/octet-stream;
@@ -323,7 +296,6 @@ http {
     gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
     gzip_vary on;
     gzip_disable "MSIE [1-6]\.";
-
     server {
         listen       80;
         server_name  localhost;
@@ -336,7 +308,6 @@ http {
             root   /usr/share/nginx/html;
             index  index.html;
         }
-
         location /api/ {
             #基础服务  a.com/api/bbb 会替换到  http://10.103.237.165:8080/bbb
             proxy_pass       http://10.103.237.165:8080/;    
@@ -344,7 +315,6 @@ http {
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         }
-
         location /file/ {
             add_header Access-Control-Allow-Origin *;
             alias   /usr/local/file/;
@@ -352,9 +322,7 @@ http {
             # autoindex on;
             autoindex_exact_size off;
         }
-
         #error_page  404              /404.html;
-
         # redirect server error pages to the static page /50x.html
         #
         error_page   500 502 503 504  /50x.html;
@@ -363,9 +331,7 @@ http {
         }
     }
 }
-
 以上的配置会按以下规则转发请求( GET 和 POST 请求都会转发):
-
 将 http://example.com/mail/ 下的请求转发到 http://example.com:portmail/
 将 http://example.com/com/ 下的请求转发到 http://example.com:portcom/main/
 将其它所有请求转发到 http://example.com:portdefault/
@@ -417,8 +383,6 @@ IPADDR=10.110.197.137
 PREFIX=24
 GATEWAY=10.110.197.254
 DNS1=114.114.114.114
-
-
 systemctl restart network
 # 然后再修改 dns
 ```
@@ -452,7 +416,6 @@ function getIPAdress() {
 
 ```log
 Receiving objects:   0% (1/1536)
-
 Receiving objects:  17% (262/1536), 1.28 MiB | 2.55 MiB/s
 Receiving objects:  17% (270/1536), 2.95 MiB | 2.92 MiB/s
 Receiving objects:  18% (277/1536), 2.95 MiB | 2.92 MiB/s
@@ -504,7 +467,6 @@ npx prisma migrate dev --name init
 $ docker login --username=菜菜成功 registry.cn-hangzhou.aliyuncs.com
 $ docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
 $ docker push registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
-
 $ docker pull registry.cn-hangzhou.aliyuncs.com/deu-xxx-project/signup:[镜像版本号]
 ```
 
@@ -553,16 +515,12 @@ PasswordAuthentication no
 service sshd restart
 passwd root
 gsnysbslzr@123qwe
-
-
 //  ss no混淆
 bash <(curl -sL https://raw.githubusercontent.com/Miuzarte/hijk.sh/main/Original/ss.sh)
-
 // with plugin
 wget -N --no-check-certificate -c -t3 -T60 -O ss-plugins.sh https://git.io/fjlbl
 chmod +x ss-plugins.sh
 ./ss-plugins.sh
-
 ```
 
 #### 

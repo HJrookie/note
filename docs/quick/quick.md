@@ -1,12 +1,9 @@
 - commomjs es6
-- npm -S -D
+- npm -S -D `下载包时,只下载dependency中的内容.`
 - indexOf slice 0-i, i-
 - em - rem
 - charAt charCodeAt codePointAt
 - str . match search replace(all) split
-- JSON.stringify `JSON.stringify(val,replacer, space)` 2,key 数组,space,缩进
-- JSON.parse `reviver`,支持自定义`parser`
-- `图片文件 accept="image/*" `
 - `Object.hasOwn`取代`hasOwnProperty`,避免`对象重写hasOwnProperty,以及 Object.create(null)`识别错误的问题  
 - `Array.of,Object.is NaN,+0`  
 - `... Object.assign` 后者get/set,不会拷贝,原型链,以及不可枚举属性,基本类型会被包装为对象('字符串'),异常会打断后续拷贝任务  

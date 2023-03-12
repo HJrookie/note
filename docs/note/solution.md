@@ -25,43 +25,43 @@ vhv.enable = “TRUE”#
 
 ```js
 var option = {
-            title: {
-              text: "访客性别",
-              left: "center",
-              textStyle: {
-                color: "#79b0ce",  // 标题颜色
-              },
-            },
-            // 修改饼图颜色
-            color: ["#e33ea8", "#5660d2"],
-            tooltip: {
-              trigger: "item",
-              formatter: function (info) {
-                const { name, value = 0, percent = 0 } = info;
-                return [
-                  '<div class="tooltip-title">' +
-                    `<div class="small-block" style='background-color: ${info.color}'> </div>  ${name} </br>` +
-                    `人数:   &nbsp;&nbsp; ${value}` +
-                    "</br>" +
-                    `占比:    &nbsp;&nbsp;  ` +
-                    `${percent}% \n` +
-                    "</div>",
-                ].join("");
-              },
-            },
-            series: [
-              {
-                name: "性别",
-                type: "pie",
-                radius: "50%",
-                label: {
-                  color: "#79b0ce",
-                  formatter: "{b}:{d}%",
-                },
-                data: [...data],
-                // 文字显示到 里面
-                label: { normal: { show: true, position: "inner" } },
-              },
-            ],
-          };
+  title: {
+    text: "访客性别",
+    left: "center",
+    textStyle: {
+      color: "#79b0ce", // 标题颜色
+    },
+  },
+  // 修改饼图颜色
+  color: ["#e33ea8", "#5660d2"],
+  tooltip: {
+    trigger: "item",
+    formatter: function (info) {
+      const { name, value = 0, percent = 0 } = info;
+      return [
+        '<div class="tooltip-title">' +
+          `<div class="small-block" style='background-color: ${info.color}'> </div>  ${name} </br>` +
+          `人数:   &nbsp;&nbsp; ${value}` +
+          "</br>" +
+          `占比:    &nbsp;&nbsp;  ` +
+          `${percent}% \n` +
+          "</div>",
+      ].join("");
+    },
+  },
+  series: [
+    {
+      name: "性别",
+      type: "pie",
+      radius: "50%",
+      label: {
+        color: "#79b0ce",
+        formatter: "{b}:{d}%",
+      },
+      data: [...data],
+      // 文字显示到 里面
+      label: { normal: { show: true, position: "inner" } },
+    },
+  ],
+};
 ```
