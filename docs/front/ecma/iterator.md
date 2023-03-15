@@ -21,8 +21,26 @@ iterator 是一个函数,对于数组来说,就是对应的`Symbol.iterator`这�
 JS中内置iterator: `Array,Map,Set,String,TypedArray,函数的 arguments 对象,NodeList 对象`
 ```js
 var arr = [1,2,3,4,]
-let f = arr[Symbol.iterator]();
+let f = arr[Symbol.iterator]();  //注意这里需要 执行一下. 
 f.next()  // {value: 1, done: false}
+
+// 数组内置的 iterator 猜测类似下面这样子. 比上面的那个 makeIterator 函数多了一层
+function iterator(arr) {
+    return function () {
+        let i = 0;
+        return {
+            next: function () {
+                return i < arr.length
+                    ? { value: arr[i++], done: false }
+                    : { value: undefined, done: true };
+            },
+        };
+    };
+}
+// 这个 iterator 咋用呢
+let value = {}
+value[Symbol.iterator] = iterator([33,5,3,62,232])
+[...value]  // 就是数组
 ```
 
 #### 如何实现 Iterator
@@ -41,22 +59,22 @@ for (let x of obj) {
 }
 // "hello"
 // "world"
-
 ```
 
 #### 较为成熟一点的 Iterator (自定义迭代器)
 ```js
-const o = {
-    a: 'hello',
-    b: 'world',
+let o = {
+    a: 1,
+    b: 2,
+    c: 3,
     [Symbol.iterator]() {
-        let _this = this,
-            keys = Object.keys(this),
+        let _this = this;
+        let arr = Object.entries(_this),
             i = 0;
         return {
-            next() {  // 注意这里需要一个 next 函数
-                if (i < keys.length) {
-                    return { value: [keys[i], _this[keys[i++]]], done: false };
+            next() {
+                if (i < arr.length) {
+                    return { value: arr[i++], done: false };
                 }
                 return { value: undefined, done: true };
             },

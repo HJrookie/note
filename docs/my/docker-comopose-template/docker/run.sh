@@ -13,7 +13,7 @@ echo "-------------- cp dist files success -----------------------------"
 mkdir -p logs
 image_name="letms-ppraise/letms-ppraise-web:v1.0"
 #echo $image_name
-docker build -t $image_name .
+docker build -t $image_name . --no-cache
 
 echo "-------------- build docker image  success -----------------------"
 

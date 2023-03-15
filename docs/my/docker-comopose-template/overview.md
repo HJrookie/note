@@ -14,8 +14,8 @@ docker-compose 的模板项目,大概写了如何进行前端项目的配置,以
 @[code docker](./docker/Dockerfile)
 
 
-
 ####  docker-compose.yml
 @[code yaml](./docker/docker-compose.yml)
 
 #### 前端项目配置
+@[code js](../docker-comopose-template/code/api.js)
