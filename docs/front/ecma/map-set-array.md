@@ -7,6 +7,9 @@ const ws2 = new WeakSet([[]])
 ```
 #### Map
 使用 `Object.is` 判断 key
+按 set 的顺序遍历
+#### set 
+按 add 的顺序遍历
 #### 其它容器转换
 map => arr `[...map] [...map.keys()] [...map.entries()]`    
 arr => map `new Map(二维数组)  new Map([[1,2],[3,4]])`   

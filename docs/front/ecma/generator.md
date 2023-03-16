@@ -21,9 +21,10 @@ var myIterable = {};
 myIterable[Symbol.iterator] = function* () {
   yield 1;
   yield 2;
+  yield* [4,5]; // 也会调用 iterator
   yield 3;
 };
-[...myIterable] // [1, 2, 3]
+[...myIterable] // [1, 2, 4,5,3]
 ```
 
 #### next 可以带参数
