@@ -2,7 +2,7 @@
 
 让 js 对象自定义被迭代时的行为,`Array,Map,Set,String,TypedArray,函数的 arguments 对象,NodeList 对象`有默认的迭代行为,  
 但是普通对象没有;  
-即 在`[Symbol.iterator]`这个常量上定义一个无参方法,这个方法会返回一个对象,这个对象符合 [`iterator 协议`](#iterator协议)
+即 在`[Symbol.iterator]`这个常量上定义一个无参方法,这个方法会返回一个对象,这个对象符合 [`iterator 协议`](#iterator-协议)
 这个无参方法可以是一个 `普通函数` 或者 是一个 [`generator`](/front/ecma/generator.md)
 
 #### iterator 协议
@@ -63,6 +63,11 @@ function makeIterator(array) {
 it.next(); // { value: "a", done: false }
 it.next(); // { value: "b", done: false }
 it.next(); // { value: undefined, done: true }
+// 但是 [...it] 会报错.因为 it 没实现 iterator .
+it[Symbol.iterator] = function () {
+  return this;
+}; // 这样就不会报错了
+console.log([...it])  // ['a', 'b']
 ```
 
 #### 探索数组的 iterator
@@ -91,15 +96,6 @@ value[Symbol.iterator] = iterator([33,5,3,62,232])
 [...value]  // 就是数组
 ```
 
-#### 如何实现 Iterator
-
-`Symbol.iterator()`方法的最简单实现，还是使用` Generator 函数`
-
-```js
-// 一个简单的实现,
-
-```
-
 #### 让一个对象 iterable
 
 ```js
@@ -108,7 +104,7 @@ let o = {
   a: 1,
   b: 2,
   c: 3,
-  [Symbol.iterator]() { 
+  [Symbol.iterator]() {
     let _this = this;
     let arr = Object.entries(_this),
       i = 0;
