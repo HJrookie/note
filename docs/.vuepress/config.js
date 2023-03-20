@@ -1,6 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import { defaultTheme } from "vuepress";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
+import codeCopyPlugin from "@snippetors/vuepress-plugin-code-copy";
 
 export default defineUserConfig({
     lang: "zh-CN",
@@ -26,6 +27,9 @@ export default defineUserConfig({
             apiKey: "e545798dfec8a6328fd5f84996a8de96",
             indexName: "dev",
             // 配置项
+        }),
+        codeCopyPlugin({
+            align: "top",
         }),
     ],
     theme: defaultTheme({
@@ -128,10 +132,7 @@ export default defineUserConfig({
                             text: "对象数组格式化",
                             link: "/front/write/object-format-reverse.md",
                         },
-                        {
-                            text: "Promise",
-                            link: "/front/write/promise.md",
-                        },
+
                         {
                             text: "todo",
                             link: "/front/write/todo.md",
@@ -298,6 +299,18 @@ export default defineUserConfig({
                         {
                             text: "3. tcp哪些方法保证可靠交付 ",
                             link: "/question/3. tcp-way.md",
+                        },
+                        {
+                            text: "4. symbol ",
+                            link: "/question/4. symbol.md",
+                        },
+                        {
+                            text: "5. 迭代器 ",
+                            link: "/question/5.iterator.md",
+                        },
+                        {
+                            text: "6. Promise",
+                            link: "/question/6. promiseA+.md",
                         },
                     ],
                 },

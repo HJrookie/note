@@ -8,18 +8,6 @@
 - `Array.of,Object.is NaN,+0`  
 - `... Object.assign` 后者get/set,不会拷贝,原型链,以及不可枚举属性,基本类型会被包装为对象('字符串'),异常会打断后续拷贝任务  
 
-#### Symbol 类型
-
-```js
-1. typeof  Symbol(42)  // 'symbol'
-2. Symbol("foo") //每次都是不同的,Symbol.for("foo")会复用已有的值
-3. `new Symbol,则会抛出 TypeError错误`,//不支持包装器类型,但是支持`Object(sym)`
-4. 可以作为对象的 key,不支持 `for of,Object.entries,JSON.stringify,Object.keys/valus,
-Object.getOwnPropertyNames`,支持`Object.getOwnPropertySymbols,Reflect.ownKeys,Object.assign,...`
-5. `Symbol.keyFor(Symbol.for("kkk")) // kkk`
-6. 不能转为 string 和 number,`但是支持 toString 方法`
-7. Object(sym) == sym returns true.//用===.就不相等.因为数据类型不一样
-```
 
 #### 复制一个对象以及对象的原型对象中的属性
 

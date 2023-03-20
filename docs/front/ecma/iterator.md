@@ -1,6 +1,6 @@
 #### iterable protocol 可迭代协议
 
-让 js 对象自定义被迭代时的行为,`Array,Map,Set,String,TypedArray,函数的 arguments 对象,NodeList 对象`有默认的迭代行为,  
+让 js 对象自定义被迭代时的行为,`Array,Map,Set,String,TypedArray,Segments,函数的 arguments 对象,NodeList 对象`有默认的迭代行为,  
 但是普通对象没有;  
 即 在`[Symbol.iterator]`这个常量上定义一个无参方法,这个方法会返回一个对象,这个对象符合 [`iterator 协议`](#iterator-协议)
 这个无参方法可以是一个 `普通函数` 或者 是一个 [`generator`](/front/ecma/generator.md)

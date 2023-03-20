@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@snippetors/vuepress-plugin-code-copy": "^1.2.3",
     "@vuepress/plugin-back-to-top": "^2.0.0-beta.51",
     "@vuepress/plugin-docsearch": "^2.0.0-beta.51",
     "@vuepress/plugin-medium-zoom": "^2.0.0-beta.51",

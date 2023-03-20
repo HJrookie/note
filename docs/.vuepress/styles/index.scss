@@ -32,7 +32,11 @@ html.dark {
     background: #00ff554d;
   }
 }
-
+.line-numbers-mode {
+  &::before {
+    display: none;
+  }
+}
 @media (max-width: 419px) {
   .theme-default-content {
     code {
