@@ -497,7 +497,11 @@ git add .
 git status
 ```
 
-
+#### npm 代理
+npm config set proxy=http://127.0.0.1:54621
+npm config set https-proxy http://server:port
+npm config delete proxy
+npm config delete https-proxy
 
 
 

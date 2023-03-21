@@ -1,7 +1,7 @@
 ### 1.mac 上 nginx 的各种目录
 1. 配置文件目录   `/usr/local/etc/nginx  `
 2. 日志目录       `/usr/local/var/log/nginx/access.log  `
-3. 静态文件目录   `/ /usr/local/var/www/static`
+3. 静态文件目录   `/usr/local/var/www/`
 
 ### 2. docker 上 nginx 的各种目录
 1. 配置文件目录   `/etc/nginx/nginx.conf  `
