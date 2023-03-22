@@ -42,7 +42,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: path.posix.join("static/css", "app_[name]_[contenthash:7].css"),
       chunkFilename: path.posix.join("static/css", "[name]_[contenthash:7].css"),
     }),
-    // duplicated CSS from different components can be deduped.
+    // duplicated CSS from different components can be deduped. 移除重复 css
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap ? { safe: true, map: { inline: false } } : { safe: true },
     }),
@@ -111,6 +111,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   ],
   optimization: {
     minimizer: [
+      // 压缩 js
       new UglifyJsPlugin({
         test: /\.js(\?.*)?$/i,
         cache: false, //是否启用文件缓存，默认缓存在node_modules/.cache/uglifyjs-webpack-plugin.目录
