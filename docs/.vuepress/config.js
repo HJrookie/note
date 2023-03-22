@@ -98,10 +98,7 @@ export default defineUserConfig({
                             text: "map-set-array",
                             link: "/front/ecma/map-set-array.md",
                         },
-                        {
-                            text: "Iterator",
-                            link: "/front/ecma/iterator.md",
-                        },
+
                         {
                             text: "Closure",
                             link: "/front/ecma/closure.md",
@@ -111,8 +108,16 @@ export default defineUserConfig({
                             link: "/front/ecma/object.md",
                         },
                         {
+                            text: "Iterator",
+                            link: "/front/ecma/iterator.md",
+                        },
+                        {
                             text: "Generator",
                             link: "/front/ecma/generator.md",
+                        },
+                        {
+                            text: "AutoRunner",
+                            link: "/front/ecma/autoRunner.md",
                         },
                     ],
                 },

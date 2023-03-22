@@ -1,7 +1,3 @@
-#### generator + thunkify => AutoRunner
-
-@[code](./js/thunkify.js)
-
 ### Generator 是什么
 
 - 可以理解为是一个状态机,内部封装了多个状态,会逐步转换.
@@ -140,7 +136,21 @@ readFileThunk(callback);
 - 实现 iterator
 - 实现类似协程的操作,即把函数的执行权交出去,暂停函数执行
 - 实现 无限 range
+```js
+let g = (function* name(params) {
+    let i=0;
+    while(1){yield i++}
+})()
+```
 - lazy evaluation 惰性计算
+```js
+let g = (function* name(params) {
+    console.log(2 + 3)
+    yield 'hello';
+})()
+g.next()  // 这时候才去计算 2+3
+```
+
 - 用来实现 async/await,
 
 #### range 函数
@@ -157,3 +167,4 @@ for (let v of f) {
   console.log(v);
 }
 ```
+
