@@ -119,6 +119,10 @@ export default defineUserConfig({
                             text: "AutoRunner",
                             link: "/front/ecma/autoRunner.md",
                         },
+                        {
+                            text: "worker",
+                            link: "/front/ecma/worker.md",
+                        },
                     ],
                 },
                 {
@@ -316,6 +320,10 @@ export default defineUserConfig({
                         {
                             text: "6. Promise",
                             link: "/question/6. promiseA+.md",
+                        },
+                        {
+                            text: "7. 宏任务-微任务",
+                            link: "/question/7. twoTask.md",
                         },
                     ],
                 },

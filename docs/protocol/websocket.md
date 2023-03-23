@@ -15,3 +15,7 @@ Sec-WebSocket-Version: 13
 Origin: http://example.com
 
 ```
+
+
+#### Server-sent events 
+请求头比较特殊 `Content-Type: text/event-stream`
