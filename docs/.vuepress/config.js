@@ -322,8 +322,11 @@ export default defineUserConfig({
                             link: "/question/6. promiseA+.md",
                         },
                         {
-                            text: "7. 宏任务-微任务",
+                            text: "7. 宏任务-微任务-理论",
                             link: "/question/7. twoTask.md",
+                        }, {
+                            text: "7. 宏任务-微任务-例子",
+                            link: "/question/8.twoTaskExample.md",
                         },
                     ],
                 },
