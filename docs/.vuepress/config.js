@@ -325,8 +325,12 @@ export default defineUserConfig({
                             text: "7. 宏任务-微任务-理论",
                             link: "/question/7. twoTask.md",
                         }, {
-                            text: "7. 宏任务-微任务-例子",
+                            text: "8. 宏任务-微任务-例子",
                             link: "/question/8.twoTaskExample.md",
+                        },
+                        {
+                            text: "9. Regexp",
+                            link: "/question/9.Regexp.md",
                         },
                     ],
                 },
