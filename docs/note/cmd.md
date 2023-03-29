@@ -449,6 +449,13 @@ git clone --depth=1 -b stu-learning http://10.103.237.65/edu/letms/letms-web.git
 https://www.jenkins.io/files/2016/jenkins-world/large-git-repos.pdf
 
 
+#### FTP 下载服务器上的文件到本地
+
+```shell
+# 这时候是没有 ssh 连到远程服务器的,还是在本地
+scp root@10.103.237.40:/usr/share/pve-docs/api-viewer/7.html .
+```
+
 
 
 
@@ -504,6 +511,16 @@ npm config delete proxy
 npm config delete https-proxy
 
 
+
+### ssh 不断
+
+```sh
+vi  /etc/ssh/sshd_config
+
+ClientAliveInterval 30
+
+service sshd restart 
+```
 
 
 #### gmail
