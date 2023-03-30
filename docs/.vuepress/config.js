@@ -332,6 +332,10 @@ export default defineUserConfig({
                             text: "9. Regexp",
                             link: "/question/9.Regexp.md",
                         },
+                        {
+                            text: "10. GC 堆栈",
+                            link: "/question/10.gc.md",
+                        },
                     ],
                 },
             ],
