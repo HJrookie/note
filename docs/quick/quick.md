@@ -1,3 +1,4 @@
+- defer 保证顺序,延迟到解析到`</html>`才执行,async 异步,不保证执行顺序. 
 - commomjs es6
 - npm -S -D `下载包时,只下载dependency中的内容.`
 - indexOf slice 0-i, i-
@@ -12,8 +13,8 @@
 #### 复制一个对象以及对象的原型对象中的属性
 
 ```js
-// 先创建一个对象,它的原型对象指向原来的原型对象,然后把 obj 上的属性 copy 到新创建的对象上去
-var cc = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
+//Object.create 用来明确指定一个对象的原型对象
+{...Object.create(Object.getPrototypeOf(o)),...o}
 // 创建一个对象,它的原型指向 原来的原型对象,属性 就是原来的对象的属性
 Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```

@@ -27,15 +27,13 @@ Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对
 `max-stale`,愿意接受一个过期的资源,可设置秒数,表示不能过时超过给定的时间    
 `stale-while-revalidate`,客户端愿意接受陈旧的响应,同时在后台异步检查新的响应.先在 10 分钟内用旧的响应,超过了再用新的.  
 3. 重新验证和重新加载      
-`must-revalidate`,在`缓存过期之后`,在成功向server验证之前,这个资源不能拿来响应后续的请求;`加了这个字段,当缓存没过期时,这个字段其实没用.`    
+`must-revalidate`,在`缓存过期之后`,在成功向server验证之前,这个资源不能拿来响应后续的请求;`加了这个字段,当缓存没过期时,这个字段其实没用.`[大佬的博客](https://zhuanlan.zhihu.com/p/60357719)    
 `proxy-revalidate`,和上面作用一样,只作用于共享缓存.public的那种.  
 
 ### 文件是否变化相关的请求头  
-当浏览器对某个资源的请求没有命中强缓存，就会发一个请求到服务器，验证协商缓存是否命中，  
-如果协商缓存命中，请求响应返回的http状态为304并且会显示一个`Not Modified`的字符串  
+当浏览器对某个资源的请求没有命中缓存，就会发一个请求到服务器，去重新验证缓存,如果缓存仍然有效,请求响应返回的http状态为304`Not Modified`  
 
-协商缓存是利用的是`【If-Modified-Since,Last-Modified】和【If-None-Match,ETag】`这两对Header来管理的
-,后者的优先级较高,
+验证缓存用的是`【If-Modified-Since,Last-Modified】和【If-None-Match,ETag】`两对Header来管理的,后者的优先级较高
 #### etag的作用
 一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变了修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；  
 某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，  If-Modified-Since能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)；  
@@ -50,8 +48,12 @@ Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires ,表示的是相对
 Cache-Control的几个指令特别容易混淆，不能望文生义。比如`no-cache`，并不是指不能用 cache，客户端仍会把带有 no-cache 的响应缓存下来，只不过每次不会直接用缓存，而得`先 revalidate 一下`，所以其实`no-cache`真正合适的名字才是 `must-revalidate`。而现在的`must-revalidate`更合适的名字可能是 `never-return-stale`。如果你想让客户端完全不缓存响应，应该用`no-store`，带有`no-store`的响应不会被缓存到任意的磁盘或者内存里，它才是真正的 `no-cache`
 
 ### 浏览器缓存判断顺序  
-0. 先查看`pragma,expires,cache-control`这三个字段中是否设置了缓存,如果是`no-store`,那么会直接请求服务端  
-   如果是`no-cache`,则至`步骤 3` 校验文件是否过期  
+0. 先检查一个资源有没有缓存相关的响应头,按优先级如下:  
+- cache-control里的 max-age 字段  
+- expires
+- `pragma (被移除了)`
+- Last-Modified 启发式缓存  
+如果是`no-store`,那么会直接请求服务端,如果是`no-cache`,则至`步骤 3` 校验文件是否过期   
 1. 先通过时间上判断,该资源是否过期,优先级从高到低,依次为`Cache-Control中的s-maxage  -->  max-age   --> Expires`  
 2. 如果资源没有过期,那么浏览器就会从本地缓存中读取,`不会发送 http 请求`,只是有的文件从`Memory`中读取,有的从`Disk`中读取,具体规则未知,  
     部分行为详见  --->  [Chrome 实现](/browser/chrome-cache.md)
@@ -86,7 +88,8 @@ Cache-Control的几个指令特别容易混淆，不能望文生义。比如`no-
 `${(new Date('Tue, 23 Apr 2019 10:18:21 GMT').valueOf()/1000).toString(16)}-${(612).toString(16)}`  //时间戳除以 1000 然后转 16
 ```
 
-#### 目前情况
-上面都是八股文,目前的玩法是 大部分的静态资源,即 immutable 的文件,都会设置非常长的过期时间,例如 1 年,
+#### cdn 原理
+把静态资源,多媒体资源放到全国的 cdn 节点上,然后收到用户的请求时,由 dns 调度系统把离用户最近的 cdn 的 ip 返回给用户;    
+如果命中缓存则返回资源,否则回源请求资源,并且缓存内容,返回给用户;
 
 
