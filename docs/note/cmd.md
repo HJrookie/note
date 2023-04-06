@@ -239,7 +239,15 @@ https://www.cnblogs.com/qiyebao/p/12105737.html
 ```
 
 
-
+#### ntp
+```shell
+yum install ntp
+systemctl enable ntpd
+# 增加 -g -x 参数
+vi /etc/sysconfig/ntpd
+service ntpd restart
+date
+```
 
 
 

@@ -224,7 +224,7 @@ export default defineUserConfig({
                     // collapsible: true,
                     children: [
                         {
-                            text: "HTTP",
+                            text: "HTTP(2/s/3)",
                             link: "/protocol/http.md",
                         },
                         {

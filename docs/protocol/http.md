@@ -1,5 +1,5 @@
+[书籍-High Performance Browser Networking](https://hpbn.co/)
 ### HTTP协议常见状态码
-- 200 OK
 - 201 Created,所需要的资源已经建立,其URI已经跟随Location头信息返回 
 - 202 Accepted,但还没处理,不确定会不会被执行
 - 206 Partial Content   (cache)
@@ -34,12 +34,15 @@ HEAD,PUT,GET,Delete,Options
    服务器上可以有多个虚拟主机,并且共享一个IP地址.HTTP 1.1得请求消息,  和相应详细都应支持Host头域,否则返回400  
 5. 长连接,keep_alive,和请求的流水线处理(Pipelining).在一个tcp连接上可以传送多个http请求和响应,减少了建立和关闭连接的消耗和延迟.1.1中默认开启connection,keep-alive
    
+#### http1.1常见的优化 [优化文章](https://hpbn.co/http1x/)
+- 多域名,现代浏览器单个域名最多支持六个 http 请求[rfc 规定是俩](http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4),因此需要拆分资源到多个不同的域名,来提升加载速度(`dns 查找和 tcp 慢启动是隐患`)    
+- 合并资源,spriting, 可以减少 http 请求,但是`资源更新,缓存,spriting 预处理,很麻烦`  
+- 资源内联(`data:`)  
+- cdn gzip cache  避免重定向
 
-
-### HTTP2.0
+### HTTP2.0  [http 解释](https://web.dev/performance-http2/)
 1. 性能更好，传输更快。  
-2. 新的二进制格式。HTTP 1.x的解析是基于文本，基于文本协议的格式解析存在天然缺陷，文本  
-的表现形式很多，不容易做到健壮。二进制只认0,1.
+2. [二进制解释](https://stackoverflow.com/questions/58498116/why-is-it-said-that-http2-is-a-binary-protocol) http2中的数据包(帧)是高度结构化的,帧有特定的格式(`流 id,包长度等`),且 http2 消息可以分布到多个帧来发送;http1.1则是非结构化格式,由 ascii 文本行构成,以换行符分割,基本上是一个字符流,且消息必须作为一个完整的数据流发送;     
 3. 多路复用。连接共享。一个连接上可以有多个request，每个request对应一个id，server根据id  让不同的服务再去处理
 4. header压缩，http1.1的header中有大量信息，每次都要重复发送，2.0里面使用encoder减少需要传输  
 的header大小，并且双方各自cache header fields表，避免了重复header的传输，也减小了需要传输的大小  
@@ -49,17 +52,28 @@ pipeling: 多个请求排队,串行化,单线程处理.多个请求可以一起�
 如果这个请求超时了,后续请求被阻塞.即通常说的线头阻塞;  
 2.0: 在同一个连接上,并发,大家一起发请求,互不影响.
 ### 服务端推送 
-服务端推送能把客户端所需要的资源伴随着index.html一起发送到客户端，省去了客户端重复请求的步骤。  
-正因为没有发起请求，建立连接等操作，所以静态资源通过服务端推送的方式可以极大地提升速度。具体  
-正常的过程: 
-1. client -> server 要index.html
-2. server 发给了client
-3. client -> 要main.js,
-4. server发给了client
-服务端推送: 
-1. client -> server 要index.html
-2. server 发给了client,main,js也给你吧.  
+服务端推送能把客户端所需要的资源伴随着index.html一起发送到客户端，省去了客户端重复请求的步骤。需要在 nginx 配置. 
 ### 头部压缩 
-假定一个页面有100个资源需要加载（这个数量对于今天的Web而言还是挺保守的）, 而每一次请求都有1kb的消息头（这同样也并不少见，因为Cookie和引用等东西的存在）, 则至少需要多消耗100kb来获取这些消息头。HTTP2.0可以维护一个字典，差量更新HTTP头部，大大降低因头部传输产生的流量
+HTTP2.0可以维护一个字典，差量更新HTTP头部，大大降低因头部传输产生的流量(`HPACK(静态表在规范中定义,动态表默认为空,在连接中不断更新),哈夫曼编码`,解决CRIME攻击)
 
-# [上述http不同版本差异详见](https://juejin.im/entry/5981c5df518825359a2b9476)
+
+#### 所谓的优化
+- 多域名是负优化了.因为 http2 复用 tcp 链接,因此最佳实践是一个 tcp 链接,此外 http2 还有 tls 合并机制,当`多域名ip 相同时或者tls 证书相同`,复用同一个 tcp 连接;  
+- 合并资源,spriting 需要根据内容的类型,更新频率,大小,来重新优化  
+- 
+
+#### http2 传输详解
+- 所有通信都通过单个 TCP 连接执行，该连接可以承载任意数量的双向流。  
+- 每个流都有一个唯一的`id`和可选的权重(`1-256`)以及`依赖`，用于携带双向消息。  
+- 每条消息都是一条逻辑 HTTP 消息，例如请求或响应，由一个或多个帧组成  
+- 帧是承载特定类型数据（例如 HTTP 标头、消息有效负载等）的最小通信单元。来自不同流的帧可以交错，然后通过每个帧的标头中嵌入的流标识符重新组合  
+
+![图片](https://web-dev.imgix.net/image/C47gYyWYVMMhDmtYSLOWazuyePF2/0bfdEw00aKXFDxT0yEKt.svg)
+
+#### [上述http不同版本差异详见](https://juejin.im/entry/5981c5df518825359a2b9476)
+
+#### http3
+`http3`在传输层部分使用QUIC而不是TCP   
+- QUIC 将 TLS 握手集成到初始 QUIC 握手  
+- HTTP/2 是一种多路复用协议，允许同时进行多个 HTTP 事务。但是，事务在单个 TCP 连接上进行多路复用，这意味着 TCP 层的数据包丢失和随后的重传可能会阻止所有事务。QUIC 通过在 UDP 上运行并为每个流分别实施数据包丢失检测和重传来避免这种情况，这意味着数据包丢失只会阻止其数据包丢失的特定流。
+
