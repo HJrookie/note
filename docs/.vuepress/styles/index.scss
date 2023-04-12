@@ -13,10 +13,13 @@
   --content-width: 1000px;
 }
 
-* {
-  transition: all ease-in-out 0.5s;
+// * {
+//   transition: all ease-in-out 0.5s;
+// }
+a,
+button {
+  transition: all ease-in-out 0.3s 0.05s;
 }
-
 .hero img {
   border-radius: 50%;
   background: #008d2f21;
