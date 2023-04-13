@@ -1,28 +1,14 @@
 ### flex 与常规布局的不同
-之前利用`display,position,float`布局,但是会有浮动的麻烦问题
-#### 应用到container
-1. justify-content 
-  - space-between 就是两端对齐,最左边和最右边没有空缺,然后各个 dom 元素之间的间隔相等  
-  - space-around, 每个 dom 最左边和最右边有空缺,元素的左右的间距相等,项目之间的间隔比项目和边框的间隔大一倍  
-2. align-items  定义交叉轴上的排列  
-  - flex-start,flex-end,center,baseline,stretch  
-  - baseline 文字的第一行对齐  
-  - stretch  默认,占满高度  
-3. align-content  设置浏览器如何沿着 flex 的交叉轴和 grid 的横轴分配空间   [例子 ](https://jsfiddle.net/areYouOk/wgnd5q0z/8/)
-  - flex-start(从上到下),flex-end(从下到上),center(垂直居中),stretch(默认占满),
-  space-between(垂直方向上的 space-between ),space-around(垂直的 around)    
-  - 
-#### 应用到item  
-所有属性:  order,flex-grow,flex-shrink,flex-basis,flex,align-self,  
-1. order 可以改变当前项目排列顺序,默认都是0,数字小的在前面  [Demo](https://jsfiddle.net/areYouOk/so18tnu7/5/)
+之前利用`display,position,float`布局,但是会有浮动的麻烦问题  
+
+container:`direction,wrap,flow,justify-content,align-items,align-content`  
+item  :`order,flex-grow,flex-shrink,flex-basis,flex,align-self,`  
 
 
-
-
-### 简介
+#### grid简介
 将 一片区域划分为行和列,形成许多个单元格.可以指定某个项目在哪个单元格;  
 分 container 和项目.类似 flex 中的容器和项目,注意: 项目只能是容器中的顶层子元素  
-[在线的例子](https://jsbin.com/qimadav/edit?html,css,output)
+[在线的例子](https://jsbin.com/qimadav/edit?html,css,output)  [例子 2](https://jsfiddle.net/areYouOk/duwr08x6/31/)
 ### 网格线  
 划分网格的线;有水平.垂直的两种;  
 水平上,3行需要4根水平线.垂直也是一样;  

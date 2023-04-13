@@ -342,7 +342,11 @@ export default defineUserConfig({
                         },
                         {
                             text: "12. CSS3",
-                            link: "/css/2. 清除浮动-bfc.md",
+                            link: "/css/css3.md",
+                        },
+                        {
+                            text: "12. Flex-Grid",
+                            link: "/css/flex-grid.md",
                         },
                     ],
                 },
