@@ -1,11 +1,17 @@
+#### 变量
+一般是定义在一个规则集之内,常用是定义在`:root`里 
+```css
+element {
+  --main-bg-color: brown;
+}
+```
+使用`--`定义变量,然后使用`var`获取值,`var`支持设置默认值,变量可以被子元素继承  
+`element.style.getPropertyValue("--my-var");  element.style.setProperty("--my-var", jsVar + 4);`
+
 #### transition 过渡效果
 ```js
 .trans {
 transition: all ease-in-out 0.5s 0.1s;
-//    transition-property: all;
-//    transition-duration: 0.5s;
-//   transition-timing-function: ease-in-out;
-//    transition-delay: 0.1s;
 }
 ```
 
@@ -73,7 +79,9 @@ text-shadow : #edc7ce73 1px 1px 2px;
 ```
 
 #### 渐变
+<div class="gradient-test">
 线性渐变 和 放射状渐变(圆锥渐变),重复渐变;  
+</div>  
 
 ```css
 background: linear-gradient(red, orange, yellow, green, blue, indigo, violet);  
@@ -82,6 +90,8 @@ background: repeating-linear-gradient(lightpink, lightpink 5px, white 5px, white
 background: repeating-radial-gradient(powderblue, powderblue 8px, white 8px, white 16px);
 ```
 
+
+
 #### filter  滤镜
 可选值: blur (模糊) , contrast (对比度),  grayscale(灰度),  drop-shadow(阴影), brightness(亮度);  opacity(透明度); 
 ```css
@@ -89,7 +99,6 @@ background: repeating-radial-gradient(powderblue, powderblue 8px, white 8px, whi
     filter: contrast(175%) brightness(3%);    // 可以使用多个函数;
 }
 ```
-#### grid 
 
 #### will-change  动画渲染加速
 不能多用,乱用, 可以写到 :hover 里

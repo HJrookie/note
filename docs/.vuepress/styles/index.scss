@@ -40,6 +40,21 @@ html.dark {
     display: none;
   }
 }
+
+.gradient-test {
+  background: linear-gradient(141.83deg, #6e86ff -0.03%, rgba(110, 134, 255, 0) 44.15%),
+    radial-gradient(
+      120% 119.72% at -12.5% 94.12%,
+      #75acff 0,
+      #6e86ff 42.19%,
+      #b14eff 64.06%,
+      #f54cc0 81.77%,
+      #ff98a4 100%
+    );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 @media (max-width: 419px) {
   .theme-default-content {
     code {
