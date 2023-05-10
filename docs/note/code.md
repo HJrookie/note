@@ -66,3 +66,30 @@ const swap = (arr: number[], i: number, j: number) => {
 console.log(shuffle(arr));
 
 ```
+
+##### 用 setTimeout 实现setInterval
+```js
+const interVal = (func, delay) => {
+    let timer = null;
+    const newTimer = () => {
+        timer = setTimeout(() => {
+            func();
+            newTimer();
+        }, delay);
+        //  console.log(timer);
+    };
+    const clear = () => {
+        clearTimeout(timer);
+    };
+    return {
+        newTimer,
+        clear,
+    };
+};
+
+let timer = interVal(() => {
+    console.log(1);
+}, 1000);
+timer.newTimer();
+
+```
