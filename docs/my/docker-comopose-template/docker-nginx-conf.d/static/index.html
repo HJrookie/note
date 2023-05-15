@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>联想区块链 B-Connected平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .c {
+            width: 100%;
+            height: 100%;
+            min-width: 1280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #efefef;
+            background-image: url('./2.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .back {
+            width: 600px;
+            /* height: 400px; */
+            background-color: white;
+            /* margin: 200px auto; */
+            box-shadow: 0 2px 12px #0000001a;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 29px;
+        }
+
+        .logo-c {
+            display: flex;
+            justify-content: center;
+        }
+
+        .img {
+            width: 190px;
+            cursor: pointer;
+            height: 38px;
+        }
+
+        .t1 {
+            margin-top: 20px;
+            transition: all ease-in-out 0.5s;
+            cursor: pointer;
+        }
+
+        .t1:hover {
+            color: rgba(0, 0, 0, 0.586);
+        }
+
+        .items {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+
+        }
+
+        .item {
+            box-shadow: 0 2px 12px #0000001a;
+            width: 150px;
+            background-color: #ffffff80;
+            padding: 10px;
+            height: 66px;
+            border-radius: 10px;
+            transition: all ease-in-out 0.5s;
+        }
+
+        .i-t-1 {
+            color: #0a0909bf;
+            cursor: pointer;
+        }
+
+        .i-t {
+            color: #0a0909bf;
+            cursor: pointer;
+            line-height: 46px;
+        }
+
+        .item:hover {
+            background-color: #efefefba;
+            color: #efefefba;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c">
+        <div class="back">
+            <div class="logo-c">
+                <img src="./logo.png" class="img">
+            </div>
+            <h3 class="t1">联想区块链 B-Connected平台</h3>
+
+            <div class="items">
+
+                <div class="item" onClick="goto(1)">
+                    <div class="i-t-1">
+                        Hyperledger Fabric
+                    </div>
+                    <div class="i-des">
+
+                    </div>
+                </div>
+                <div class="item" onClick="goto(2)">
+                    <div class="i-t">
+                        FISCO BCOS
+                    </div>
+                    <div class="i-des">
+
+                    </div>
+                </div>
+                <div class="item" onClick="goto(3)">
+                    <div class="i-t">
+                        XuperChain
+                    </div>
+                    <div class="i-des">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        function goto(v) {
+            let url = '';
+            if (v === 1) {
+                // hosts http://192.168.100.150
+                url = "http://edu.blockchain.lenovo.com/"
+            } else if (v === 2) {
+                url = "http://192.168.100.150:8088/#/login"
+
+            } else if (v === 3) {
+                url = "xuperide://start"
+
+            }
+            window.open(url, "_blank")
+        }
+    </script>
+</body>
+
+</html>

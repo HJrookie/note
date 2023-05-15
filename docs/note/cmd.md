@@ -55,7 +55,7 @@ pm2 save
 wget --no-check-certificate https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
 tar xf node-v16.17.0-linux-x64.tar.xz  
 # 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
-cd node-v16.17.0-linux-x64.tar.xz
+cd node-v16.17.0-linux-x64
 pwd                                                           //查看当前的目录 , 假设是 /Users/app
 ln -s /home/lenovo/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/ 
 ln -s /Users/app/bin/node    /usr/local/bin/
