@@ -9,6 +9,14 @@ sudo ifconfig en1 up
 #查看可用版本
 npm view node versions
 n 16.10.0
+
+sudo n 17.0.0 
+sudo NODE_MIRROR=http://npm.taobao.org/mirrors/node n stable
+sudo NODE_MIRROR=http://npm.taobao.org/mirrors/node n 18.0.0
+
+# npm清除缓存
+npm cache clear --force 
+npm cache clean --force 
 ```
 
 #### macos cli 配置代理
