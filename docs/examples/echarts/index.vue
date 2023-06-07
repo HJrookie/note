@@ -323,7 +323,7 @@ export default {
             prev.xAxisdata.push(cur.task_no);
             prev.seriesData.push(cur.student_score);
             prev.tblData.push(cur);
-            prev.days.add(day);
+            prev.days.add(day); 
             prev.weeks.add(week);
           }
           return prev;
