@@ -239,7 +239,13 @@ export default defineUserConfig({
                 },
                 {
                     text: "网络知识",
-                    link: "/network/index.md",
+                    children: [
+                        {
+                            text: "5 层",
+                            link: "/network/5layer.md",
+                        },
+
+                    ],
                 },
                 {
                     text: "CSS",
