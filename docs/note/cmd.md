@@ -57,10 +57,11 @@ pm2 save
 #运行 `pm2 startup`，即在`/etc/init.d/`目录下生成`pm2-root`的启动脚本，且自动将`pm2-root`设为服务。
 #运行 `pm2 save`，会将当前pm2所运行的应用保存在`/root/.pm2/dump.pm2`下，当开机重启时，运行`pm2-root`服务脚本，并且到`/root/.pm2/dump.pm2`下读取应用并启动。
 ```
-#### nodejs 安装
+#### nodejs 安装  注意不要装到 root 目录下,不然安装库时有权限问题 (官方文档)[https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally]
 ```shell
 # https://nodejs.org/dist/v15.4.0/node-v15.4.0-linux-x64.tar.gz
 wget --no-check-certificate https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+# https://nodejs.org/dist/v14.4.0/node-v14.4.0-linux-x64.tar.gz
 tar xf node-v16.17.0-linux-x64.tar.xz  
 # 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
 cd node-v16.17.0-linux-x64
@@ -70,6 +71,12 @@ ln -s /Users/app/bin/node    /usr/local/bin/
 node -v          # v16.13.0
 npm -v				   # 8.1.0
 npm config set registry https://registry.npm.taobao.org      # 设置 npm 源
+
+
+# 解决全局安装后命令找不到问题 
+vi /etc/profile
+export NODE_PATH=/root/nodejs/node-v14.16.1-linux-x64/bin
+export PATH=${PATH}:${NODE_PATH}
 ```
 
 #### yum 更新 git
