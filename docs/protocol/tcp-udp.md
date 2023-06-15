@@ -4,7 +4,8 @@
 TCP: 面向连接的,面向字节流,可靠,全双工,建立和释放连接,只支持 1 对一的.,  
 UDP: 无连接,面向报文,尽最大努力交付的,支持 1 对 1,1 对多,多对 1,多对多
 
-滑动窗口  拥塞控制 慢开始 拥塞避免 快重传 快恢复 
+- 滑动窗口  慢开始 拥塞避免 快恢复   快重传(收到3个相同的ACK) 
+-  拥塞控制( 加法增大、乘法减小)
 #### TCP [blog](https://blog.csdn.net/qzcsu/article/details/72861891)
 一般意义上的通信其实是主机上的进程之间的通信,网络层只能把数据报送到目的主机,但是并没有交付到应用进程,进程间通信需要 ip+端口,即端到端通信  
 > 每一条TCP连接都有两个端点，这种端点我们叫作套接字（socket），ip+端口就是套接字 192.3.4.16:80。  
@@ -42,9 +43,8 @@ UDP: 无连接,面向报文,尽最大努力交付的,支持 1 对 1,1 对多,多
 
 为什么客户端最后还要等待2MSL？  
 MSL（Maximum Segment Lifetime），TCP允许不同的实现可以设置不同的MSL值。 `去向ACK消息最大存活时间（MSL) + 来向FIN消息的最大存活时间(MSL)。`  
-当 server 发送 FIN 时,是不能直接释放 server 的资源的,必须要等到 client 的确认才可以释放资源.  当 Client 收到 FIN时,会回复 ACK,但是 client 不能确定  
-server 是否收到了 ACK, 如果收到了,那么通信结束,没收到的话,Server 就会重新发 FIN,因此 Client 是必须等待结果的.为什么是 2msl 呢? `ack 丢+FIN重发`  
-那么 client 如果不等呢? 会导致 server 可能未收到 ack,一直等待,或server 重发 Fin 后,未被处理,或者又和新 server 建立了链接,又收到旧 server 的包   
+当 server 发送 FIN 时,是不能直接释放 server 的资源的,必须要等到 client 的确认才可以释放资源.  当 Client 收到 FIN时,会回复 ACK,但是 client 不能确定 server 是否收到了 ACK, 如果收到了,那么通信结束,没收到的话,Server 就会重新发 FIN,因此 Client 是必须等待结果的.为什么是 2msl 呢? `ack 丢+FIN重发`  
+那么 client 如果不等呢? 会导致 server 重发 Fin 后,未被处理,或者又和新 server 建立了链接,又收到旧 server 的包   
 
 
 
