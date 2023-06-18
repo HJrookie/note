@@ -1,4 +1,4 @@
-- defer 保证顺序,延迟到解析到`</html>`才执行,async 异步,不保证执行顺序. 
+- defer 保证顺序,dcl之前,async 异步,不保证执行顺序. 
 - commomjs es6
 - npm -S -D `下载包时,只下载dependency中的内容.`
 - indexOf slice 0-i, i-

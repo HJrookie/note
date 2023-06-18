@@ -5,3 +5,6 @@ export let setA = (v) => {
 export let getA = (v) => {
     return a;
 };
+export function inc() {
+  a++;
+}
