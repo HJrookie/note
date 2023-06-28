@@ -276,6 +276,12 @@ service ntpd restart
 date
 ```
 
+#### 网络
+```shell
+# 所有 ip 计时 程序 tcp 
+netstat -anopt 
+```
+
 
 
 

@@ -58,7 +58,10 @@ Cache-Control的几个指令特别容易混淆，不能望文生义。比如`no-
 - expires
 - `pragma (被移除了)`
 - Last-Modified 启发式缓存 `(Date - Last-Modified)*0.1`   
-如果是`no-store`,那么会直接请求服务端,如果是`no-cache`,则至`步骤 3` 校验文件是否过期   
+
+-------------------
+
+看 Cache-Control里是不是`no-store`,那么会直接请求服务端,如果是`no-cache`,则至`步骤 3` 校验文件是否过期   
 1. 先通过时间上判断,该资源是否过期,优先级从高到低,依次为`Cache-Control中的s-maxage  -->  max-age   --> Expires`  
 2. 如果资源没有过期,那么浏览器就会从本地缓存中读取,`不会发送 http 请求`,只是有的文件从`Memory`中读取,有的从`Disk`中读取,具体规则未知,  
     部分行为详见  --->  [Chrome 实现](/browser/chrome-cache.md)
