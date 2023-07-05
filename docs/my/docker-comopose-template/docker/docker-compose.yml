@@ -6,6 +6,8 @@ services:
       - '80:80'
     restart: always
     privileged: true
+    environment:
+        TZ : 'Asia/Shanghai'
     volumes:
       - /etc/localtime:/etc/localtime
 #      - ./dist:/usr/share/nginx/html

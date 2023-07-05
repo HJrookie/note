@@ -24,8 +24,13 @@ set  设置值的的时候,调用此函数
 实现继承的主要方法是 原型链.  
 >每个构造函数都有一个原型对象每个原型对象有一个constructor属性,指向构造函数.通过new 调用构造函数可以创建实例,实例有一个__proto__的属性,指向构造函数的原型对象.当然,每个构造函数继承了Object对象,故以下例子成立:  
 ```js
-function test(){}
-test.prototype.__proto__ === Object.prototype;
+function t(){}
+t.prototype.constructor === t;
+t.prototype.__proto__ === Object.prototype; 
+// 函数本身是 Function 的实例
+t.__proto__ === Function.prototype
+Function.prototype.__proto__ === Object.prototype
+Object.prototype.__proto__ === null 
 ```
 ```js
 // 实现一下继承
@@ -34,6 +39,9 @@ var father = function(){}
 var obj = new son();  //obj是 son 的实例
 var temp = son.prototype;                     //在这里暂存一下son原来的原型对象
 console.log(obj.__proto__ === son.prototype) //判断obj的__proto__是否指向son的原型对象  true
+
+
+// 重写 son 的选型对象,  等同于 Object.setPrototypeOf(son.prototype,father.prototype)
 son.prototype = new father();
 console.log(obj.__proto__ === son.prototype)    // false,son的原型对象 = new father了,因此son.__proto__不再指向son的原型了.
 console.log(obj.__proto__ === temp)                                        //true,temp还是指向原来son的原型对象
@@ -41,9 +49,14 @@ console.log(obj.__proto__ === temp)                                        //tru
 console.log(son.prototype.__proto__ === Object.prototype)                  //false,son的原型对象 = new father了
 console.log(son.prototype.__proto__ === father.prototype)               //true,因此指向了father的原型对象
 console.log(father.prototype.__proto__===Object.prototype )            //true
+
 // 新创建一个son对象
-var o2 = new son();
-o2.__proto__===son.prototype;   //true
+let d =new son();
+d.__proto__ === son.prototype  // t 
+son.prototype.__proto__ === father.prototype // t
+father.prototype.__proto__ === Object.prototype  // t
+// d ---> son.prototype ---> father.prototype ---> Object.prototype ---> null
+// 通过 d.__proto__ 或者 Object.getPrototypeOf向上追溯 
 ```
 #### 继承的另一个例子
 ```js
@@ -77,7 +90,7 @@ console.log(Baz.prototype.__proto__ === Bar.prototype); //true
 对象属性的搜索: 在上述例子中,对于对象属性的搜索,将会有三步:  
 1. 在对象自身中搜索  
 2. 在son.prototype中搜索  
-3. 在father>prototype中搜索
+3. 在father.prototype中搜索
 
 ### Object的原型上有什么
 Object.prototype  

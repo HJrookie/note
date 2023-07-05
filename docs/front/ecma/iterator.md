@@ -105,10 +105,9 @@ let o = {
   b: 2,
   c: 3,
   [Symbol.iterator]() {
-    let _this = this;
-    let arr = Object.entries(_this),
+    let arr = Object.entries(this),
       i = 0;
-    return {
+    return { // 这里一定是需要返回一个对象
       next() {
         if (i < arr.length) {
           return { value: arr[i++], done: false };
@@ -133,6 +132,8 @@ let o = {
 for (let v of o) {
   console.log(v); // ['a', 1] ['b', 2] ['c', 3]
 }
+
+
 // generator 的另一种写法
 let obj = {
   *[Symbol.iterator]() {
