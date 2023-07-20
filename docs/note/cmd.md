@@ -72,20 +72,20 @@ pm2 save
 #### nodejs 安装  注意不要装到 root 目录下,不然安装库时有权限问题 (官方文档)[https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally]
 ```shell
 # https://nodejs.org/dist/v15.4.0/node-v15.4.0-linux-x64.tar.gz
-wget --no-check-certificate https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+wget --no-check-certificate https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz
 # https://nodejs.org/dist/v14.4.0/node-v14.4.0-linux-x64.tar.gz
-tar xf node-v16.17.0-linux-x64.tar.xz  
+tar xf node-v16.1.0-linux-x64.tar.xz
 # 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
 cd node-v16.17.0-linux-x64
 pwd                                                           //查看当前的目录 , 假设是 /Users/app
-ln -s /home/lenovo/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/ 
+ln -s /home/edu-test/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/ 
 ln -s /Users/app/bin/node    /usr/local/bin/
 node -v          # v16.13.0
 npm -v				   # 8.1.0
 npm config set registry https://registry.npm.taobao.org      # 设置 npm 源
 
 
-# 解决全局安装后命令找不到问题 
+# 解决npm 全局安装后命令找不到问题 
 vi /etc/profile
 export NODE_PATH=/root/nodejs/node-v14.16.1-linux-x64/bin
 export PATH=${PATH}:${NODE_PATH}
@@ -142,6 +142,9 @@ docker run -itd --name mysql -p 3306:3306 --privileged=true -e MYSQL_ROOT_PASSWO
 docker exec --user root -it 18e541e99668 bash
 # 启动 nginx
 docker run -d -p 80:80  -v /usr/local/letmsHtml:/usr/local/letmsHtml -v /usr/local/nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx nginx
+# 保存容器 并且 load
+docker save edu-test/itsm:0.2 | gzip -c >  edu-test-itsm-0.2.tar 
+docker load -i edu-test-itsm-0.2.tar 
 ```
 
 
@@ -155,7 +158,6 @@ docker-compose  -f docker-web-prod.yml  pull
 docker-compose  -f docker-web-prod.yml  up -d
 docker-compose -f nginx-dev.yml down --rmi all
 ```
-
 
 
 
@@ -564,7 +566,7 @@ service sshd restart
 ```
 
 
-#### gmail
+#### gmail gcp
 
 
 
@@ -574,11 +576,12 @@ vi /etc/ssh/sshd_config
 # 改成 yes
 PermitRootLogin no
 PasswordAuthentication no
+
 service sshd restart
 passwd root
 gsnysbslzr@123qwe
 //  ss no混淆
-bash <(curl -sL https://raw.githubusercontent.com/Miuzarte/hijk.sh/main/Original/ss.sh)
+bash <(curl -sL https://raw.githubusercontent.com/luciferkids/hijkpw-scripts/main/ss.sh)
 // with plugin
 wget -N --no-check-certificate -c -t3 -T60 -O ss-plugins.sh https://git.io/fjlbl
 chmod +x ss-plugins.sh
