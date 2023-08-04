@@ -255,6 +255,12 @@ npm install express --save
 git config --global user.name "xxx"(输入你的用户名)
 git config --global user.email "xxx"(输入你的邮箱)
 git config --list
+
+
+
+#  git 批量修改所有的提交记录
+git filter-branch -f --env-filter "GIT_AUTHOR_NAME='rookie'; GIT_AUTHOR_EMAIL='1181400768@qq.com'; GIT_COMMITTER_NAME='rookie'; GIT_COMMITTER_EMAIL='1181400768@email';" HEAD
+
 ```
 
 
@@ -564,6 +570,7 @@ ClientAliveInterval 30
 
 service sshd restart 
 ```
+
 
 
 #### gmail gcp

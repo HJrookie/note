@@ -154,7 +154,7 @@ export default defineUserConfig({
                     children: [
                         {
                             text: "跨域",
-                            link: "/browser/cross-origin.md",
+                            link: "/browser/cors.md",
                         },
                         {
                             text: "事件Event",
