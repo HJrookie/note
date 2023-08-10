@@ -118,8 +118,6 @@ chown xxx:xxx directory
 vi /etc/docker/daemon.json
 {
   "registry-mirrors": [
-    "https://xx4bwyg2.mirror.aliyuncs.com",
-    "http://f1361db2.m.daocloud.io",
     "https://registry.docker-cn.com",
     "http://hub-mirror.c.163.com",
     "https://docker.mirrors.ustc.edu.cn"
@@ -130,7 +128,11 @@ systemctl daemon-reload
 # 重启Docker
 systemctl restart docker
 # 安装 docker-compose
-curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+# https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64
+
+ curl -k -L  https://download.fastgit.org/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
