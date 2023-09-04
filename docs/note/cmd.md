@@ -595,6 +595,11 @@ bash <(curl -sL https://raw.githubusercontent.com/luciferkids/hijkpw-scripts/mai
 wget -N --no-check-certificate -c -t3 -T60 -O ss-plugins.sh https://git.io/fjlbl
 chmod +x ss-plugins.sh
 ./ss-plugins.sh
+
+# 例子 
+port: 1725
+cipher: aes-256-cfb
+password: slflsnfs@#$8fs
 ```
 
 #### 
