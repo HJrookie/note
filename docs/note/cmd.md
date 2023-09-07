@@ -600,6 +600,30 @@ chmod +x ss-plugins.sh
 port: 1725
 cipher: aes-256-cfb
 password: slflsnfs@#$8fs
+
+
+
+Xray官网：https://xtls.github.io/
+XUI的github页面：https://github.com/vaxilu/x-ui
+
+好用的一键脚本：
+wulabing的一键脚本（ws+tls）：https://github.com/wulabing/V2Ray_ws-tls_bash_onekey
+make-a的八合一脚本：https://github.com/mack-a/v2ray-agent
+jinwyp 的一键多协议脚本：https://github.com/jinwyp/one_click_script
+
+其他：
+hysteria协议：https://github.com/apernet/hysteria
+REALITY协议：https://github.com/XTLS/REALITY
+linux网络加速：https://github.com/ylx2016/Linux-NetSpeed
+萌咖的一键DD脚本：https://github.com/veip007/dd
+路由规则增强版：https://github.com/Loyalsoldier/v2ray-rules-dat
+clash路由规则：https://github.com/Loyalsoldier/clash-rules
+
+客户端：
+V2rayN：https://github.com/2dust/v2rayN
+
+不良林主页：https://bulianglin.com/
+不良林有图比：https://www.有图比.com/@bulianglin
 ```
 
 #### 
