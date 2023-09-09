@@ -398,6 +398,8 @@ http {
 ```shell
 git config --global http.https://github.com.proxy http://127.0.0.1:54621
 // 文章地址       https://ericclose.github.io/git-proxy-config.html
+# 单次克隆代理
+git clone -c http.proxy="127.0.0.1:7890" https://github.com/labring/FastGPT.git
 ```
 
 
