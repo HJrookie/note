@@ -6,7 +6,7 @@ sudo ifconfig en1 up
 
 #### node version
 ```shell
-#查看可用版本
+#查看可用版本 n 模块
 npm view node versions
 n 16.10.0
 
@@ -130,7 +130,7 @@ systemctl restart docker
 # 安装 docker-compose
 # curl -L https://get.daocloud.io/docker/compose/releases/download/v2.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
-# https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64
+# curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64 > /usr/local/bin/docker-compose
 
  curl -k -L  https://download.fastgit.org/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
@@ -577,7 +577,7 @@ service sshd restart
 
 
 
-#### gmail gcp
+#### gmail gcp 荔盈街6及8号
 
 
 

@@ -6,3 +6,10 @@
 
 - 在检查缓存的时候,除了`ADD 和 COPY 指令`,其他的指令都不会检查文件的内容; 例如,当检查`RUN apt-get -y update`的时候,只会比较这个字符串是否发生了变化;  
 - 前一个 layer 失效时,后面的那些 layer 也会失效.  
+
+#### 
+```shell
+# 删除不用的镜像
+docker image prune -a
+docker save XXX:xx | gzip -c > xxxxx.tar
+```
