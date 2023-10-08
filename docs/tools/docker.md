@@ -12,4 +12,8 @@
 # 删除不用的镜像
 docker image prune -a
 docker save XXX:xx | gzip -c > xxxxx.tar
+
+docker build -t nextjs-docker .  
+docker run -p 3000:3000 nextjs-docker  
+
 ```

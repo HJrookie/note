@@ -145,7 +145,7 @@ docker exec --user root -it 18e541e99668 bash
 # 启动 nginx
 docker run -d -p 80:80  -v /usr/local/letmsHtml:/usr/local/letmsHtml -v /usr/local/nginx/nginx.conf:/etc/nginx/nginx.conf --name nginx nginx
 # 保存容器 并且 load
-docker save edu-test/itsm:0.2 | gzip -c >  edu-test-itsm-0.2.tar 
+docker save wise-llm-platform:0.3 | gzip -c >  wise-llm-platform-0.3.tar 
 docker load -i edu-test-itsm-0.2.tar 
 ```
 
@@ -578,8 +578,10 @@ service sshd restart
 
 
 #### gmail gcp 荔盈街6及8号
+4514 6175 0069 8636          54
 
-
+// clash 加速地址
+https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
 
 ```shell
 sudo su
@@ -605,6 +607,7 @@ password: slflsnfs@#$8fs
 
 
 
+
 Xray官网：https://xtls.github.io/
 XUI的github页面：https://github.com/vaxilu/x-ui
 
@@ -623,9 +626,8 @@ clash路由规则：https://github.com/Loyalsoldier/clash-rules
 
 客户端：
 V2rayN：https://github.com/2dust/v2rayN
-
-不良林主页：https://bulianglin.com/
-不良林有图比：https://www.有图比.com/@bulianglin
+# 获取基本信息,不测试网络
+curl -sL yabs.sh | bash -s -- -i
 ```
 
 #### 
