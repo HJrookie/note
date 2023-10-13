@@ -309,87 +309,6 @@ git push origin --delete [branchname]
 
 
 
-#### nginx 配置实例
-
-```js
-// 前端 baseUrl 配置为  /secure
-location /secure/ {
-  proxy_pass "http://10.103.237.156:4800/";
-  # proxy_pass "http://localhost.localdomain:4800/";
-}
-#user  nobody;
-worker_processes  2;
-#error_log  logs/error.log;
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-#pid        logs/nginx.pid;
-events {
-    worker_connections  1024;
-}
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    client_max_body_size 100M;
-    #access_log  logs/access.log  main;
-    sendfile        on;
-    #tcp_nopush     on;
-    #keepalive_timeout  0;
-    keepalive_timeout  1800;
-    client_max_body_size 1024M;
-    proxy_connect_timeout       600;
-    proxy_send_timeout          600;
-    proxy_read_timeout          600;
-    send_timeout                600;
-    #gzip  on;
-    gzip on;
-    gzip_min_length 1k;
-    gzip_comp_level 5;
-    gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
-    gzip_vary on;
-    gzip_disable "MSIE [1-6]\.";
-    server {
-        listen       80;
-        server_name  localhost;
-        #charset koi8-r;
-        #access_log  logs/host.access.log  main;
-        location / {
-            #root   /root/letmsHtml;
-            try_files $uri $uri/ /index.html;
-            # root   /usr/local/letmsHtml;
-            root   /usr/share/nginx/html;
-            index  index.html;
-        }
-        location /api/ {
-            #基础服务  a.com/api/bbb 会替换到  http://10.103.237.165:8080/bbb
-            proxy_pass       http://10.103.237.165:8080/;    
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-        location /file/ {
-            add_header Access-Control-Allow-Origin *;
-            alias   /usr/local/file/;
-            # alias /usr/local/file/2022/02/24/;
-            # autoindex on;
-            autoindex_exact_size off;
-        }
-        #error_page  404              /404.html;
-        # redirect server error pages to the static page /50x.html
-        #
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
-}
-以上的配置会按以下规则转发请求( GET 和 POST 请求都会转发):
-将 http://example.com/mail/ 下的请求转发到 http://example.com:portmail/
-将 http://example.com/com/ 下的请求转发到 http://example.com:portcom/main/
-将其它所有请求转发到 http://example.com:portdefault/
-————————————————
-```
-
-
 
 
 
@@ -634,4 +553,13 @@ curl -sL yabs.sh | bash -s -- -i
 ```shell
 # 清除 dns 缓存
 sudo killall -HUP mDNSResponder
+```
+
+
+#### 查看当前路径下文件夹大小
+```shell
+# mac
+du -d 1 -h
+# linux
+du -ah --max-depth=1.
 ```
