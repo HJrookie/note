@@ -9,7 +9,7 @@
 
 #### 
 ```shell
-# 删除不用的镜像
+# 删除不用的镜像`
 docker volume prune -f  
 docker image prune -a  
 # 已停止的也会被删除 
@@ -21,10 +21,10 @@ docker build -t nextjs-docker .
 docker run -p 3000:3000 nextjs-docker  
 
 # platform
-docker build --build-arg name=app  -t  wise-llm-platform:0.48 . 
+docker build --build-arg name=app  -t  wise-llm-platform:0.51 . 
 
-docker save wise-llm-platform:0.48 | gzip -c > wise-llm-platform-0.48.tar
-scp wise-llm-platform-0.48.tar root@47.98.144.126:/root/fastgpt-docker/
+docker save wise-llm-platform:0.51 | gzip -c > wise-llm-platform-0.51.tar
+scp wise-llm-platform-0.51.tar root@47.98.144.126:/root/fastgpt-docker/
 bytviQ-mykki1-wiqjob
 # assistant
 
