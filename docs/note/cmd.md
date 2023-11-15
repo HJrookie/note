@@ -118,9 +118,9 @@ chown xxx:xxx directory
 vi /etc/docker/daemon.json
 {
   "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn"
     "https://registry.docker-cn.com",
     "http://hub-mirror.c.163.com",
-    "https://docker.mirrors.ustc.edu.cn"
   ]
 }
 # 使配置生效
