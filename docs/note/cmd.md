@@ -524,7 +524,7 @@ port: 1725
 cipher: aes-256-cfb
 password: slflsnfs@#$8fs
 
-
+34.142.139.
 
 
 Xray官网：https://xtls.github.io/

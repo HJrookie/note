@@ -21,9 +21,9 @@ docker build -t nextjs-docker .
 docker run -p 3000:3000 nextjs-docker  
 
 # platform
-docker build --build-arg name=app  -t  wise-llm-platform:0.51 . 
+docker build --build-arg name=app  -t  wise-llm-platform:0.604 . 
 
-docker save wise-llm-platform:0.51 | gzip -c > wise-llm-platform-0.51.tar
+docker save wise-llm-platform:0.604 | gzip -c > wise-llm-platform-0.604.tar
 scp wise-llm-platform-0.51.tar root@47.98.144.126:/root/fastgpt-docker/
 bytviQ-mykki1-wiqjob
 # assistant
