@@ -29,3 +29,10 @@ bytviQ-mykki1-wiqjob
 # assistant
 
 ```
+
+#### fix 问题
+```log
+"1 error occurred:\n\t* provisioning docker WSL distros: running wsl-bootstrap version set in main distro: exit status 0xffffffff
+
+wsl --set-default-version 2
+```
