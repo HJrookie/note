@@ -167,6 +167,10 @@ docker-compose -f nginx-dev.yml down --rmi all
 ### ls 命令 查看详细时间
 ```shell
 ls -lh --time-style="+%Y-%m-%d %H:%M:%S" -t
+
+# find 
+find "." -name .DS_Store | xargs rm
+
 ```
 
 
