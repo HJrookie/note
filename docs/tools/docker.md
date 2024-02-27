@@ -29,3 +29,17 @@ bytviQ-mykki1-wiqjob
 # assistant
 
 ```
+
+#### fix 问题
+```log
+"1 error occurred:\n\t* provisioning docker WSL distros: running wsl-bootstrap version set in main distro: exit status 0xffffffff
+
+1.Docker运行出现的问题
+Docker.Core.HttpBadResponseException: {“message”:“2 errors occurred:\n\t* provisioning docker WSL distros: running wsl-bootstrap version set in main distro: exit status 1\n\t* checking if isocache exists: CreateFile \wsl$\docker-desktop-data\isocache: The network name cannot be found.\n\n”}
+
+2.方案(两种方案)
+(1)wsl --update
+第一种先用管理员运行CMD执行wsl --update更新你的WSL（Docker需要的WSL是2）
+更新完后使用wsl --shutdown重启一下
+(2) netsh winsock reset
+第二种管理员运行CMD执行netsh winsock reset，运行完后记得使用wsl --shutdown重启一下，不需要重启计算机
