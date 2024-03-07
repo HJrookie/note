@@ -100,6 +100,14 @@ yum install git
 yum update git
 ```
 
+####  linux 操作日志
+```shell
+tail -200f /var/log/messages
+# cpu mem 占用
+ps aux | sort -nrk 3,3 | head -n 5
+
+```
+
 
 #### centos 安装 docker
 
