@@ -147,7 +147,7 @@ chmod +x /usr/local/bin/docker-compose
 #### 启动容器
 ```shell
 # mysql
-docker run -itd --name mysql -p 3306:3306 --privileged=true -e MYSQL_ROOT_PASSWORD=root  -e TZ=Asia/Shanghai mysql:5.7 
+docker run -itd --name mysql -p 3306:3306 --privileged=true  --restart=always -e MYSQL_ROOT_PASSWORD=root  -e TZ=Asia/Shanghai mysql:5.7 
 # 使用 root 用户进入容器
 docker exec --user root -it 18e541e99668 bash
 # 启动 nginx
