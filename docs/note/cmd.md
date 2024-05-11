@@ -2,6 +2,7 @@
 ```shell
 sudo ifconfig en1 down
 sudo ifconfig en1 up
+sudo arp -d -a  
 ```
 
 #### node version
