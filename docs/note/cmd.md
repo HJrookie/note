@@ -2,6 +2,7 @@
 ```shell
 sudo ifconfig en1 down
 sudo ifconfig en1 up
+sudo arp -d -a  
 ```
 
 #### node version
@@ -128,7 +129,7 @@ vi /etc/docker/daemon.json
   "registry-mirrors": [
     "https://docker.mirrors.ustc.edu.cn"
     "https://registry.docker-cn.com",
-    "http://hub-mirror.c.163.com",
+    "http://hub-mirror.c.163.com"
   ]
 }
 # 使配置生效
