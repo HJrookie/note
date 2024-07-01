@@ -1,0 +1,17 @@
+version: '3'
+services:
+  nginx:
+    image: heartexlabs/label-studio:latest
+    ports:
+      - '7080:8080'
+    restart: always
+    privileged: true
+    volumes:
+      - ./web-static:/label-studio/web/dist
+      - ./django-static_build:/label-studio/label_studio/core/static_build/
+      - ./mydata:/label-studio/data
+      - ./views.py:/label-studio/label_studio/users/views.py
+      - ./login.css:/label-studio/label_studio/core/static/css/login.css
+      - ./templates:/label-studio/label_studio/templates
+      - ./templates-users:/label-studio/label_studio/users/templates/users
+      - ./forms.py:/label-studio/label_studio/users/forms.py
