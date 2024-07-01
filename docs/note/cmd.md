@@ -46,6 +46,21 @@ proxy
 unproxy
 ```
 
+
+#### python
+```shell
+
+python -m venv venv
+
+python 启动虚拟环境
+
+source ./venv/bin/activate
+退出
+deactivate
+
+```
+
+
 #### 配置yum 源
 
 ```shell
