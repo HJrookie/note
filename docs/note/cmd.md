@@ -8,10 +8,14 @@ sudo arp -d -a
 #### letms 项目启动不了
 ```shell
 # 如果npm 安装依赖全局安装  不是安装到项目本地
-npm config --global false 
-# 方法1
+npm config --global false
+npm i
+
+# nlark 旧域名问题
+把package-lock.json删除了.重新装, 这是个老的域名  
+https://cnodejs.org/topic/61405b76fe0c5109a7aea0ed
 # 1. 把package-lock.json 删除了
-# 2. npm i 会报错 antd的依赖错误
+# 2. npm i 会报错 antd的依赖错误 用下面的命令去安装  
 # 3
 npm i --legacy--peer-deps 
 ```
