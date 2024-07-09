@@ -5,6 +5,17 @@ sudo ifconfig en1 up
 sudo arp -d -a  
 ```
 
+#### letms 项目启动不了
+```shell
+# 如果npm 安装依赖全局安装  不是安装到项目本地
+npm config --global false 
+# 方法1
+# 1. 把package-lock.json 删除了
+# 2. npm i 会报错 antd的依赖错误
+# 3
+npm i --legacy--peer-deps 
+```
+
 #### node version
 ```shell
 #查看可用版本 n 模块
