@@ -113,7 +113,7 @@ ln -s /home/edu-test/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/
 ln -s /Users/app/bin/node    /usr/local/bin/
 node -v          # v16.13.0
 npm -v				   # 8.1.0
-npm config set registry https://registry.npm.taobao.org      # 设置 npm 源
+npm config set registry https://registry.npmmirror.com      # 设置 npm 源
 
 
 # 解决npm 全局安装后命令找不到问题 
@@ -259,10 +259,20 @@ scp root@10.103.237.40:/usr/share/pve-docs/api-viewer/7.html .
 ```
 
 
-#### npm 基本配置
+#### npm 基本配置 代理
 ```shell
-npm config set registry https://registry.npm.taobao.org
-npm -v
+npm config set registry https://registry.npmmirror.com
+# 设置代理
+npm config set proxy=http://127.0.0.1:54621
+npm config set https-proxy=http://127.0.0.1:54621
+# 获取
+npm config get proxy
+npm config get https-proxy
+# 删除
+npm config rm proxy
+npm config rm https-proxy
+
+
 ```
 
 #### centos 防火墙
@@ -282,7 +292,7 @@ systemctl status firewalld.service  # 查看防火墙状态
 
 ```shell
 # 一般采用 pm2
-npm config set registry https://registry.npm.taobao.org
+npm config set registry https://registry.npmmirror.com
 npm install -g pm2
 npm install axios
 npm install cors --save
