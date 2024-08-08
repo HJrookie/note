@@ -1,3 +1,6 @@
+# npm 源
+npm config set registry https://registry.npmmirror.com      # 设置 npm 源
+
 #### 网卡
 ```shell
 sudo ifconfig en1 down
@@ -40,11 +43,46 @@ npm cache clean --force
 # 在这里下载exe 安装
 https://github.com/coreybutler/nvm-windows/releases  
 # 终端中配置镜像 
-nvm npm_mirror https://npmmirror.com/mirrors/npm/W
+nvm npm_mirror https://npmmirror.com/mirrors/npm/
 nvm node_mirror https://npmmirror.com/mirrors/node/
 # install 
 nvm install 16.11.0  
 nvm use 16.11.0
+```
+
+#### Linux 安装 nodejs   注意不要装到 root 目录下,不然安装库时有权限问题 (官方文档)[https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally]
+```shell
+# https://nodejs.org/dist/v15.4.0/node-v15.4.0-linux-x64.tar.gz
+wget --no-check-certificate https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz
+# https://nodejs.org/dist/v14.4.0/node-v14.4.0-linux-x64.tar.gz
+tar xf node-v16.1.0-linux-x64.tar.xz
+# 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
+cd node-v16.17.0-linux-x64
+pwd                                                           //查看当前的目录 , 假设是 /Users/app
+ln -s /home/edu-test/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/ 
+ln -s /Users/app/bin/node    /usr/local/bin/
+node -v          # v16.13.0
+npm -v				   # 8.1.0
+
+
+# 解决npm 全局安装后命令找不到问题 
+vi /etc/profile
+export NODE_PATH=/root/nodejs/node-v14.16.1-linux-x64/bin
+export PATH=${PATH}:${NODE_PATH}
+```
+
+#### npm 基本配置 代理
+```shell
+npm config set registry https://registry.npmmirror.com
+# 设置代理
+npm config set proxy=http://127.0.0.1:54621
+npm config set https-proxy=http://127.0.0.1:54621
+# 获取
+npm config get proxy
+npm config get https-proxy
+# 删除
+npm config rm proxy
+npm config rm https-proxy
 ```
 
 #### macos cli 配置代理
@@ -100,27 +138,7 @@ pm2 save
 #运行 `pm2 startup`，即在`/etc/init.d/`目录下生成`pm2-root`的启动脚本，且自动将`pm2-root`设为服务。
 #运行 `pm2 save`，会将当前pm2所运行的应用保存在`/root/.pm2/dump.pm2`下，当开机重启时，运行`pm2-root`服务脚本，并且到`/root/.pm2/dump.pm2`下读取应用并启动。
 ```
-#### nodejs 安装  注意不要装到 root 目录下,不然安装库时有权限问题 (官方文档)[https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally]
-```shell
-# https://nodejs.org/dist/v15.4.0/node-v15.4.0-linux-x64.tar.gz
-wget --no-check-certificate https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz
-# https://nodejs.org/dist/v14.4.0/node-v14.4.0-linux-x64.tar.gz
-tar xf node-v16.1.0-linux-x64.tar.xz
-# 如果解压报错 执行 yum install -y xz   或者  apt install -y xz-utils ,然后重新解压
-cd node-v16.17.0-linux-x64
-pwd                                                           //查看当前的目录 , 假设是 /Users/app
-ln -s /home/edu-test/node-v16.17.0-linux-x64.tar.xz/bin/npm   /usr/local/bin/ 
-ln -s /Users/app/bin/node    /usr/local/bin/
-node -v          # v16.13.0
-npm -v				   # 8.1.0
-npm config set registry https://registry.npmmirror.com      # 设置 npm 源
 
-
-# 解决npm 全局安装后命令找不到问题 
-vi /etc/profile
-export NODE_PATH=/root/nodejs/node-v14.16.1-linux-x64/bin
-export PATH=${PATH}:${NODE_PATH}
-```
 
 #### yum 更新 git
 ```shell
@@ -259,21 +277,7 @@ scp root@10.103.237.40:/usr/share/pve-docs/api-viewer/7.html .
 ```
 
 
-#### npm 基本配置 代理
-```shell
-npm config set registry https://registry.npmmirror.com
-# 设置代理
-npm config set proxy=http://127.0.0.1:54621
-npm config set https-proxy=http://127.0.0.1:54621
-# 获取
-npm config get proxy
-npm config get https-proxy
-# 删除
-npm config rm proxy
-npm config rm https-proxy
 
-
-```
 
 #### centos 防火墙
 
@@ -287,17 +291,6 @@ systemctl status firewalld.service  # 查看防火墙状态
 ```
 
 
-
-#### Nodejs 项目部署
-
-```shell
-# 一般采用 pm2
-npm config set registry https://registry.npmmirror.com
-npm install -g pm2
-npm install axios
-npm install cors --save
-npm install express --save
-```
 
 
 
