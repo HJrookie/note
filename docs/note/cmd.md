@@ -163,9 +163,19 @@ ps aux | sort -nrk 3,3 | head -n 5
 ```shell
 # 官方文档  https://docs.docker.com/engine/install/centos/
 sudo yum install -y yum-utils
+# 原来的源 
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
+# 阿里云
+sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# 清华
+sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo
+   
 sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # 安装完发现没启动 
 systemctl start docker            
