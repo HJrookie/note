@@ -183,12 +183,16 @@ systemctl enable docker
 chown xxx:xxx directory
 # 修改镜像源  
 vi /etc/docker/daemon.json
+#docker 镜像源文章    https://linux.do/t/topic/114516
 {
-  "registry-mirrors": [
-    "https://docker.mirrors.ustc.edu.cn"
-    "https://registry.docker-cn.com",
-    "http://hub-mirror.c.163.com"
-  ]
+    "registry-mirrors": [
+        "https://hub.uuuadc.top",
+        "https://docker.anyhub.us.kg",
+        "https://dockerhub.jobcher.com",
+        "https://dockerhub.icu",
+        "https://docker.ckyl.me",
+        "https://docker.awsl9527.cn"
+    ]
 }
 # 使配置生效
 systemctl daemon-reload
