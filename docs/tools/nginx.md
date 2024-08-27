@@ -1,3 +1,9 @@
+#### 0. centos yum 安装的 nginx 各种目录
+(1) Nginx配置路径：/etc/nginx/  
+(2) PID目录：/var/run/nginx.pid  
+(3) 错误日志：/var/log/nginx/error.log  
+(4) 访问日志：/var/log/nginx/access.log  
+(5) 默认站点目录：/usr/share/nginx/html  
 ### 1.mac 上 nginx 的各种目录
 1. 配置文件目录   `/usr/local/etc/nginx  `
 2. 日志目录       `/usr/local/var/log/nginx/access.log  `
