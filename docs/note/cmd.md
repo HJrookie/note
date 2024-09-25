@@ -624,3 +624,7 @@ du -d 1 -h
 # linux
 du -ah --max-depth=1.
 ```
+#### 各项目 node 版本
+leva portal  12.1.0  
+hro   20.12.2  
+block 15.4.0  

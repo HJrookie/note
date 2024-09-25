@@ -13,3 +13,18 @@ window.opener.postMessage({
   refresh: true,
 });
 ```
+
+
+#### 触发事件
+```js
+function dispatch(el, type){
+        try{
+            var evt = window.document.createEvent('Event');
+            evt.initEvent(type,true,true);
+            el.dispatchEvent(evt);
+        }catch(e){alert(e)};
+    }
+let btns = window.document.getElementsByClassName('startAudioBtn')
+let btn = btns[btns.length-1]
+dispatch(btn,'click')
+```
