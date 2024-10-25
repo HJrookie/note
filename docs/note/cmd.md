@@ -31,7 +31,7 @@ n 16.10.0
 
 sudo n 17.0.0 
 sudo NODE_MIRROR=https://npmmirror.com/mirrors/node n stable
-sudo NODE_MIRROR=https://npmmirror.com/mirrors/node n 18.0.0
+sudo NODE_MIRROR=https://npmmirror.com/mirrors/node n 18.17.0
 
 # npm清除缓存
 npm cache clear --force 
