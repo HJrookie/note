@@ -10,7 +10,19 @@ dify
 
 8.155.19.71   root  aliyun*2024  
 ```
+数据中台地址：
+dp.linghu-ai.com
+http://117.50.17.115:19001/sdp-web/login 
+测试账号 ceshi0814 密码是ceshi0814123
+admin/4BlQG1fe5597RAzz1qaz
 
+指标中台
+dv.linghu-ai.com
+http://117.50.17.115:18002/   
+试用账号  data001 SHZN!23qaz
+管理员账号 admin SHZN!23qaz8712
+这两用户可以配合使用，data001是客户演示角色，可以用admin调整这个角色的权限。目前配置了数据集以及行列权限，可以体验。
+指标创建和指标可视化都可以参考【5.客户演示域】
 
 #### dify  
 ```shell
