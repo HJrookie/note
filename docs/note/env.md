@@ -1,3 +1,9 @@
+<video  controls  muted  loop  width="300" >
+  <source 
+   src="https://ossapi.linghu-ai.com/dify-prod/1634091480199.mp4" 
+   type="video/webm"  />
+</video>
+
 ### 服务器列表
 ```shell
 1. 电信服务器  # 上面启动了 dify 环境,
