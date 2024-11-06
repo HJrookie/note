@@ -1,8 +1,4 @@
-<video  controls  muted  loop  width="300" >
-  <source 
-   src="https://ossapi.linghu-ai.com/dify-prod/1634091480199.mp4" 
-   type="video/webm"  />
-</video>
+![](https://img2.baidu.com/it/u=633293833,3456551902&fm=253&fmt=auto&app=138&f=JPEG?w=665&h=370)
 
 ### 服务器列表
 ```shell
