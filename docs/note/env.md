@@ -40,7 +40,8 @@ http://101.227.48.37:15001/signin
 # 账号: 0001-hongyaokeji@gmail.com
 # 密码: 0001-hongyaokeji
 # 0002-qiuguojiudian@gmail.com  0002-qiuguojiudian
-# 
+# 国网AIGC 统一账号  0005-dangxiaopeixun@gmail.com 0005-dangxiaopeixun
+
 
 jdbc:postgresql://101.227.48.37:15005/dify
 PGUSER=postgres
