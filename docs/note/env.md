@@ -37,8 +37,9 @@ http://117.50.17.115:18002/
 # ip 地址 
 http://101.227.48.37:15001/signin
 # web 界面 管理员用户 账号密码  
-# 账号: tenant1_admin@gmail.com
-# 密码: tenant1_admin
+# 账号: 0001-hongyaokeji@gmail.com
+# 密码: 0001-hongyaokeji
+# 0002-qiuguojiudian@gmail.com  0002-qiuguojiudian
 # 
 
 jdbc:postgresql://101.227.48.37:15005/dify
