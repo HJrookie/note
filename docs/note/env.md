@@ -23,6 +23,10 @@ http://117.50.17.115:19001/sdp-web/login
 测试账号 ceshi0814 密码是ceshi0814123
 admin/4BlQG1fe5597RAzz1qaz
 
+#### super sonic 
+```
+sh assembly/bin/supersonic-build.sh webapp
+```
 #### 指标中台
 
 dv.linghu-ai.com
