@@ -17,11 +17,10 @@ dify
 ```
 
 #### 数据中台
-地址：
-dp.linghu-ai.com
-http://117.50.17.115:19001/sdp-web/login 
-测试账号 ceshi0814 密码是ceshi0814123
-admin/4BlQG1fe5597RAzz1qaz
+地址： dp.linghu-ai.com    
+http://117.50.17.115:19001/sdp-web/login   
+测试账号 ceshi0814 密码是ceshi0814123    
+admin    4BlQG1fe5597RAzz1qaz  
 
 #### super sonic 
 ```
