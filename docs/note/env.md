@@ -30,6 +30,11 @@ mvn -f pom.xml dependency:copy-dependencies
 sh assembly/bin/supersonic-build.sh webapp
 # G:\project\supersonic\webapp 目录下--->   supersonic-webapp.tar
 # build 的脚本生成的静态文件存放在:  webapp\packages\supersonic-fe\supersonic-webapp
+
+# 135部署地址 在/data/supersonic/su.../docker
+#1.Named Volumes are best for persistent data managed by Docker.
+      # - supersonic_data:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}
+      - ./supersonic-webapp:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}/webapp
 ```
 #### 指标中台
 ```shell
