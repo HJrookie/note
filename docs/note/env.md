@@ -25,7 +25,12 @@ admin/4BlQG1fe5597RAzz1qaz
 
 #### super sonic 
 ```
+http://8.155.16.135:18005/webapp/login
+mvn -f pom.xml dependency:copy-dependencies
+# 执行这个命令去build,用bash
 sh assembly/bin/supersonic-build.sh webapp
+# G:\project\supersonic\webapp 目录下--->   supersonic-webapp.tar
+# build 的脚本生成的静态文件存放在:  webapp\packages\supersonic-fe\supersonic-webapp
 ```
 #### 指标中台
 ```shell
