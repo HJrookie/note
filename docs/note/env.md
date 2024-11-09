@@ -24,6 +24,10 @@ admin    4BlQG1fe5597RAzz1qaz
 
 #### super sonic 
 ```shell
+# 文档地址
+https://supersonicbi.github.io/docs/%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/%E7%BC%96%E8%AF%91%E6%9E%84%E5%BB%BA/
+
+
 http://8.155.16.135:18005/webapp/login
 mvn -f pom.xml dependency:copy-dependencies
 # 执行这个命令去build,用bash
@@ -35,6 +39,8 @@ sh assembly/bin/supersonic-build.sh webapp
 #1.Named Volumes are best for persistent data managed by Docker.
       # - supersonic_data:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}
       - ./supersonic-webapp:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}/webapp
+
+
 ```
 #### 指标中台
 ```shell
