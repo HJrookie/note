@@ -23,7 +23,7 @@ http://117.50.17.115:19001/sdp-web/login
 admin    4BlQG1fe5597RAzz1qaz  
 
 #### super sonic 
-```
+```shell
 http://8.155.16.135:18005/webapp/login
 mvn -f pom.xml dependency:copy-dependencies
 # 执行这个命令去build,用bash
