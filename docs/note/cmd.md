@@ -23,6 +23,29 @@ https://cnodejs.org/topic/61405b76fe0c5109a7aea0ed
 npm i --legacy--peer-deps 
 ```
 
+#### linux python 升级版本
+```shell
+1. 安装必要的依赖
+yum groupinstall "Development Tools"
+yum install openssl-devel bzip2-devel libffi-devel
+2. 下载源码包
+wget https://www.python.org/ftp/python/3.10.9/Python-3.10.9.tgz
+3. 解压进入
+tar zxvf Python-3.10.9.tgz
+cd Python-3.10.9
+4. 编译安装
+./configure --prefix=/usr/local/python310 --with-ssl-default-suites=openssl 
+make && make install
+5. 加入系统路径
+[临时]
+export PATH=/usr/local/python310/bin:$PATH
+[永久]
+echo 'export PATH=/usr/local/python310/bin:$PATH' >> /etc/profile
+source /etc/profile
+6. 检查python版本
+python3 -V
+```
+
 #### node version
 ```shell
 #查看可用版本 n 模块
