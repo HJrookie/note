@@ -8,6 +8,28 @@ sudo ifconfig en1 up
 sudo arp -d -a  
 ```
 
+#### yum源
+```shell
+# 创建备份目录
+[root@hzk /]# mkdir -p /etc/yum.repos.d/backup/
+# 备份本地yum包     
+[root@hzk /]# mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/backup/
+
+cat /etc/redhat-release
+
+# 下载对应系统版本的阿里云yum源
+[root@hzk /]# wget -O /etc/yum.repos.d/CentOs-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+# 下载epel开源发行软件包版本库,可以提供额外的软件包
+[root@hzk /]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+# 删除缓存数据
+yum clean all
+
+# 创建元数据缓存
+yum makecache
+```
+
 #### letms 项目启动不了
 ```shell
 # 如果npm 安装依赖全局安装  不是安装到项目本地
