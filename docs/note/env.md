@@ -17,25 +17,42 @@ dify
 ```
 
 #### 数据中台
-地址：
-dp.linghu-ai.com
-http://117.50.17.115:19001/sdp-web/login 
-测试账号 ceshi0814 密码是ceshi0814123
-admin/4BlQG1fe5597RAzz1qaz
+地址： dp.linghu-ai.com    
+http://117.50.17.115:19001/sdp-web/login   
+测试账号 ceshi0814 密码是ceshi0814123    
+admin    4BlQG1fe5597RAzz1qaz  
 
 #### super sonic 
-```
+```shell
+# 文档地址
+https://supersonicbi.github.io/docs/%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/%E7%BC%96%E8%AF%91%E6%9E%84%E5%BB%BA/
+
+
+http://8.155.16.135:18005/webapp/login
+mvn -f pom.xml dependency:copy-dependencies
+# 执行这个命令去build,用bash
 sh assembly/bin/supersonic-build.sh webapp
+# G:\project\supersonic\webapp 目录下--->   supersonic-webapp.tar
+# build 的脚本生成的静态文件存放在:  webapp\packages\supersonic-fe\supersonic-webapp
+
+# 135部署地址 在/data/supersonic/su.../docker
+#1.Named Volumes are best for persistent data managed by Docker.
+      # - supersonic_data:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}
+      - ./supersonic-webapp:/usr/src/app/supersonic-standalone-${SUPERSONIC_VERSION:-latest}/webapp
+
+
 ```
 #### 指标中台
-
-dv.linghu-ai.com
-http://117.50.17.115:18002/   
-试用账号  data001 SHZN!23qaz
-管理员账号 admin SHZN!23qaz8712
-这两用户可以配合使用，data001是客户演示角色，可以用admin调整这个角色的权限。目前配置了数据集以及行列权限，可以体验。
+```shell
+dv.linghu-ai.com  
+http://117.50.17.115:18002/     
+试用账号  data001 SHZN!23qaz  
+管理员账号 admin SHZN!23qaz8712  
+这两用户可以配合使用，data001是客户演示角色，可以用admin调整这个角色的权限。目前配置了数据集以及行列权限，可以体验。  
 指标创建和指标可视化都可以参考【5.客户演示域】
 
+# 新的指标中台 dataease-1.18版本  http://8.155.19.71:29010   admin Fox!23qaz
+```
 #### dify  
 ```shell
 # ip 地址 

@@ -8,6 +8,28 @@ sudo ifconfig en1 up
 sudo arp -d -a  
 ```
 
+#### yum源
+```shell
+# 创建备份目录
+[root@hzk /]# mkdir -p /etc/yum.repos.d/backup/
+# 备份本地yum包     
+[root@hzk /]# mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/backup/
+
+cat /etc/redhat-release
+
+# 下载对应系统版本的阿里云yum源
+[root@hzk /]# wget -O /etc/yum.repos.d/CentOs-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+# 下载epel开源发行软件包版本库,可以提供额外的软件包
+[root@hzk /]# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+# 删除缓存数据
+yum clean all
+
+# 创建元数据缓存
+yum makecache
+```
+
 #### letms 项目启动不了
 ```shell
 # 如果npm 安装依赖全局安装  不是安装到项目本地
@@ -21,6 +43,18 @@ https://cnodejs.org/topic/61405b76fe0c5109a7aea0ed
 # 2. npm i 会报错 antd的依赖错误 用下面的命令去安装  
 # 3
 npm i --legacy--peer-deps 
+```
+
+#### linux python 升级版本
+```shell
+打开 WEB 浏览器访问 https://www.python.org/downloads/source/  下载及解压压缩包 Python-3.x.x.tgz，3.x.x 为你下载的对应版本号。 如果你需要自定义一些选项修改 Modules/Setup
+以 Python3.6.1 版本为例：
+# tar -zxvf Python-3.6.1.tgz
+# cd Python-3.6.1
+# ./configure
+# make && make install
+# 检查 Python3 是否正常可用： python3 -V
+Python 3.6.1
 ```
 
 #### node version
@@ -376,7 +410,9 @@ git push origin --delete [branchname]
 #### github 代理配置
 
 ```shell
-git config --global http.https://github.com.proxy http://127.0.0.1:54621
+git config  http.proxy http://127.0.0.1:54621
+git config  https.proxy http://127.0.0.1:54621
+
 // 文章地址       https://ericclose.github.io/git-proxy-config.html
 # 单次克隆代理
 git clone -c http.proxy="127.0.0.1:7890" https://github.com/labring/FastGPT.git
