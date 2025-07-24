@@ -30,6 +30,13 @@ yum clean all
 yum makecache
 ```
 
+#### yum install nginx
+```shell
+sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+sudo yum install -y nginx
+systemctl start nginx
+```
+
 #### letms 项目启动不了
 ```shell
 # 如果npm 安装依赖全局安装  不是安装到项目本地
