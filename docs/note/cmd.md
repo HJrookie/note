@@ -34,7 +34,11 @@ yum makecache
 ```shell
 sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 sudo yum install -y nginx
+# 启动 nginx
 systemctl start nginx
+# 设置开机启动
+systemctl enable nginx
+
 ```
 
 #### letms 项目启动不了
