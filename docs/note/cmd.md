@@ -611,7 +611,6 @@ service sshd restart
 
 
 #### gmail gcp 荔盈街6及8号
-4514 6175 0069 8636          54
 
 // clash 加速地址
 https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
